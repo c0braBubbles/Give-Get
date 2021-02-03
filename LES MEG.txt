@@ -3,5 +3,8 @@ Last ned nodeJS og npm
 Hold Left-skift og høyreklikk et tomt sted, så trykk på "åpne powershell" elns 
 På mac vet jeg ikke hva man skal gjøre her 
 Men når du er i den terminalen skriver du NPM start. Så går du i nettleseren din og skriver i url-en "localhost:3000"
+
 Her er grener i git veldig essensielt. Du kødder ikke rundt i master-grenen. Utrolig viktig. Er du i master-grenen 
 skal det være for å gjøre små-ting som ikke krever at du sitter å jobber i mer enn 15 min. 
+Du avslutter å kjøre programmet ved å trykke CTRL+C. Alle endringer du gjør "lastes" automatisk opp, så du trenger
+ikke avslutte for hver gang du gjør en endring. 
