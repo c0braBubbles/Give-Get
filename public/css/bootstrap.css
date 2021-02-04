@@ -6,6 +6,14 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
 :root {
+
+  --bs-jet: #353535;
+  --bs-Ming: #3C6E71;
+  --bs-White: #FFFFFF;
+  --bs-Gainsboro: #D9D9D9;
+  --bs-Indigo: #284B63;
+
+
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
@@ -50,8 +58,8 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
-  background-color: #fff;
+  color: #ffffff;
+  background-color: #353535;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
@@ -7189,6 +7197,26 @@ textarea.form-control-lg {
 
 .lh-lg {
   line-height: 2 !important;
+}
+
+.bg-Jet {
+  background-color: #353535 !important;
+}
+
+.bg-Ming {
+  background-color: #3C6E71 !important;
+}
+
+.bg-White {
+  background-color: #FFFFFF !important;
+}
+
+.bg-Gainsboro {
+  background-color: #D9D9D9 !important;
+}
+
+.bg-Indigo {
+  background-color: #284B63 !important;
 }
 
 .bg-primary {
