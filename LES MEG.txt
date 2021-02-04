@@ -9,9 +9,9 @@ skal det være for å gjøre små-ting som ikke krever at du sitter å jobber i 
 Du avslutter å kjøre programmet ved å trykke CTRL+C. Alle endringer du gjør "lastes" automatisk opp, så du trenger
 ikke avslutte for hver gang du gjør en endring. 
 
-Alle sider (ejs/html) skal ligge i mappen "views". Er du litt rusten eller utstå på serverkode kan du lagre sidene 
-som html for å få dem opp og se hva du har laget. Vi kan alltids konvertere til ejs når som helst. Hvis du vil lære 
-deg litt serverkode og se ejs filer kan jeg vise deg hvordan her: 
+Alle sider (ejs/html) skal ligge i mappen "views". CSS, JS-filer og diverse skal i public-mappa. Er du litt rusten 
+eller utstå på serverkode kan du lagre sidene som html for å få dem opp og se hva du har laget. Vi kan alltids 
+konvertere til ejs når som helst. Hvis du vil lære deg litt serverkode og se ejs filer kan jeg vise deg hvordan her: 
 - app.js er en fil som ligger i øverste mappenivå. Det er server-fila 
 - for å kunne se filene dine må du skrive inn at programmet skal kunne "requeste" og "få" fila. Det vil stå noe her: 
 	app.get('', (req, res) => {
