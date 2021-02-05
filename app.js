@@ -26,6 +26,10 @@ app.get('/cheatsheet', (req, res) => {
     res.render('cheatsheet');
 });
 
+app.get('/headers', (req, res) => {
+    res.render('headers'); 
+});
+
 
 // Listen on port 3000 
 app.listen(port, () => console.info(`Listening on port ${port}`)); 
