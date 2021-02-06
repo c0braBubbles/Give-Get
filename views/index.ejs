@@ -3,11 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/main.css">
     <title>Give and Get</title>
 </head>
 <body>
-    <h1>Hello World 1234</h1>
-    <h2> <%= text %> </h2>
+    <!-- HEADER -->
+    <div class="top" style="width: 100%;">
+        <div id="bar" class="bars">
+            <div class="left">
+                <h2 class="tittle_head">G & G</h2>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- SLIDESHOW -->
+    <script src="js/action.js"></script>
+    <slider>
+        <slide> <p>Tekst</p> </slide>
+        <slide> <p>Tekst</p> </slide>
+        <slide> <p>Tekst</p> </slide>
+        <slide> <p>Tekst</p> </slide>
+    </slider>
+
+
+    <!-- LOGIN OG REGISTRER KNAPPER -->
+    <div class="boxcontainer">
+        <a class="whitebtn" href="/login">Log in</a>
+        <a class="bluebtn" href="/registrer">Registrer</a>
+    </div>
+
+
+    <!-- FOOTER -->
+    <div class="foot">
+        <div class="left">About</div>
+
+        <div class="middle">
+            <div class="middle2">
+                <a class="fa fa-facebook"></a>
+                <a class="fa fa-instagram"></a>
+                <a class="fa fa-twitter"></a>
+            </div>
+            <p class="cc">Copyright © 2020, G&G All Rights Reserved.</p>
+        </div>
+
+        <div class="right">Support</div>
+    </div>
 </body>
 </html>
