@@ -14,7 +14,7 @@ eller utstå på serverkode kan du lagre sidene som html for å få dem opp og s
 konvertere til ejs når som helst. Hvis du vil lære deg litt serverkode og se ejs filer kan jeg vise deg hvordan her: 
 - app.js er en fil som ligger i øverste mappenivå. Det er server-fila 
 - for å kunne se filene dine må du skrive inn at programmet skal kunne "requeste" og "få" fila. Det vil stå noe her: 
-	app.get('', (req, res) => {
+	app.get('/eksempelfilnavn', (req, res) => {
     		res.render('eksempelfilnavn'); 
 	});
 - Det du gjør er å skrive det samme. Bare bytter ut navnet på fila
