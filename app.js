@@ -22,9 +22,9 @@ app.get('/other', (req, res) => {
     res.render('other', {text: 'other pages'}); 
 });
 
-/*app.get('/headers', (req, res) => {
-    res.render('headers'); 
-}); */
+app.get('/header', (req, res) => {
+    res.render('header'); 
+}); 
 
 
 // Listen on port 3000 
