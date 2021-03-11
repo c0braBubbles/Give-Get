@@ -15,7 +15,11 @@ app.set('views', './views');
 app.set('view engine', 'ejs'); 
 
 app.get('', (req, res) => {
-    res.render('innstillinger', {text: 'This is ejs'});
+    res.render('', {text: 'This is ejs'});
+});
+
+app.get('/innstillinger', (req, res) => {
+    res.render('innstillinger'); 
 });
  
 app.get('/other', (req, res) => {
