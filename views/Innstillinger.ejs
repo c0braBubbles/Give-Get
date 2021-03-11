@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Innstillinger</title>
-    <link rel="stylesheet" href="public/css/bootstrap.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     
 </head>
@@ -106,6 +106,52 @@
 
 
   </div>
+
+   <!-- DISSE SKAL IKKE RØRES -->
+      <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>
+      <script>
+          var firebaseConfig = {
+              apiKey: "AIzaSyChkMk9qNYQPiY6CrtSf5BvSdRDJHSk3w4",
+              authDomain: "giveget-73d6d.firebaseapp.com",
+              databaseURL: "https://giveget-73d6d-default-rtdb.firebaseio.com",
+              projectId: "giveget-73d6d",
+              storageBucket: "giveget-73d6d.appspot.com",
+              messagingSenderId: "283451874495",
+              appId: "1:283451874495:web:84f01359274a699715ba0a",
+              measurementId: "G-0MT991669E"
+          };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          firebase.analytics();
+      </script>
+  
+      <!-- DETTE ER DEN DU RØRER -->
+      <script>
+
+
+          /* var abs = "Ting og tang"; */firebaseConfig
+
+
+            document.getElementById("flexCheckDefault").onclick = function() {
+        
+          if (navigator.geolocation)
+          navigator.geolocation.getCurrentPosition(function(position) {
+            console.log(position);
+            
+          });
+          else 
+             console.log("geolocation is not supported");
+           };
+
+           
+ 
+
+          /*
+              DU KAN OGSÅ LINKE TIL FIL EKSTERN JAVASCRIPT FIL 
+              SE HVORDAN OPPSETTET BLIR DA I DATABASESTUFF/FIREBASE-DEMO/APP.JS
+          */
+      </script>
 
 
 </body>
