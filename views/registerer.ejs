@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    
+    <title>Register</title>
+  </head>
+  <body style="background-color:#353535">
+      
+    <div class="container w-50" style="padding-top:10%;">
+        <div class="card" style="background-color:#284B63;"> <!-- rammefarge, farge på header/footer -->
+            <div class="card-header" style="color:#FFFFFF;">New Account</div> <!--Login-top farge-->
+            <div class="card-body" style="background-color:#FFFFFF"> <!-- farge bak input felt -->
+                <form>
+                    <!-- First, lastname -->
+                    <div class="row mb-2">
+                        <div class="form-group col-md-6">
+                            <label for="inputFirstname">First name</label>
+                            <input type="text" class="form-control" id="inputFirstname" placeholder="Jon">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputLastname">Last name</label>
+                            <input type="text" class="form-control" id="inputLastname" placeholder="Sagen">
+                        </div>
+                    </div>
+                    <!-- Email -->
+                    <div class="form-group mb-2">
+                        <label for="inputEmail">Email address</label>
+                        <input type="email" class="form-control" id="inputEmail" placeholder="JonKanon352@hotmail.com">
+                    </div>
+                    <!-- Username -->
+                    <div class="form-group mb-2">
+                        <label for="inputUsername">Username</label>
+                        <input type="text" class="form-control" id="inputUsername" placeholder="Jonkanon352">
+                    </div>
+                    <!-- Password -->
+                    <div class="row mb-2">
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword">Password</label>
+                            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputPassword2"></label>
+                            <input type="password" class="form-control" id="inputPassword2" placeholder="Repeat password">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer text-center">
+                <button type="submit" class="btn btn-primary">Create Account</button>
+                </div>
+            
+        </div>
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+
+  </body>
+</html>
