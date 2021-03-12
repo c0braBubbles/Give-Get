@@ -7,13 +7,8 @@
     <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <title>Login page</title>
-
-    <!-- Firebase login shit -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-auth.js"></script>
-    <script src="js/login.js"></script>
-  </head>
-  <body style="background-color:#353535">
+</head>
+<body style="background-color:#353535">
       
     <div class="container w-50" style="padding-top:10%;">
         <div class="card" style="background-color:#284B63;"> <!-- rammefarge, farge på header/footer -->
@@ -21,18 +16,20 @@
             <div class="card-body" style="background-color:#FFFFFF"> <!-- farge bak input felt -->
                 <div class="form-inline" id="formContainer">
                     <div class="form-floating mb-3">
-                        <input id="email" type="email" class="form-control" id="floatingInput" placeholder="Email">
+                        <input id="email" type="email" class="form-control" placeholder="Email">
                         <label for="floatingInput">Email address</label>
                     </div>
+
                     <div class="form-floating"> 
                         <input id="passord" type="password" class="form-control" placeholder="Password">
                         <label for="floatingPassword">Password</label>
                     </div>
+
                     <div class="checkbox" style="padding-top:5px;">
                         <label>
                             <input type="checkbox"> Remember me
                         </label>
-                        <button onclick="signIn()" class="btn btn-bprimary">Login</button>
+                        <button onclick="login()" class="btn btn-bprimary">Login</button>
                     </div>
                 </div>
             </div>
@@ -46,8 +43,5 @@
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    
-
-    
-  </body>
+</body>
 </html>
