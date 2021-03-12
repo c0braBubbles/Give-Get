@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/various.css">
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
+    <title>G & G</title>
+</head>
+<body style="background-color:#353535">
+    
+    <!-- LOGIN SIDEN -->
+    <div id="login-side">
+        <%- include('partials/loginp.ejs'); %> 
+    </div>
+
+
+    <div id="main-side">
+        <%- include('partials/header.ejs'); %>
+        <h2 id="velkommen"></h2>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyChkMk9qNYQPiY6CrtSf5BvSdRDJHSk3w4",
+            authDomain: "giveget-73d6d.firebaseapp.com",
+            databaseURL: "https://giveget-73d6d-default-rtdb.firebaseio.com",
+            projectId: "giveget-73d6d",
+            storageBucket: "giveget-73d6d.appspot.com",
+            messagingSenderId: "283451874495",
+            appId: "1:283451874495:web:84f01359274a699715ba0a",
+            measurementId: "G-0MT991669E"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        //firebase.analytics();
+    </script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
