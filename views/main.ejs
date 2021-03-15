@@ -23,7 +23,16 @@
 
     <div id="main-side">
         <%- include('partials/header.ejs'); %>
-        <h2 id="velkommen"></h2>
+
+        <div id="hjem_div" style="display: none;">Hjem side</div>
+
+        <div id="sok_div" style="display: none;">Søke side</div>
+
+        <div id="melding_div" style="display: none;">Melding side</div>
+
+        <div id="profil_div" style="display: none;">
+            <%- include('partials/profilep.ejs'); %>
+        </div>
     </div>
 
 
@@ -44,5 +53,6 @@
         //firebase.analytics();
     </script>
     <script src="js/auth.js"></script>
+    <script src="js/action.js"></script>
 </body>
 </html>

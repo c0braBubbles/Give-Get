@@ -8,7 +8,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
         if(user != null) {
             var email_id = user.email; 
-            document.getElementById("velkommen").innerHTML += "Velkommen " + email_id;
+            // document.getElementById("velkommen").innerHTML += "Velkommen " + email_id;
         }
     }
 
