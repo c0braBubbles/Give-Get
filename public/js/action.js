@@ -17,3 +17,31 @@ const navSlide = () => {
         burger.classList.toggle('toggle');
     })
 }
+
+
+/* Navigasjon */
+var toggles = [
+    document.getElementById("hjem_div"),
+    document.getElementById("sok_div"), 
+    document.getElementById("melding_div"),
+    document.getElementById("profil_div")
+];
+
+var id = [
+    "hjem",
+    "sok",
+    "melding", 
+    "bruker"
+];
+
+var active = toggles[0]; 
+
+function navigate(clicked_id) {
+    for(let i = 0; i < toggles.length; i++) {
+        if(clicked_id === id[i]) {
+            active.style.display = "none"; 
+            toggles[i].style.display = "block";
+            active = toggles[i];
+        }
+    }
+}

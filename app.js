@@ -24,6 +24,11 @@ app.get('', (req, res) => {
     res.render('', {text: 'This is ejs'});
 });
 
+// HovedSiden
+app.get('/main', (req, res) => {
+    res.render('main');
+});
+
 // DETTE SKAL BLI EN PARTIAL ETTERHVERT
 app.get('/annonser', (req, res) => {
     res.render('annonser');
