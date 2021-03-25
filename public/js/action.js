@@ -1,3 +1,9 @@
+/* 
+    JavaScript fil med diverse funksjoner for den dynamiske opplevelsen
+    Inneholder funksjoner for å manøvrere seg inni brukergrensesnittet
+*/
+
+
 const navSlide = () => {
     const burger = document.querySelector('.burger'); 
     const nav = document.querySelector('.nav-links'); 

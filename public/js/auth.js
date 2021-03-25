@@ -30,3 +30,15 @@ function login() {
         window.alert("Error : " + errorMessage);
     });
 }
+
+
+/* For at funksjonen skulle funke måtte jeg omringe 
+funksjonen "firebase.auth().signOut()" med try-catch */
+
+function logout() {
+    firebase.auth().signOut().then(() => {
+        // trenger ingenting her
+    }).catch((error) => {
+        alert(error); // mest sannsynlig vil ingen error forekomme
+    });
+}
