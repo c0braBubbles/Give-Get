@@ -3,7 +3,7 @@
     Inneholder funksjoner for å manøvrere seg inni brukergrensesnittet
 */
 
-
+/* Slideshowet på index.html */
 const navSlide = () => {
     const burger = document.querySelector('.burger'); 
     const nav = document.querySelector('.nav-links'); 
@@ -48,6 +48,26 @@ function navigate(clicked_id) {
             active.style.display = "none"; 
             toggles[i].style.display = "block";
             active = toggles[i];
+        }
+    }
+}
+
+
+/* Funksjon for søking: */
+function searching() {
+    var input, filter, ul, li, a, i, txtValue; 
+    input = document.getElementById("sokBar");
+    filter = input.value.toUpperCase(); 
+    ul = document.getElementById("liste"); 
+    li = document.getElementsByTagName("li"); 
+    
+    for(i = 0; i < li.length; i++) {
+        a = li[i].getElementsByTagName("a")[0];
+        txtValue = a.textContent || a.innerText; 
+        if(txtValue.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = ""; 
+        } else {
+            li[i].style.display = "none";
         }
     }
 }

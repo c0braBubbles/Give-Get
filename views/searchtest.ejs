@@ -9,20 +9,26 @@
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/various.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div class="input-group">
-        <div class="form-outline">
-            <input type="search" id="form1" class="form-control"/>
-            <label class="form-label" for="form1">Search</label>
-        </div>
-        <button type="button" class="btn btn-primary">
-            <i class="fas fa-search"></i>
-        </button>
-    </div>
+    <input type="text" id="sokBar" onkeyup="searching()" placeholder="Søk etter bruker eller annonser..." title="Type in a name">
+
+    <ul id="liste">
+        <!-- Eksempeldata -->
+        <li><a href="#">Adele</a></li>
+        <li><a href="#">Agnes</a></li>
+        <li><a href="#">Billy</a></li>
+        <li><a href="#">Bob</a></li>
+        <li><a href="#">Calvin</a></li>
+        <li><a href="#">Christina</a></li>
+        <li><a href="#">Cindy</a></li>
+    </ul>
+
+    <script src="js/action.js"></script>
 </body>
 </html>
