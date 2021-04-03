@@ -42,3 +42,9 @@ function logout() {
         alert(error); // mest sannsynlig vil ingen error forekomme
     });
 }
+
+
+/**
+ * Submit funksjon for å lagre brukernavna til brukere for enklere aksess for søk
+ */
+

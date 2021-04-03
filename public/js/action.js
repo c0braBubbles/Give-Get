@@ -53,21 +53,40 @@ function navigate(clicked_id) {
 }
 
 
-/* Funksjon for søking: */
+/**
+ * Henter info innhold fra databasen, som kan bli brukt til å søkes etter
+ * Innholdet blir lagt til i en HTML liste (ul)
+ */
+
+var ul = document.getElementById("liste");
+var chat = firebase.database().ref().child('Annonse');
+chat.on("child_added", function(snapshot) {
+    var message = snapshot.val();
+    ul.innerHTML += `<li><a href='#'>${message.tittel}</a></li>`; 
+});
+
+
+/**
+ * Funksjon for søking
+ * Når innhold blir hentet fra databasen blir det usynlig helt til 
+ * funksjonen trer i kraft og filtrerer lista og sjekker kompatibelhet med
+ * inndatafeltet
+ */
+
 function searching() {
-    var input, filter, ul, li, a, i, txtValue; 
-    input = document.getElementById("sokBar");
-    filter = input.value.toUpperCase(); 
-    ul = document.getElementById("liste"); 
-    li = document.getElementsByTagName("li"); 
-    
+    var input, filter, li, a, i, txtValue; 
+    input = document.getElementById("sokeBar"); 
+    filter = input.value.toUpperCase();
+    li = ul.getElementsByTagName("li"); 
+
     for(i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
+        a = li[i].getElementsByTagName("a")[0]; 
         txtValue = a.textContent || a.innerText; 
+
         if(txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = ""; 
+            li[i].style.display = "block";
         } else {
-            li[i].style.display = "none";
+            li[i].style.display = "";
         }
     }
 }
