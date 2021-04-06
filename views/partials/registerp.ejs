@@ -1,0 +1,52 @@
+<div class="container w-50" style="padding-top:10%;">
+    <div class="card" style="background-color:#284B63;">
+        <!-- rammefarge, farge på header/footer -->
+        <div class="card-header" style="color:#FFFFFF;">New Account</div>
+        <!--Login-top farge-->
+        <div class="card-body" style="background-color:#FFFFFF">
+            <!-- farge bak input felt -->
+            <form id="signup-form">
+                <!--form-->
+                <!-- First, lastname -->
+                <div class="row mb-2">
+                    <div class="form-group col-md-6">
+                        <label for="inputFirstname">First name</label>
+                        <input type="text" class="form-control" id="inputFirstname" placeholder="Jon">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputLastname">Last name</label>
+                        <input type="text" class="form-control" id="inputLastname" placeholder="Sagen">
+                    </div>
+                </div>
+                <!-- Email -->
+                <div class="form-group mb-2">
+                    <label for="inputEmail">Email address</label>
+                    <input type="email" class="form-control" id="inputEmail" placeholder="JonKanon352@hotmail.com">
+                </div>
+                <!-- Username -->
+                <div class="form-group mb-2">
+                    <label for="inputUsername">Username</label>
+                    <input type="text" class="form-control" id="inputUsername" placeholder="Jonkanon352">
+                </div>
+                <!-- Password -->
+                <div class="row mb-2">
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword2"></label>
+                        <input type="password" class="form-control" id="inputPassword2" placeholder="Repeat password">
+                    </div>
+                </div>
+
+
+
+            </form>
+            <!--form-->
+        </div>
+        <div class="card-footer text-center">
+            <button onclick="signUp()" class="btn btn-primary">Create Account</button>
+        </div>
+    </div>
+</div>
