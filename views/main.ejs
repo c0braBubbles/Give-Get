@@ -93,6 +93,12 @@
                     grønn: grønn
                 });      
             }
+
+            var chat = firebase.database().ref().child('Annonse');
+            chat.on("child_added", function(snapshot) {
+                var message = snapshot.val(); 
+                id = message.id;
+            });
     </script>
 
 
