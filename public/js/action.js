@@ -33,7 +33,7 @@ var toggles = [
     document.getElementById("profil_div")
 ];
 
-var id = [
+var ids = [
     "hjem",
     "sok",
     "melding", 
@@ -44,7 +44,7 @@ var active = toggles[0];
 
 function navigate(clicked_id) {
     for(let i = 0; i < toggles.length; i++) {
-        if(clicked_id === id[i]) {
+        if(clicked_id === ids[i]) {
             active.style.display = "none"; 
             toggles[i].style.display = "block";
             active = toggles[i];

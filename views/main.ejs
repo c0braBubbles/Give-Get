@@ -59,6 +59,8 @@
           firebase.initializeApp(firebaseConfig);
           //firebase.analytics();
         </script>  
+
+
         <!-- DETTE ER DEN DU RØRER -->
         <script>
             //Finner brukerens posisjon
@@ -68,9 +70,9 @@
             console.log(position);   
             });
             else 
-            console.log("geolocation is not supported");
-            }
-            );
+                console.log("geolocation is not supported");
+            });
+
             //Laster opp tittel og beksrivelse til firebase
             var id = 0;
             var blå = 0;
