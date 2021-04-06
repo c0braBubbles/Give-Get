@@ -1,21 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    
+
     <title>Register</title>
-  </head>
-  <body style="background-color:#353535">
-      
+</head>
+
+
+<body style="background-color:#353535">
+
     <div class="container w-50" style="padding-top:10%;">
-        <div class="card" style="background-color:#284B63;"> <!-- rammefarge, farge på header/footer -->
-            <div class="card-header" style="color:#FFFFFF;">New Account</div> <!--Login-top farge-->
-            <div class="card-body" style="background-color:#FFFFFF"> <!-- farge bak input felt -->
-                <form>
+        <div class="card" style="background-color:#284B63;">
+            <!-- rammefarge, farge på header/footer -->
+            <div class="card-header" style="color:#FFFFFF;">New Account</div>
+            <!--Login-top farge-->
+            <div class="card-body" style="background-color:#FFFFFF">
+                <!-- farge bak input felt -->
+                <form id="signup-form">
+                    <!--form-->
                     <!-- First, lastname -->
                     <div class="row mb-2">
                         <div class="form-group col-md-6">
@@ -45,20 +52,51 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="inputPassword2"></label>
-                            <input type="password" class="form-control" id="inputPassword2" placeholder="Repeat password">
+                            <input type="password" class="form-control" id="inputPassword2"
+                                placeholder="Repeat password">
                         </div>
                     </div>
+
+
+
                 </form>
+                <!--form-->
             </div>
             <div class="card-footer text-center">
-                <button type="submit" class="btn btn-primary">Create Account</button>
-                </div>
-            
+                <button onclick="signUp()" class="btn btn-primary">Create Account</button>
+                <!--id="barmsang" type="submit"-->
+            </div>
         </div>
     </div>
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
-  </body>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase.js"></script>
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyChkMk9qNYQPiY6CrtSf5BvSdRDJHSk3w4",
+            authDomain: "giveget-73d6d.firebaseapp.com",
+            databaseURL: "https://giveget-73d6d-default-rtdb.firebaseio.com",
+            projectId: "giveget-73d6d",
+            storageBucket: "giveget-73d6d.appspot.com",
+            messagingSenderId: "283451874495",
+            appId: "1:283451874495:web:84f01359274a699715ba0a",
+            measurementId: "G-0MT991669E"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        //firebase.analytics();
+
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Oppdaterer firestore settings
+        db.settings({ timestampsInSnapshots: true });
+    </script>
+    <script src="auth.js"></script>
+
+
+
+</body>
+
 </html>
