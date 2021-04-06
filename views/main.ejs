@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kart</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/various.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+
+    <!-- LOGIN SIDEN -->
+    <div id="login-side">
+        <%- include('partials/loginp.ejs'); %> 
+    </div>
+
+
+    <div id="main-side">
+        <%- include('partials/header.ejs'); %>
+
+        <div id="hjem_div" style="display: none;">Hjem side</div>
+
+        <div id="sok_div" style="display: none;">Søke side</div>
+
+        <div id="melding_div" style="display: none;">Melding side</div>
+
+        <div id="profil_div" style="display: none;">
+            <%- include('partials/profilep.ejs'); %>
+        </div>
+    </div>
+
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+    </button>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+        
+    <div class="modal-dialog modal-xl bg-Jet">
+        <div class="modal-content">
+        
+        <div class="modal-body">
+            <div class="container w-100 h-100 p-3 bg-White mt-2">
+
+
+            <h2 class = "font-weight-bold text-dark m-auto"> Opprett annonse </h2>
+            <hr class= "bg-Indigo">
+            <div class ="m-5">
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label text-dark" for="flexCheckDefault">
+                    Tilby
+                    </label>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label text-dark" for="flexCheckDefault">
+                    Etterspørr
+                    </label>
+                </div>
+
+                <div class="mt-3">
+                    <label for="Title" class="form-label text-dark">Tittel</label>
+                    <input class="form-control" id="Title" aria-describedby="emailHelp">
+                </div>
+
+
+                <div class="mb-3 mt-3">
+                    <label for="Description" class="form-label text-dark">Beskrivelse</label>
+                    <textarea class="form-control" id="Description" rows="3"></textarea>
+                </div>
+
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                    <label class="form-check-label text-dark" for="flexCheckDefault">
+                    Bruk min posisjon
+                    </label>
+                </div>
+        </div>
+        </div>
+        
+        <div class="modal-footer">
+            <button onclick = "submitClick()" type="button" class="btn btn-primary" data-bs-dismiss="modal" id="publish">Publiser</button>
+        </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+        <!-- DISSE SKAL IKKE RØRES -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>  
+        <script>
+          var firebaseConfig = {
+              apiKey: "AIzaSyChkMk9qNYQPiY6CrtSf5BvSdRDJHSk3w4",
+              authDomain: "giveget-73d6d.firebaseapp.com",
+              databaseURL: "https://giveget-73d6d-default-rtdb.firebaseio.com",
+              projectId: "giveget-73d6d",
+              storageBucket: "giveget-73d6d.appspot.com",
+              messagingSenderId: "283451874495",
+              appId: "1:283451874495:web:84f01359274a699715ba0a",
+              measurementId: "G-0MT991669E"
+          };
+          // Initialize Firebase
+          firebase.initializeApp(firebaseConfig);
+          firebase.analytics();
+        </script>  
+        <!-- DETTE ER DEN DU RØRER -->
+        <script>
+            //Finner brukerens posisjon
+            $(document).on('click', '.modal',document.getElementById("flexCheckDefault"), function(){
+            if (navigator.geolocation)
+            navigator.geolocation.getCurrentPosition(function(position) {
+            console.log(position);   
+            });
+            else 
+            console.log("geolocation is not supported");
+            }
+            );
+            //Laster opp tittel og beksrivelse til firebase
+            var id = 0;
+            var blå = 0;
+            var rød = 999;
+            var grønn = 9999;
+
+            function submitClick() {
+                id++;
+                blå++;
+                rød++;
+                grønn++;
+                firebase.database().ref("Annonse").child(id).set({
+                    tittel: document.getElementById("Title").value,
+                    beskrivelse: document.getElementById("Description").value,
+                    id: id,
+                    blå: blå,
+                    rød: rød,
+                    grønn: grønn
+                });      
+            }
+    </script>
+
+
+    <script src="js/auth.js"></script>
+    <script src="js/action.js"></script>
+</body>
+</html>
