@@ -15,9 +15,6 @@
 
 <body>
 
-    <p class= "text-light" id="test" ></p>
-
-
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
@@ -142,33 +139,8 @@
             });      
         }
 
-    //henter data fra firebase
-        function getData() {
-           firebase.database().ref('Annonse').on('value',function(snapshot) {
-                snapshot.forEach(function(childSnapshot) 
-                {
-                    var childKey = childSnapshot.key;
-                    var childData = childSnapshot.val();                
-                    document.getElementById("test").innerHTML = childData['tittel'];
-             })
-        })
-    }
-    getData();
-    
-    
 
 
-
-    
-
-    </script>
-
-    
-
-
-
-
-
-</body>
-
+        </script>
+    </body>
 </html>
