@@ -43,6 +43,17 @@ function logout() {
     });
 }
 
+function signUp() {
+
+    var email = document.getElementById('inputEmail').value;
+    var password = document.getElementById('inputPassword').value;
+
+    // opprett brukeren, metoden bruker litt tid på å gjennomføre
+    auth.createUserWithEmailAndPassword(email, password).then(cred => {
+        console.log(cred);
+    });
+}
+
 
 /**
  * Submit funksjon for å lagre brukernavna til brukere for enklere aksess for søk
