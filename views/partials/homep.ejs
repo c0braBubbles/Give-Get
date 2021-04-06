@@ -7,7 +7,6 @@
     </svg>
 </button>
 
-
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
@@ -16,8 +15,8 @@
         <div class="modal-content">
 
             <div class="modal-body">
+                <form id="form">
                 <div class="container w-100 h-100 p-3 bg-White mt-2">
-
 
                     <h2 class="font-weight-bold text-dark m-auto"> Opprett annonse </h2>
                     <hr class="bg-Indigo">
@@ -56,11 +55,12 @@
                         </div>
                     </div>
                 </div>
+            
 
                 <div class="modal-footer">
-                    <button onclick="submitClick()" type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                        id="publish">Publiser</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" id="publish">Publiser</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>

@@ -41,64 +41,83 @@
         </div>
     </div>
 
-        <!-- DISSE SKAL IKKE RØRES -->
-        <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>  
-        <script>
-          var firebaseConfig = {
-              apiKey: "AIzaSyChkMk9qNYQPiY6CrtSf5BvSdRDJHSk3w4",
-              authDomain: "giveget-73d6d.firebaseapp.com",
-              databaseURL: "https://giveget-73d6d-default-rtdb.firebaseio.com",
-              projectId: "giveget-73d6d",
-              storageBucket: "giveget-73d6d.appspot.com",
-              messagingSenderId: "283451874495",
-              appId: "1:283451874495:web:84f01359274a699715ba0a",
-              measurementId: "G-0MT991669E"
-          };
-          // Initialize Firebase
-          firebase.initializeApp(firebaseConfig);
-          //firebase.analytics();
-        </script>  
+    <!-- DISSE SKAL IKKE RØRES -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>  
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyChkMk9qNYQPiY6CrtSf5BvSdRDJHSk3w4",
+            authDomain: "giveget-73d6d.firebaseapp.com",
+            databaseURL: "https://giveget-73d6d-default-rtdb.firebaseio.com",
+            projectId: "giveget-73d6d",
+            storageBucket: "giveget-73d6d.appspot.com",
+            messagingSenderId: "283451874495",
+            appId: "1:283451874495:web:84f01359274a699715ba0a",
+            measurementId: "G-0MT991669E"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        //firebase.analytics();
+    </script>  
 
 
-        <!-- DETTE ER DEN DU RØRER -->
-        <script>
-            //Finner brukerens posisjon
-            $(document).on('click', '.modal',document.getElementById("flexCheckDefault"), function(){
-            if (navigator.geolocation)
+    <!-- DETTE ER DEN DU RØRER -->
+    <script>
+        //Finner brukerens posisjon
+        $(document).on('click', '.modal',document.getElementById("flexCheckDefault"), function(){
+        if (navigator.geolocation)
             navigator.geolocation.getCurrentPosition(function(position) {
             console.log(position);   
-            });
-            else 
-                console.log("geolocation is not supported");
+        });
+        else 
+            console.log("geolocation is not supported");
+        });
+
+        //Laster opp tittel og beksrivelse til firebase
+        /*var id = 0;
+        var blå = 0;
+        var rød = 999;
+        var grønn = 9999;
+
+        function submitClick() {
+            id++;
+            blå++;
+            rød++;
+            grønn++;
+            firebase.database().ref("Annonse").child(id).set({
+                tittel: document.getElementById("Title").value,
+                beskrivelse: document.getElementById("Description").value,
+                id: id,
+                blå: blå,
+                rød: rød,
+                grønn: grønn
+            });      
+        }*/
+
+
+        var chat = firebase.database().ref().child("Annonse");
+        var id = 1; 
+        var blaa = 1; 
+        var rod = 999; 
+        var gronn = 9999;
+        var form = document.getElementById("form");
+        
+        form.onsubmit = function(evt) {
+            evt.preventDefault();
+            chat.push({
+                "tittel": document.getElementById("Title").value,
+                "beskrivelse": document.getElementById("Description").value,
+                "id": id,
+                "blå": blå,
+                "rød": rød,
+                "grønn": grønn
             });
 
-            //Laster opp tittel og beksrivelse til firebase
-            var id = 0;
-            var blå = 0;
-            var rød = 999;
-            var grønn = 9999;
-
-            function submitClick() {
-                id++;
-                blå++;
-                rød++;
-                grønn++;
-                firebase.database().ref("Annonse").child(id).set({
-                    tittel: document.getElementById("Title").value,
-                    beskrivelse: document.getElementById("Description").value,
-                    id: id,
-                    blå: blå,
-                    rød: rød,
-                    grønn: grønn
-                });      
-            }
-
-            var chat = firebase.database().ref().child('Annonse');
-            chat.on("child_added", function(snapshot) {
-                var message = snapshot.val(); 
-                id = message.id;
-            });
+            id++; 
+            blaa++; 
+            rod++;
+            gronn++; 
+        }
     </script>
 
 
