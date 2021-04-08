@@ -53,7 +53,6 @@ app.get('/profile', (req, res) => {
     res.render('profile');
 });
 
-// DENNE KAN VÆRE MULIG VI DROPPER
 app.get('/registerer', (req, res) => {
     res.render('registerer');
 });

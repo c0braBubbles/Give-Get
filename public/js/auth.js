@@ -51,6 +51,7 @@ function signUp() {
     // opprett brukeren, metoden bruker litt tid på å gjennomføre
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
         console.log(cred);
+        window.location = "main";
     });
 }
 
