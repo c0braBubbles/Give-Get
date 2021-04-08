@@ -87,8 +87,8 @@
                 rød++;
                 grønn++;
                 firebase.database().ref("Annonse").child(id).set({
-                    tittel: document.getElementById("Title").value,
-                    beskrivelse: document.getElementById("Description").value,
+                    tittel: document.getElementById("TitlePost").value,
+                    beskrivelse: document.getElementById("DescriptionPost").value,
                     id: id,
                     blå: blå,
                     rød: rød,
