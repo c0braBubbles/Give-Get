@@ -48,6 +48,7 @@ function signUp() {
     var email      = document.getElementById('inputEmail').value;
     var password   = document.getElementById('inputPassword').value;
 
+
     var brukerInfo = {
         fornavn: document.getElementById('inputFirstname').value,
         etternavn: document.getElementById('inputLastname').value,
@@ -55,6 +56,7 @@ function signUp() {
         brukernavn: document.getElementById('inputUsername').value
     }
 
+    
     // opprett brukeren, metoden bruker litt tid på å gjennomføre
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
         console.log(cred);

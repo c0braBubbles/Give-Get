@@ -57,6 +57,10 @@ app.get('/registerer', (req, res) => {
     res.render('registerer');
 });
 
+app.get('/chat', (req, res) => {
+    res.render('chat');
+});
+
 
 // Listen on port 3000 
 app.listen(port, () => console.info(`Listening on port ${port}`)); 
