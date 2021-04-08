@@ -65,6 +65,25 @@ function signUp() {
     });
 }
 
+function signUp() {
+    
+    var email      = document.getElementById('inputEmail').value;
+    var password   = document.getElementById('inputPassword').value;
+    var brukernavn = document.getElementById('inputUsername').value;
+    
+    // opprett brukeren, metoden bruker litt tid på å gjennomføre
+    auth.createUserWithEmailAndPassword(email, password).then(cred => { //Oppretter brukeren i auth her
+        firebase.database().ref('bruker').child(brukernavn).set({       //Legger inn resterende bruker info
+            fornavn:    document.getElementById('inputFirstname').value,
+            etternavn:  document.getElementById('inputLastname').value,
+            email:      email,
+            brukernavn: document.getElementById('inputUsername').value
+        }).then(() => {                                                 //Går til slutt til main-siden når det over er ferdig
+            window.location = "main";            
+        });
+    });
+}
+
 
 /**
  * Submit funksjon for å lagre brukernavna til brukere for enklere aksess for søk
