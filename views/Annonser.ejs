@@ -36,7 +36,7 @@
 
  
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
     
   <div class="modal-dialog modal-xl bg-Jet">
@@ -170,7 +170,7 @@
     //Edit knapp, åpner popup
     $(document).ready(function() {
     $('body').on('click', '#' + blå +'', function() {
-        $('#exampleModal').modal('show');
+        $('#myModal').modal('show');
         document.getElementById("Title").value = snap.child("tittel").val();
         document.getElementById("Description").value = snap.child("beskrivelse").val();
 
