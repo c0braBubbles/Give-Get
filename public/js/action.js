@@ -89,8 +89,4 @@ function searching() {
             li[i].style.display = "";
         }
     }
-
-    if(input.innerHTML === "") {
-        ul.style.display = "none";
-    }
 }
