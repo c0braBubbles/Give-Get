@@ -45,12 +45,19 @@ function logout() {
 
 function signUp() {
 
-    var email = document.getElementById('inputEmail').value;
-    var password = document.getElementById('inputPassword').value;
+    var email      = document.getElementById('inputEmail').value;
+    var password   = document.getElementById('inputPassword').value;
+
+    var brukerInfo = {
+        fornavn: document.getElementById('inputFirstname').value,
+        etternavn: document.getElementById('inputLastname').value,
+        email: document.getElementById('inputEmail').value,
+        brukernavn: document.getElementById('inputUsername').value
+    }
 
     // opprett brukeren, metoden bruker litt tid på å gjennomføre
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
-        console.log(cred);
+        firebase.database().ref('Bruker').push(brukerInfo); // Lagrer resterende brukerdata i databasen
     });
 }
 
