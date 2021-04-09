@@ -290,13 +290,13 @@
     var titleee;
     $(document).ready(function() {
     $('body').on('click', '#' + grønn +'', function() {
-        firebase.database().ref("Annonse").child(id).remove();
         firebase.database().ref("Fullført").child(id).set({
         tittel: document.getElementById("Title").value = snap.child("tittel").val()
-         }); 
+         });  
+        firebase.database().ref("Annonse").child(id).remove();
         setTimeout(function() {
         window.location.reload(1);
-        }, 0001);  
+        }, 0200); 
     });
 });
 
@@ -332,13 +332,15 @@
 				});
 			});
 		});
-         //Henter data fra fullført tabell i Firebase og fyller ut fullført tabell på nettsiden
-  var root = firebase.database().ref().child("Fullført");
-  root.on("child_added", snap => { 
-  titleee = snap.child("tittel").val();
-  $("#done").append( '<tr> <td class = "pt-4" style = "width:65%" id = "tekst">' + titleee + '</td>'+ '</tr>');
-  }); 
-	});
+
+
+    //Henter data fra fullført tabell i Firebase og fyller ut fullført tabell på nettsiden
+    var root = firebase.database().ref().child("Fullført");
+    root.on("child_added", snap => { 
+    titleee = snap.child("tittel").val();
+    $("#done").append( '<tr> <td class = "pt-4" style = "width:65%" id = "tekst">' + titleee + '</td>'+ '</tr>');
+    }); 
+});
 
 
     // JavaScript kode fra Innstillinger.ejs:
