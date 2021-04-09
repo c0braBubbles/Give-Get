@@ -43,6 +43,7 @@ function logout() {
     });
 }
 
+
 function signUp() {
 
     var email      = document.getElementById('inputEmail').value;
@@ -64,6 +65,7 @@ function signUp() {
         window.location = "main";
     });
 }
+
 
 function signUp() {
     

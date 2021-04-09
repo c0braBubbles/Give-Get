@@ -59,12 +59,20 @@ function navigate(clicked_id) {
  */
 
 var ul = document.getElementById("liste");
-var chat = firebase.database().ref().child('Annonse');
-chat.on("child_added", function(snapshot) {
+
+// Referanse og funksjon til når annonser blir lagt til
+var ref_ads = firebase.database().ref().child('Annonse');
+ref_ads.on("child_added", function(snapshot) {
     var message = snapshot.val();
     ul.innerHTML += `<li><a href='#'>${message.tittel}</a></li>`; 
-    ul.innerHTML += `<li><a href='#'>${Array().toString(message.bruker)}</a></li>`;
 });
+
+// Referanse og funksjon for når brukere blir lagt til
+var ref_users = firebase.database().ref().child('bruker'); 
+ref_users.on("child_added", function(snapshot) {
+    var message = snapshot.val(); 
+    ul.innerHTML += `<li><a href='#'>${message.brukernavn}</a></li>`;
+})
 
 
 /**

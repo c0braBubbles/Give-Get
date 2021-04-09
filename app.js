@@ -24,41 +24,18 @@ app.get('', (req, res) => {
     res.render('', {text: 'This is ejs'});
 });
  
-
 // HovedSiden
 app.get('/main', (req, res) => {
     res.render('main');
-});
-
-// DETTE SKAL BLI EN PARTIAL ETTERHVERT
-app.get('/annonser', (req, res) => {
-    res.render('annonser');
-}); 
-
-// PROBLEMER MED DENNE. SPØR JACOB ELLER CHRIS
-// DETTE SKAL VÆRE BLI EN PARTIAL ETTERHVERT
-app.get('/editprofile', (req, res) => {
-    res.render('editprofile');
-});
-
-app.get('/innstillinger', (req, res) => {
-    res.render('innstillinger'); 
-});
-
-app.get('/login', (req, res) => {
-    res.render('login'); 
-});
-
-app.get('/profile', (req, res) => {
-    res.render('profile');
 });
 
 app.get('/registerer', (req, res) => {
     res.render('registerer');
 });
 
-app.get('/chat', (req, res) => {
-    res.render('chat');
+// test
+app.get('/mapTest', (req, res) => {
+    res.render('mapTest');
 });
 
 
