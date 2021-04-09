@@ -33,11 +33,6 @@ app.get('/registerer', (req, res) => {
     res.render('registerer');
 });
 
-// test
-app.get('/mapTest', (req, res) => {
-    res.render('mapTest');
-});
-
 
 // Listen on port 3000 
 app.listen(port, () => console.info(`Listening on port ${port}`)); 

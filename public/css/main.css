@@ -300,3 +300,13 @@ slide p {
     color: white;
     font-size: 25px;
 }
+
+
+/* Div til kartet */
+#map {
+    margin: auto;
+    /* width: 60vw; */
+    width: 100%;
+    height: 35vw;
+    padding: 10px;
+}
