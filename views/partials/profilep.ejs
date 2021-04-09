@@ -292,10 +292,11 @@
     $('body').on('click', '#' + grønn +'', function() {
         firebase.database().ref("Fullført").child(id).set({
         tittel: document.getElementById("Title").value = snap.child("tittel").val()
-         }); 
+         });  
+        firebase.database().ref("Annonse").child(id).remove();
         setTimeout(function() {
         window.location.reload(1);
-        }, 0001);  
+        }, 0100); 
     });
 });
 
@@ -338,7 +339,6 @@
     root.on("child_added", snap => { 
     titleee = snap.child("tittel").val();
     $("#done").append( '<tr> <td class = "pt-4" style = "width:65%" id = "tekst">' + titleee + '</td>'+ '</tr>');
-    firebase.database().ref("Annonse").child(id).remove();
     }); 
 });
 
