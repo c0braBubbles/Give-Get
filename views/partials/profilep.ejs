@@ -52,6 +52,9 @@
                     <th colspan="1" scope="col"></th>
                     <th colspan="1" scope="col">Handlinger</th>
                 </table>
+                <table class = "table" id ="done">
+                    <th colspan = "1" scope ="col"> Fullførte Annonser </th>
+                </table>
             </div>
         </div>
 
@@ -204,61 +207,6 @@
             Vis min posisjon
         </label>
     </div>
-
-    <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch modal
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl bg-Jet">
-            <div class="modal-content">
-
-                <div class="modal-body">
-                    <div class="container w-75 h-75 p-3 bg-White mt-5">
-
-
-                        <h2 class="font-weight-bold text-dark m-auto"> Innstillinger </h2>
-                        <hr class="bg-Indigo">
-                        <div class="m-5">
-
-                            <label for="customRange1" class="form-label text-dark">Radius</label>
-                            <input type="range" class="form-range" min="1" max="32" id="Avstand">
-
-                            <div class="container w-100 text-left">
-                                <div class="row row-cols-2">
-
-                                    <div class="col w-25">
-                                        <label class="label text-dark">1km</label>
-                                    </div>
-
-                                    <div class="col w-50 text-center">
-                                        <div class="badge bg-primary ">Km: <span id="Verdi"></span></div>
-                                    </div>
-
-                                    <div class="col w-25 text-end">
-                                        <label class="label text-dark">32km</label>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-check m-5">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label text-dark" for="flexCheckDefault">
-                                Vis min posisjon
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Lukk</button>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 
@@ -337,6 +285,23 @@
 				'</svg>' + '</button>' + '</tr></td>');
 
 
+
+    //Fullført knapp, pusher annonsen til fullført tabellen i Firebase
+    var titleee;
+    $(document).ready(function() {
+    $('body').on('click', '#' + grønn +'', function() {
+        firebase.database().ref("Annonse").child(id).remove();
+        firebase.database().ref("Fullført").child(id).set({
+        tittel: document.getElementById("Title").value = snap.child("tittel").val()
+         }); 
+        setTimeout(function() {
+        window.location.reload(1);
+        }, 0001);  
+    });
+});
+
+
+
 			//Edit knapp, åpner popup
 			$(document).ready(function () {
 				$('body').on('click', '#' + blå + '', function () {
@@ -367,6 +332,12 @@
 				});
 			});
 		});
+         //Henter data fra fullført tabell i Firebase og fyller ut fullført tabell på nettsiden
+  var root = firebase.database().ref().child("Fullført");
+  root.on("child_added", snap => { 
+  titleee = snap.child("tittel").val();
+  $("#done").append( '<tr> <td class = "pt-4" style = "width:65%" id = "tekst">' + titleee + '</td>'+ '</tr>');
+  }); 
 	});
 
 
