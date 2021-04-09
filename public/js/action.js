@@ -63,6 +63,7 @@ var chat = firebase.database().ref().child('Annonse');
 chat.on("child_added", function(snapshot) {
     var message = snapshot.val();
     ul.innerHTML += `<li><a href='#'>${message.tittel}</a></li>`; 
+    ul.innerHTML += `<li><a href='#'>${Array().toString(message.bruker)}</a></li>`;
 });
 
 
