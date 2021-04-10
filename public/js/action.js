@@ -53,6 +53,23 @@ function navigate(clicked_id) {
 }
 
 
+
+/**
+ * Javascript kode for kartet på hjem-skjermen 
+ * Variabel 'map' er selve kartet som blir lagt til i 'kart-diven' (home.ejs)
+ * Linker fra maptiler.com blir så lagt til som et lag (layer) på kartet
+ * Variabel 'marker' er bare en test-markør for å demonstrere hvordan ting kan bli 
+ * ... lagt til på kartet med lengdegrad og breddegrad 
+ */
+
+ var map = L.map('map').setView([0, 0], 1); 
+ L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=GM1I0Cr9B2EDW1eBIoYl', {
+     attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+ }).addTo(map); 
+ //var marker = L.marker([51.5, -0.09]).addTo(map); // Testmarkør plassert i London
+
+
+
 /**
  * Henter info innhold fra databasen, som kan bli brukt til å søkes etter
  * Innholdet blir lagt til i en HTML liste (ul)
@@ -65,6 +82,10 @@ var ref_ads = firebase.database().ref().child('Annonse');
 ref_ads.on("child_added", function(snapshot) {
     var message = snapshot.val();
     ul.innerHTML += `<li><a href='#'>${message.tittel}</a></li>`; 
+    var marker2 = L.marker([message.latitude, message.longitude]).addTo(map);
+    marker2.onclick = function() {
+        alert("her bor mats");
+    }
 });
 
 // Referanse og funksjon for når brukere blir lagt til
@@ -99,18 +120,3 @@ function searching() {
         }
     }
 }
-
-
-/**
- * Javascript kode for kartet på hjem-skjermen 
- * Variabel 'map' er selve kartet som blir lagt til i 'kart-diven' (home.ejs)
- * Linker fra maptiler.com blir så lagt til som et lag (layer) på kartet
- * Variabel 'marker' er bare en test-markør for å demonstrere hvordan ting kan bli 
- * ... lagt til på kartet med lengdegrad og breddegrad 
- */
-
-var map = L.map('map').setView([0, 0], 1); 
-L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=GM1I0Cr9B2EDW1eBIoYl', {
-    attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
-}).addTo(map); 
-var marker = L.marker([51.5, -0.09]).addTo(map); // Testmarkør plassert i London
