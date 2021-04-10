@@ -108,6 +108,8 @@
             }
         } else {
             //alert("unchecked")
+            long = 0;
+            lat = 0;
             } 
         });
 
@@ -131,8 +133,10 @@
                     grønn: grønn,
                     longitude: long,
                     latitude: lat
-                });      
-                
+                });   
+                setTimeout(function () {
+						window.location.reload(1);
+					}, 0001);   
             }
 
             var chat = firebase.database().ref().child('Annonse');
