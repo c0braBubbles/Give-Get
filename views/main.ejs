@@ -71,6 +71,7 @@
 
         <!-- DETTE ER DEN DU RØRER -->
         <script>
+            /*
             //Finner brukerens posisjon
             $(document).on('click', '.modal',document.getElementById("flexCheckDefault"), function(){
             if (navigator.geolocation)
@@ -80,6 +81,35 @@
             else 
                 console.log("geolocation is not supported");
             });
+*/
+
+        //Registrerer om CB er checket, Henter brukers posisjon og lagrer variabel som lastes opp i DB  
+        var long = 0;
+        var lat = 0;
+        $('#positioncb').on('change', function() { 
+        var cb = document.getElementById("positioncb");
+        if ($(cb).is(':checked')) {
+            //alert("checked");
+            if (navigator.geolocation) {
+            long = navigator.geolocation.getCurrentPosition(longitude);
+            } else { 
+            console.log(innerHTML = "Geolocation is not supported by this browser.");
+            }
+            if (navigator.geolocation) {
+            lat = navigator.geolocation.getCurrentPosition(latitude);
+            } else { 
+            console.log(innerHTML = "Geolocation is not supported by this browser.");
+            }
+            function longitude(position) {
+               long = position.coords.longitude;
+            }
+            function latitude(position) {
+               lat = position.coords.latitude;
+            }
+        } else {
+            //alert("unchecked")
+            } 
+        });
 
             //Laster opp tittel og beksrivelse til firebase
             var id = 0;
@@ -98,8 +128,11 @@
                     id: id,
                     blå: blå,
                     rød: rød,
-                    grønn: grønn
+                    grønn: grønn,
+                    longitude: long,
+                    latitude: lat
                 });      
+                
             }
 
             var chat = firebase.database().ref().child('Annonse');

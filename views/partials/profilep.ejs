@@ -336,11 +336,11 @@
 
     //Henter data fra fullført tabell i Firebase og fyller ut fullført tabell på nettsiden
     var root = firebase.database().ref().child("Fullført");
-    root.on("child_added", snap => { 
-    titleee = snap.child("tittel").val();
-    $("#done").append( '<tr> <td class = "pt-4" style = "width:65%" id = "tekst">' + titleee + '</td>'+ '</tr>');
-    }); 
-});
+        root.on("child_added", snap => { 
+        titleee = snap.child("tittel").val();
+        $("#done").append( '<tr> <td class = "pt-4" style = "width:65%" id = "tekst">' + titleee + '</td>'+ '</tr>');
+        }); 
+    });
 
 
     // JavaScript kode fra Innstillinger.ejs:
