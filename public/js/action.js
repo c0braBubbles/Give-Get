@@ -82,10 +82,10 @@ var ref_ads = firebase.database().ref().child('Annonse');
 ref_ads.on("child_added", function(snapshot) {
     var message = snapshot.val();
     ul.innerHTML += `<li><a href='#'>${message.tittel}</a></li>`; 
-    var marker2 = L.marker([message.latitude, message.longitude]).addTo(map);
-    marker2.onclick = function() {
-        alert("her bor mats");
-    }
+    var i = 1; 
+    var marker2 = L.marker([message.latitude, message.longitude]).addTo(map).on('click', function(e) {
+       alert(message.tittel); 
+    });
 });
 
 // Referanse og funksjon for når brukere blir lagt til

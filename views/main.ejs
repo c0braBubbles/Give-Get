@@ -32,7 +32,7 @@
     <div id="main-side">
         <%- include('partials/header.ejs'); %>
 
-        <div id="hjem_div" style="display: none;">
+        <div id="hjem_div" style="display: block;">
             <%- include('partials/homep.ejs'); %>
         </div>
 
@@ -87,30 +87,30 @@
         var long = 0;
         var lat = 0;
         $('#positioncb').on('change', function() { 
-        var cb = document.getElementById("positioncb");
-        if ($(cb).is(':checked')) {
-            //alert("checked");
-            if (navigator.geolocation) {
-            long = navigator.geolocation.getCurrentPosition(longitude);
-            } else { 
-            console.log(innerHTML = "Geolocation is not supported by this browser.");
-            }
-            if (navigator.geolocation) {
-            lat = navigator.geolocation.getCurrentPosition(latitude);
-            } else { 
-            console.log(innerHTML = "Geolocation is not supported by this browser.");
-            }
-            function longitude(position) {
-               long = position.coords.longitude;
-            }
-            function latitude(position) {
-               lat = position.coords.latitude;
-            }
-        } else {
-            //alert("unchecked")
-            long = 0;
-            lat = 0;
-            } 
+            var cb = document.getElementById("positioncb");
+            if ($(cb).is(':checked')) {
+                //alert("checked");
+                if (navigator.geolocation) {
+                    long = navigator.geolocation.getCurrentPosition(longitude);
+                } else { 
+                    console.log(innerHTML = "Geolocation is not supported by this browser.");
+                }
+                if (navigator.geolocation) {
+                    lat = navigator.geolocation.getCurrentPosition(latitude);
+                } else { 
+                    console.log(innerHTML = "Geolocation is not supported by this browser.");
+                }
+                function longitude(position) {
+                    long = position.coords.longitude;
+                }
+                function latitude(position) {
+                    lat = position.coords.latitude;
+                }
+            } else {
+                //alert("unchecked")
+                long = 0;
+                lat = 0;
+                } 
         });
 
             //Laster opp tittel og beksrivelse til firebase
@@ -135,8 +135,8 @@
                     latitude: lat
                 });   
                 setTimeout(function () {
-						window.location.reload(1);
-					}, 0001);   
+					window.location.reload(1);
+				}, 0001);   
             }
 
             var chat = firebase.database().ref().child('Annonse');
