@@ -3,6 +3,8 @@
     Inneholder funksjoner for å manøvrere seg inni brukergrensesnittet
 */
 
+
+
 /* Slideshowet på index.html */
 const navSlide = () => {
     const burger = document.querySelector('.burger'); 
@@ -23,6 +25,7 @@ const navSlide = () => {
         burger.classList.toggle('toggle');
     })
 }
+
 
 
 /* Navigasjon */
@@ -66,7 +69,7 @@ var map = L.map('map').setView([0, 0], 1);
 L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=GM1I0Cr9B2EDW1eBIoYl', {
     attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
 }).addTo(map); 
-var marker = L.marker([51.5, -0.09]).addTo(map); // Testmarkør plassert i London
+//var marker = L.marker([51.5, -0.09]).addTo(map); // Testmarkør plassert i London
 
 
 
@@ -81,7 +84,17 @@ ref_ads.on("child_added", function(snapshot) {
     var message = snapshot.val();
     ul.innerHTML += `<li><a href='#'>${message.tittel}</a></li>`; 
 
-    var marker2 = L.marker([message.latitude, message.longitude]).addTo(map);
+    var marker2 = L.marker([message.latitude, message.longitude]).addTo(map).bindPopup(
+        "<div class='text-center' width='560' height='315'>" +
+            "<h2>" + message.tittel + "</h2>" + 
+            "<p>" + message.beskrivelse + "</p>" +
+            "<p class='font-italic'>brukernavn</p>" + 
+            "<button type='button' class='btn btn-primary btn-default btn-circle'>" +
+                "<i class='fas fa-comment'></i>" + 
+            "</button>" +
+        "</div>", {
+            maxWidth: 560
+        }).openPopup();
 });
 
 
