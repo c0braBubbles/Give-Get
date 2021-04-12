@@ -68,12 +68,6 @@ L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=GM1I0Cr9B2E
 }).addTo(map); 
 var marker = L.marker([51.5, -0.09]).addTo(map); // Testmarkør plassert i London
 
-/*function test() {
-    window.location = "https://no.wikipedia.org/wiki/London";
-}
-
-marker.on('click', test);*/
-
 
 
 /**
@@ -81,21 +75,17 @@ marker.on('click', test);*/
  * Innholdet blir lagt til i en HTML liste (ul)
  */
 
-var ul = document.getElementById("liste");
-
-// Referanse og funksjon til når annonser blir lagt til
-var ref_ads = firebase.database().ref().child('Annonse');
+var ul = document.getElementById("liste"); 
+var ref_ads = firebase.database().ref().child('Annonse'); // Referanse og funksjon til når annonser blir lagt til
 ref_ads.on("child_added", function(snapshot) {
     var message = snapshot.val();
     ul.innerHTML += `<li><a href='#'>${message.tittel}</a></li>`; 
-    var i = 1; 
-    var marker2 = L.marker([message.latitude, message.longitude]).addTo(map).on('click', function(e) {
-       alert(message.tittel); 
-    });
+
+    var marker2 = L.marker([message.latitude, message.longitude]).addTo(map);
 });
 
-// Referanse og funksjon for når brukere blir lagt til
-var ref_users = firebase.database().ref().child('bruker'); 
+
+var ref_users = firebase.database().ref().child('bruker'); // Referanse og funksjon for når brukere blir lagt tils
 ref_users.on("child_added", function(snapshot) {
     var message = snapshot.val(); 
     ul.innerHTML += `<li><a href='#'>${message.brukernavn}</a></li>`;

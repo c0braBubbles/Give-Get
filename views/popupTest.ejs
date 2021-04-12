@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>T E S T</title>
-    
+
     <style>
         body {
             background-color: #353535;
@@ -42,6 +42,7 @@
             padding: 20px;
             border: 1px solid #888;
             width: 80%;
+            color: black;
         }
 
         /* The Close Button */
@@ -62,20 +63,26 @@
 </head>
 <body>
     <button id="knp">Trykk meg</button>
+    <button id="knp2">Trykk meg 2</button>
 
 
     <div id="myModal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <p>Some text in the Modal..</p>
+            <span class="close" onclick="exit()">&times;</span>
+            <p id="tekst">Some text in the Modal..</p>
         </div>
     </div>
 
 
     <script>
         function noe() {
-            alert("heihei");
+            document.getElementById("myModal").style.display = "block";
+            document.getElementById("tekst").innerHTML = "Artikkel 1";
+        }
+
+        function exit() {
+            document.getElementById("myModal").style.display = "none";
         }
 
         var btn = document.getElementById("knp").onclick = noe;
