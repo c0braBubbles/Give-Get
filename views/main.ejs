@@ -83,7 +83,7 @@
             });
 */
 
-        //Registrerer om CB er checket, Henter brukers posisjon og lagrer variabel som lastes opp i DB  
+        //Registrerer om CB er checket, Henter brukers posisjon og lagrer variabel som lastes opp i DB 
         var long = 0;
         var lat = 0;
         $('#positioncb').on('change', function() { 
@@ -113,7 +113,28 @@
                 } 
         });
 
-            //Laster opp tittel og beksrivelse til firebase
+            //Tilbud
+            var status = " ";
+            $('#tilbycb').on('change', function() { 
+            var tcb = document.getElementById("tilbycb");
+            if ($(tcb).is(':checked')) {
+                //alert("Tilbud");
+                status = "Tilbud";
+                }    
+            });
+
+            //Etterspørsel
+            $('#etterspørcb').on('change', function() { 
+            var ecb = document.getElementById("etterspørcb");
+            if ($(ecb).is(':checked')) {
+                //alert("Etterspørsel");
+                status = "Etterspørsel";
+                } 
+            });
+
+
+
+            //Laster opp tittel, beskrivelse, posisjon og kategori til firebase
             var id = 0;
             var blå = 0;
             var rød = 999;
@@ -132,7 +153,8 @@
                     rød: rød,
                     grønn: grønn,
                     longitude: long,
-                    latitude: lat
+                    latitude: lat,
+                    kategori: status
                 });   
                 setTimeout(function () {
 					window.location.reload(1);
