@@ -202,8 +202,8 @@
         </div>
     </div>
     <div class="form-check m-5">
-        <input class="form-check-input" type="checkbox" value="" id="sepositioncb">
-        <label class="form-check-label text-dark" for="setpositioncb">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+        <label class="form-check-label text-dark" for="flexCheckDefault">
             Vis min posisjon
         </label>
     </div>
@@ -366,7 +366,7 @@
 						firebase.database().ref("Annonse").child(id).update({
 							tittel: document.getElementById("Title").value,
 							beskrivelse: document.getElementById("Description").value,
-                            status: edstatus,
+                            kategori: edstatus,
                             longitude: edlong,
                             latitude: edlat
 						});
