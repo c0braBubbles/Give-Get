@@ -62,11 +62,17 @@ function navigate(clicked_id) {
  * ... lagt til på kartet med lengdegrad og breddegrad 
  */
 
- var map = L.map('map').setView([0, 0], 1); 
- L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=GM1I0Cr9B2EDW1eBIoYl', {
-     attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
- }).addTo(map); 
- //var marker = L.marker([51.5, -0.09]).addTo(map); // Testmarkør plassert i London
+var map = L.map('map').setView([0, 0], 1); 
+L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=GM1I0Cr9B2EDW1eBIoYl', {
+    attribution: '<a href="https://www.maptiler.com/copyright/" target="_blank">&copy; MapTiler</a> <a href="https://www.openstreetmap.org/copyright" target="_blank">&copy; OpenStreetMap contributors</a>',
+}).addTo(map); 
+var marker = L.marker([51.5, -0.09]).addTo(map); // Testmarkør plassert i London
+
+/*function test() {
+    window.location = "https://no.wikipedia.org/wiki/London";
+}
+
+marker.on('click', test);*/
 
 
 
@@ -94,6 +100,7 @@ ref_users.on("child_added", function(snapshot) {
     var message = snapshot.val(); 
     ul.innerHTML += `<li><a href='#'>${message.brukernavn}</a></li>`;
 })
+
 
 
 /**
