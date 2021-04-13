@@ -258,6 +258,17 @@
 
 	//Henter info fra databasen og gir variabler til elementer fra databasen
 	$(document).ready(function () {
+        $("#myModal").on("hidden.bs.modal", function(){
+            //clearer alt innhold i modal etter den lukkes
+            var tilbbtn = document.getElementById("edtilbycb");
+                   tilbbtn.checked = false;
+            var etterbtn = document.getElementById("edetterspørcb");
+                   etterbtn.checked = false;
+                });
+
+        //Gjør så man ikke kan klikke seg ut av edit popup etter den er åpnet
+        $('#myModal').modal({backdrop: 'static', keyboard: false})
+
 		var rootRef = firebase.database().ref().child("Annonse");
 		rootRef.on("child_added", snap => {
 			var title = snap.child("tittel").val();
@@ -301,24 +312,7 @@
     });
 
 
-            //Tilbud
-            var edstatus = " ";
-            $('#edtilbycb').on('change', function() { 
-            var tcb = document.getElementById("edtilbycb");
-            if ($(tcb).is(':checked')) {
-                //alert("Tilbud");
-                edstatus = "Tilbud";
-                }    
-            });
-
-            //Etterspørsel
-            $('#edetterspørcb').on('change', function() { 
-            var ecb = document.getElementById("edetterspørcb");
-            if ($(ecb).is(':checked')) {
-                //alert("Etterspørsel");
-                edstatus = "Etterspørsel";
-                } 
-            });
+           
 
         //Posisjon i edit vinduet
         var edlong = 0;
@@ -352,15 +346,44 @@
 
         
 
-
-
 			//Edit knapp, åpner popup
 			$(document).ready(function () {
+                var edstatus = "ikke valgt";
 				$('body').on('click', '#' + blå + '', function () {
 					$('#myModal').modal('show');
 					document.getElementById("Title").value = snap.child("tittel").val();
 					document.getElementById("Description").value = snap.child("beskrivelse").val();
 
+                    //Tilbud checkbox
+                    $('#edtilbycb').on('change', function() { 
+                    var tcb = document.getElementById("edtilbycb");
+                        if ($(tcb).is(':checked')) {
+                        //alert("Tilbud");
+                        edstatus = "Tilbud";
+                        }    
+                    });
+                    //Etterspørsel checkbox
+                    $('#edetterspørcb').on('change', function() { 
+                        var ecb = document.getElementById("edetterspørcb");
+                        if ($(ecb).is(':checked')) {
+                        //alert("Etterspørsel");
+                        edstatus = "Etterspørsel";
+                        } 
+                    });
+                    //gir Tilbud CB checked automatisk hvis annonsen er et tilbud
+                    tilb = document.getElementById("edtilbycb").value = snap.child("kategori").val();
+                    if (tilb == "Tilbud") {
+                    edstatus = "Tilbud"; //gir Tilbud CB Verdi på nytt når CBen er checket fra før av
+                    var tilbbtn = document.getElementById("edtilbycb");
+                    tilbbtn.checked = true;
+                    }
+                    //gir Etterspørsel CB checked automatisk hvis annonsen er en Etterspørsel
+                    etters = document.getElementById("edetterspørcb").value = snap.child("kategori").val();
+                    if (etters == "Etterspørsel") {
+                    edstatus = "Etterspørsel"; //gir Etterspørsel CB Verdi på nytt når CBen er checket fra før av
+                    var ettersbtn = document.getElementById("edetterspørcb");
+                    ettersbtn.checked = true;
+                    }
 					//Oppdater Annonser knapp i popuppen
 					$('body').on('click', '#update', function () {
 						firebase.database().ref("Annonse").child(id).update({
