@@ -90,7 +90,7 @@ ref_ads.on("child_added", function(snapshot) {
             "<p>" + message.beskrivelse + "</p>" +
             "<p class='font-italic'>brukernavn</p>" + 
             "<button type='button' class='btn btn-primary btn-default btn-circle'>" +
-                "<i class='fas fa-comment'></i>" + 
+                "<i class='fa fa-comment'></i>" + 
             "</button>" +
         "</div>", {
             maxWidth: 560
