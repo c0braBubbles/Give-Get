@@ -1,0 +1,201 @@
+
+.dropdown {
+    width:100%;
+    padding:0px;
+}
+
+.custom-dropdown-btn {
+    width:100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    box-shadow: none !important;
+    padding-top:10px;
+    padding-bottom:10px;
+    background-color:#284B63 !important;
+    margin-bottom:0px !important;
+    border: none;
+    border-radius: 3px 3px 0px 0px !important;
+}
+.custom-dropdown-btn:hover {
+    background-color: #1b3d53 !important;
+}
+
+.chat-liste { /* Inneholder alle chat "objektene" */
+    width:100vw;
+    background-color: #FFFFFF;
+    border: none;
+    border-bottom: 3px solid #284B63;
+    border-radius: 0px;
+}
+
+.another-chat { /* Hvert chat "objekt" */
+    width:calc(100% - 20px); /* - 20px, fordi det margin/padding*/
+    margin:10px;
+    padding-left:5px;
+    border-bottom: 1px inset #284B63;
+    word-break: break-word;
+}
+.another-chat:hover {
+    background-color: #3C6E71;
+    color:#FFFFFF;
+    border-radius: 5px;
+    border: 1px inset #353535;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.another-chat p, h5 {
+    padding:2px !important;
+    margin: 0px;
+}
+
+
+/*
+.dropdown-menu {
+    padding:0px;
+    padding-left: 20px;
+    margin-left:20px;
+}*/
+
+
+.minboks {
+    width:100vw;
+    height:calc(100vh - 95px);
+    background-color: #353535;
+    margin-top: -45px;
+}
+
+.my-col-medium {
+    background-color: #353535;
+}
+.my-col-large {
+    height:calc(100vh - 141px) !important; /* Setter til vinduets høyde - dropdown og navbar høyden*/
+}
+
+.chat-liste-stor {
+    display: none;
+}
+
+.chat-window {
+    width:100%;
+    height:calc(100vh - 181px); /* -95px trengs uansett også trenger vi i tillegg minus for skrive vinduet*/
+    background-color: #FFFFFF;
+    overflow-y: scroll;
+    word-break: break-word;
+}
+
+.sender-bubble {
+    background-color: rgb(10, 155, 210);
+    float: right;
+    clear:both;
+}
+
+.receiver-bubble {
+    background-color: rgb(190, 190, 190);
+    display: table;
+    clear: right;
+}
+
+.msg-list {
+    padding:0px;
+    margin:0px;
+}
+
+.msg-list-item {
+    padding:0px;
+    margin:0px;
+    width:100%;
+    background-color: orange;
+}
+
+.msg-line {
+    display: block;
+    margin:0px;
+    padding:0px;
+    display: block;
+}
+
+.sender-bubble, .receiver-bubble {
+    padding:0px 7px 0px 7px;
+    margin-bottom:7px;
+    border-radius: 15px;
+    max-width:60%;
+    color:black;
+    
+}
+
+.chat-input-box {
+    background-color: #FFFFFF;
+    width:100%;
+    height:40px;
+    padding:0px;
+    margin:0px;
+    font-size: 0;
+    border-top:1px inset #353535;
+}
+
+.msg-input {
+    font-size: 23px;
+    padding-left:5px;
+    height:39px;
+    width:calc(100vw - 80px);
+    border:none;
+    border-right:1px solid black;
+}
+.msg-input:focus {
+    outline:none;
+}
+.msg-btn {
+    background-color: #3C6E71;
+    color:#FFFFFF;
+    width:80px;
+    height:39px;
+    font-size: 23px;
+    border: none;
+}
+.msg-btn:hover {
+    background-color: #4f9ca0;
+}
+
+
+/* Dersom bruker er på tablet NB, vet ikke om det trengs */
+@media only screen and (min-width:768px) {
+    .dropdown {
+        display:none;
+    }
+    
+    .my-col-medium, .my-col-large {
+        height: calc(100vh - 94px) !important;
+    }
+    .my-col-medium {
+        overflow-y: scroll;
+    }
+    .my-col-large {
+        padding:0px;
+    }
+
+    .chat-window {
+        height:calc(100vh - 134px);
+    }
+
+    .chat-liste-stor {
+        list-style-type: none;
+        display:block;
+        width:100%;
+        margin:0px;
+        padding:0px;
+        color:white;
+    }
+
+    .msg-input {
+        width:calc(100% - 90px) !important;
+    }
+    
+}
+
+/* Dersom bruker er på pc */
+@media only screen and (min-width:1200px) {
+    .dropdown {
+        display:none;
+    }
+
+}
