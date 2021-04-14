@@ -88,8 +88,8 @@
 */
 
         //Registrerer om CB er checket, Henter brukers posisjon og lagrer variabel som lastes opp i DB 
-        var long = 0;
-        var lat = 0;
+        var long = null;
+        var lat = null;
         $('#positioncb').on('change', function() { 
             var cb = document.getElementById("positioncb");
             if ($(cb).is(':checked')) {
@@ -112,8 +112,8 @@
                 }
             } else {
                 //alert("unchecked")
-                long = 0;
-                lat = 0;
+                //long = 0;
+                //lat = 0;
                 } 
         });
 
@@ -145,10 +145,13 @@
             var grønn = 9999;
 
             function submitClick() {
+                var cb = document.getElementById("positioncb");
                 id++;
                 blå++;
                 rød++;
                 grønn++;
+                //hvis posisjon er valgt, pusher vi med lon og lat
+                if ($(cb).is(':checked')) {
                 firebase.database().ref("Annonse").child(id).set({
                     tittel: document.getElementById("TitlePost").value,
                     beskrivelse: document.getElementById("DescriptionPost").value,
@@ -160,6 +163,19 @@
                     latitude: lat,
                     kategori: status
                 });   
+                }
+            //hvis posisjon ikke er valgt pusher vi uten lon og lat
+            else {
+                firebase.database().ref("Annonse").child(id).set({
+                    tittel: document.getElementById("TitlePost").value,
+                    beskrivelse: document.getElementById("DescriptionPost").value,
+                    id: id,
+                    blå: blå,
+                    rød: rød,
+                    grønn: grønn,
+                    kategori: status
+                });   
+            }
                 setTimeout(function () {
 					window.location.reload(1);
 				}, 0001);   

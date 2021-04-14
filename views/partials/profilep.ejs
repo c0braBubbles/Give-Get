@@ -277,6 +277,8 @@
 			var rød = snap.child("rød").val();
 			var grønn = snap.child("grønn").val();
 			var id = snap.child("id").val();
+            var longitude = snap.child("longitude").val();
+            var latitude = snap.child("latitude").val();
 
 			//Fyller ut en html table med titler og handlingsknapper
 			$("#table").append('<tr> <td class = "pt-4" style = "width:65%" id = "tekst">' + title + '</td>' + '<td>' + '<th scope="row">' +
@@ -310,42 +312,6 @@
         }, 0200); 
         });
     });
-
-
-           
-
-        //Posisjon i edit vinduet
-        var edlong = 0;
-        var edlat = 0;
-        $('#edpositioncb').on('change', function() { 
-            var edcb = document.getElementById("edpositioncb");
-            if ($(edcb).is(':checked')) {
-                //alert("checked");
-                if (navigator.geolocation) {
-                    edlong = navigator.geolocation.getCurrentPosition(longitude);
-                } else { 
-                    console.log(innerHTML = "Geolocation is not supported by this browser.");
-                }
-                if (navigator.geolocation) {
-                    edlat = navigator.geolocation.getCurrentPosition(latitude);
-                } else { 
-                    console.log(innerHTML = "Geolocation is not supported by this browser.");
-                }
-                function longitude(position) {
-                    edlong = position.coords.longitude;
-                }
-                function latitude(position) {
-                    edlat = position.coords.latitude;
-                }
-            } else {
-                //alert("unchecked")
-                edlong = 0;
-                edlat = 0;
-                } 
-        });
-
-        
-
 			//Edit knapp, åpner popup
 			$(document).ready(function () {
                 var edstatus = "ikke valgt";
@@ -370,6 +336,33 @@
                         edstatus = "Etterspørsel";
                         } 
                     });
+
+                    //Rediger posisjon i edit vinduet
+                    var edlong = null;
+                    var edlat = null;
+                    $('#edpositioncb').on('change', function() { 
+                        var edcb = document.getElementById("edpositioncb");
+                        if ($(edcb).is(':checked')) {
+                            //alert("checked");
+                            if (navigator.geolocation) {
+                                edlong = navigator.geolocation.getCurrentPosition(longitude);
+                            } else { 
+                                console.log(innerHTML = "Geolocation is not supported by this browser.");
+                            }
+                            if (navigator.geolocation) {
+                                edlat = navigator.geolocation.getCurrentPosition(latitude);
+                            } else { 
+                                console.log(innerHTML = "Geolocation is not supported by this browser.");
+                            }
+                            function longitude(position) {
+                                edlong = position.coords.longitude;
+                            }
+                            function latitude(position) {
+                                edlat = position.coords.latitude;
+                            }
+                        } 
+                    });
+
                     //gir Tilbud CB checked automatisk hvis annonsen er et tilbud
                     tilb = document.getElementById("edtilbycb").value = snap.child("kategori").val();
                     if (tilb == "Tilbud") {
@@ -384,8 +377,20 @@
                     var ettersbtn = document.getElementById("edetterspørcb");
                     ettersbtn.checked = true;
                     }
+                    //gir posisjon CB checked automatisk hvis annonsen bruker posisjon
+                    lonpos = snap.child("longitude").val();
+                    latpos = snap.child("latitude").val();
+                    if (lonpos !=null && latpos !=null) {
+                    edlong = lonpos; //gir lon Verdi på nytt når CBen er checket fra før av
+                    edlat = latpos; //gir lat Verdi på nytt når CBen er checket fra før av
+                    var posbtn = document.getElementById("edpositioncb");
+                    posbtn.checked = true;
+                    }
+
 					//Oppdater Annonser knapp i popuppen
 					$('body').on('click', '#update', function () {
+                        var edcb = document.getElementById("edpositioncb");
+                        if ($(edcb).is(':checked')) {
 						firebase.database().ref("Annonse").child(id).update({
 							tittel: document.getElementById("Title").value,
 							beskrivelse: document.getElementById("Description").value,
@@ -393,6 +398,16 @@
                             longitude: edlong,
                             latitude: edlat
 						});
+                        //fjerner lon og lat om posisjon CB ikke er checked
+                        } else {
+                            firebase.database().ref("Annonse").child(id).update({
+							tittel: document.getElementById("Title").value,
+							beskrivelse: document.getElementById("Description").value,
+                            kategori: edstatus,
+                            longitude: null,
+                            latitude: null
+						});
+                        }
 						setTimeout(function () {
 							window.location.reload(1);
 						}, 0000);
