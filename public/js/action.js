@@ -5,6 +5,14 @@
 
 
 
+var ref_users = firebase.database().ref().child('bruker'); // Referanse og funksjon for når brukere blir lagt tils
+ref_users.on("child_added", function(snapshot) {
+    var message = snapshot.val(); 
+    ul.innerHTML += `<li><a href='#'>${message.brukernavn}</a></li>`;
+});
+
+
+
 /* Slideshowet på index.html */
 const navSlide = () => {
     const burger = document.querySelector('.burger'); 
@@ -88,7 +96,7 @@ ref_ads.on("child_added", function(snapshot) {
         "<div class='text-center' width='560' height='315'>" +
             "<h2>" + message.tittel + "</h2>" + 
             "<p>" + message.beskrivelse + "</p>" +
-            "<p class='font-italic'>brukernavn</p>" + 
+            "<p class='font-italic'>" + username + "</p>" + 
             "<button type='button' class='btn btn-primary btn-default btn-circle'>" +
                 "<i class='fa fa-comment'></i>" + 
             "</button>" +
@@ -96,13 +104,6 @@ ref_ads.on("child_added", function(snapshot) {
             maxWidth: 560
         }).openPopup();
 });
-
-
-var ref_users = firebase.database().ref().child('bruker'); // Referanse og funksjon for når brukere blir lagt tils
-ref_users.on("child_added", function(snapshot) {
-    var message = snapshot.val(); 
-    ul.innerHTML += `<li><a href='#'>${message.brukernavn}</a></li>`;
-})
 
 
 
