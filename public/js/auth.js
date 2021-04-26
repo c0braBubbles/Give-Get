@@ -8,7 +8,7 @@ firebase.auth().onAuthStateChanged(function(user) {
 
         if(user != null) {
             var email_id = user.email;
-            checkName(user);
+            return email_id;
         }
     }
 
@@ -94,3 +94,4 @@ function signUp() {
 /**
  * Submit funksjon for å lagre brukernavna til brukere for enklere aksess for søk
  */
+

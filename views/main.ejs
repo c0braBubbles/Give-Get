@@ -24,6 +24,9 @@
     <!-- Leaflet-linker (Kartet) -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <script src="js/User.js"></script>
+
 </head>
 <body style="background-color: #353535;">
 
@@ -75,6 +78,9 @@
 
         <!-- DETTE ER DEN DU RØRER -->
         <script>
+            let myUser = new User();
+            console.log(myUser.email_id);
+            console.log(myUser.test);
             /*
             //Finner brukerens posisjon
             $(document).on('click', '.modal',document.getElementById("flexCheckDefault"), function(){
