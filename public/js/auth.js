@@ -7,8 +7,8 @@ firebase.auth().onAuthStateChanged(function(user) {
         var user = firebase.auth().currentUser; 
 
         if(user != null) {
-            var email_id = user.email; 
-            // document.getElementById("velkommen").innerHTML += "Velkommen " + email_id;
+            var email_id = user.email;
+            checkName(user);
         }
     }
 
@@ -17,6 +17,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         document.getElementById("login-side").style.display = "block";
     }
 });
+
 
 
 function login() {
@@ -32,6 +33,7 @@ function login() {
 }
 
 
+
 /* For at funksjonen skulle funke måtte jeg omringe 
 funksjonen "firebase.auth().signOut()" med try-catch */
 
@@ -42,6 +44,7 @@ function logout() {
         alert(error); // mest sannsynlig vil ingen error forekomme
     });
 }
+
 
 
 function signUp() {
@@ -67,6 +70,7 @@ function signUp() {
 }
 
 
+
 function signUp() {
     
     var email      = document.getElementById('inputEmail').value;
@@ -90,4 +94,3 @@ function signUp() {
 /**
  * Submit funksjon for å lagre brukernavna til brukere for enklere aksess for søk
  */
-
