@@ -7,8 +7,9 @@ firebase.auth().onAuthStateChanged(function(user) {
         var user = firebase.auth().currentUser; 
 
         if(user != null) {
-            var email_id = user.email;
-            checkName(user);
+            var email_id = user.email; 
+
+            findUserName(email_id);
         }
     }
 
@@ -17,6 +18,17 @@ firebase.auth().onAuthStateChanged(function(user) {
         document.getElementById("login-side").style.display = "block";
     }
 });
+
+var username; 
+function findUserName(email_id) {
+    var ref_users = firebase.database().ref().child('bruker'); // Referanse og funksjon for når brukere blir lagt tils
+    ref_users.on("child_added", function(snapshot) {
+        var message = snapshot.val();
+        if(email_id === message.email) {
+            username = message.brukernavn;
+        }
+    });
+}
 
 
 

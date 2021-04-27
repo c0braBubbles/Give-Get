@@ -96,7 +96,7 @@ ref_ads.on("child_added", function(snapshot) {
         "<div class='text-center' width='560' height='315'>" +
             "<h2>" + message.tittel + "</h2>" + 
             "<p>" + message.beskrivelse + "</p>" +
-            "<p class='font-italic'>" + username + "</p>" + 
+            "<p class='font-italic'>" + "username" + "</p>" + 
             "<button type='button' class='btn btn-primary btn-default btn-circle'>" +
                 "<i class='fa fa-comment'></i>" + 
             "</button>" +
