@@ -53,40 +53,39 @@
         </div>
     </div>
 
-        <!-- DISSE SKAL IKKE RØRES -->
-        <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>  
-        <script>
-          var firebaseConfig = {
-              apiKey: "AIzaSyChkMk9qNYQPiY6CrtSf5BvSdRDJHSk3w4",
-              authDomain: "giveget-73d6d.firebaseapp.com",
-              databaseURL: "https://giveget-73d6d-default-rtdb.firebaseio.com",
-              projectId: "giveget-73d6d",
-              storageBucket: "giveget-73d6d.appspot.com",
-              messagingSenderId: "283451874495",
-              appId: "1:283451874495:web:84f01359274a699715ba0a",
-              measurementId: "G-0MT991669E"
-          };
-          // Initialize Firebase
-          firebase.initializeApp(firebaseConfig);
-          //firebase.analytics();
-        </script>  
+    <!-- DISSE SKAL IKKE RØRES -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-analytics.js"></script>  
+    <script>
+        var firebaseConfig = {
+            apiKey: "AIzaSyChkMk9qNYQPiY6CrtSf5BvSdRDJHSk3w4",
+            authDomain: "giveget-73d6d.firebaseapp.com",
+            databaseURL: "https://giveget-73d6d-default-rtdb.firebaseio.com",
+            projectId: "giveget-73d6d",
+            storageBucket: "giveget-73d6d.appspot.com",
+            messagingSenderId: "283451874495",
+            appId: "1:283451874495:web:84f01359274a699715ba0a",
+            measurementId: "G-0MT991669E"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        //firebase.analytics();
+    </script>  
 
 
-        <!-- DETTE ER DEN DU RØRER -->
-        <script>
-            auth.test();
-            /*
-            //Finner brukerens posisjon
-            $(document).on('click', '.modal',document.getElementById("flexCheckDefault"), function(){
-            if (navigator.geolocation)
+    <!-- DETTE ER DEN DU RØRER -->
+    <script>
+        /*
+        //Finner brukerens posisjon
+        $(document).on('click', '.modal',document.getElementById("flexCheckDefault"), function(){
+        if (navigator.geolocation)
             navigator.geolocation.getCurrentPosition(function(position) {
             console.log(position);   
-            });
-            else 
-                console.log("geolocation is not supported");
-            });
-*/
+        });
+        else 
+            console.log("geolocation is not supported");
+        });
+        */
 
 
         // Sjekker hvem som er logget inn 
@@ -130,44 +129,44 @@
                 //alert("unchecked")
                 //long = 0;
                 //lat = 0;
-                } 
+            } 
         });
 
-            //Tilbud
-            var status = " ";
-            $('#tilbycb').on('change', function() { 
+        //Tilbud
+        var status = " ";
+        $('#tilbycb').on('change', function() { 
             var tcb = document.getElementById("tilbycb");
             if ($(tcb).is(':checked')) {
                 //alert("Tilbud");
                 status = "Tilbud";
-                }    
-            });
+            }    
+        });
 
-            //Etterspørsel
-            $('#etterspørcb').on('change', function() { 
+        //Etterspørsel
+        $('#etterspørcb').on('change', function() { 
             var ecb = document.getElementById("etterspørcb");
             if ($(ecb).is(':checked')) {
                 //alert("Etterspørsel");
                 status = "Etterspørsel";
-                } 
-            });
+            } 
+        });
 
 
 
-            //Laster opp tittel, beskrivelse, posisjon og kategori til firebase
-            var id = 0;
-            var blå = 0;
-            var rød = 999;
-            var grønn = 9999;
+        //Laster opp tittel, beskrivelse, posisjon og kategori til firebase
+        var id = 0;
+        var blå = 0;
+        var rød = 999;
+        var grønn = 9999;
 
-            function submitClick() {
-                var cb = document.getElementById("positioncb");
-                id++;
-                blå++;
-                rød++;
-                grønn++;
-                //hvis posisjon er valgt, pusher vi med lon og lat
-                if ($(cb).is(':checked')) {
+        function submitClick() {
+            var cb = document.getElementById("positioncb");
+            id++;
+            blå++;
+            rød++;
+            grønn++;
+            //hvis posisjon er valgt, pusher vi med lon og lat
+            if ($(cb).is(':checked')) {
                 firebase.database().ref("Annonse").child(id).set({
                     tittel: document.getElementById("TitlePost").value,
                     beskrivelse: document.getElementById("DescriptionPost").value,
@@ -179,7 +178,7 @@
                     latitude: lat,
                     kategori: status
                 });   
-                }
+            }
             //hvis posisjon ikke er valgt pusher vi uten lon og lat
             else {
                 firebase.database().ref("Annonse").child(id).set({
