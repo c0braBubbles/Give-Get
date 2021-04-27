@@ -9,7 +9,7 @@ firebase.auth().onAuthStateChanged(function(user) {
         if(user != null) {
             var email_id = user.email; 
 
-            findUserName(email_id);
+            getUsername(email_id);
         }
     }
 
@@ -19,8 +19,15 @@ firebase.auth().onAuthStateChanged(function(user) {
     }
 });
 
+
+function test() {
+    alert(test);
+}
+
+
+
 var username; 
-function findUserName(email_id) {
+function getUsername(email_id) {
     var ref_users = firebase.database().ref().child('bruker'); // Referanse og funksjon for når brukere blir lagt tils
     ref_users.on("child_added", function(snapshot) {
         var message = snapshot.val();
