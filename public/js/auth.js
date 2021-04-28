@@ -1,17 +1,21 @@
-function checkUser() {
+var username; 
+var email_id;
+
+// DETTE ER FUNKSJONEN SOM SJEKKER HVEM SOM HAR LOGGET INN!!!!!!!!
+// function checkUser() {
 firebase.auth().onAuthStateChanged(function(user) {
     if(user) {
         // User is signed in
         document.getElementById("main-side").style.display = "block";
+        // document.getElementById("hjem_div").style.display = "none";
         document.getElementById("login-side").style.display = "none";
 
         var user = firebase.auth().currentUser; 
 
         if(user != null) {
-            var email_id = user.email; 
+            email_id = user.email; 
 
             setUsername(email_id);
-            // getUserName();
         }
     }
 
@@ -20,27 +24,35 @@ firebase.auth().onAuthStateChanged(function(user) {
         document.getElementById("login-side").style.display = "block";
     }
 });
-}
-// checkUser();
+// } 
 
-
-
-var username; 
+/**
+ * Brukernavn og email_id er lagret på to forskjellige steder i db-en
+ * for autensiseringens skyld. Derfor i denne metoden går vi gjennom den delen 
+ * som har lagret bruker-info, og ser hvem som matcher med emailen
+ * 
+ * @param {*} email_id 
+ */
 function setUsername(email_id) {
     var ref_users = firebase.database().ref().child('bruker'); // Referanse og funksjon for når brukere blir lagt tils
     ref_users.on("child_added", function(snapshot) {
         var message = snapshot.val();
         if(email_id === message.email) {
             username = message.brukernavn;
-            return username;
         }
     });
 }
 
-function getUserName() {
-    checkUser();
-    return username;
-}
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -54,6 +66,7 @@ function login() {
         var errorMessage = error.message;
         window.alert("Error : " + errorMessage);
     });
+    console.log(username);
 }
 
 
