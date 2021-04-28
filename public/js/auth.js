@@ -39,6 +39,7 @@ function setUsername(email_id) {
         var message = snapshot.val();
         if(email_id === message.email) {
             username = message.brukernavn;
+            document.getElementById("bnavn").innerHTML = username; 
         }
     });
 }

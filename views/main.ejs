@@ -168,6 +168,7 @@
             //hvis posisjon er valgt, pusher vi med lon og lat
             if ($(cb).is(':checked')) {
                 firebase.database().ref("Annonse").child(id).set({
+                    brukernavn: username,
                     tittel: document.getElementById("TitlePost").value,
                     beskrivelse: document.getElementById("DescriptionPost").value,
                     id: id,
@@ -182,6 +183,7 @@
             //hvis posisjon ikke er valgt pusher vi uten lon og lat
             else {
                 firebase.database().ref("Annonse").child(id).set({
+                    brukernavn: username,
                     tittel: document.getElementById("TitlePost").value,
                     beskrivelse: document.getElementById("DescriptionPost").value,
                     id: id,
