@@ -65,6 +65,7 @@ function navigate(clicked_id) {
 
 
 
+
 /**
  * Javascript kode for kartet på hjem-skjermen 
  * Variabel 'map' er selve kartet som blir lagt til i 'kart-diven' (home.ejs)
@@ -81,6 +82,7 @@ L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=GM1I0Cr9B2E
 
 
 
+
 /**
  * Henter info innhold fra databasen, som kan bli brukt til å søkes etter
  * Innholdet blir lagt til i en HTML liste (ul)
@@ -92,18 +94,31 @@ ref_ads.on("child_added", function(snapshot) {
     var message = snapshot.val();
     ul.innerHTML += `<li><a href='#'>${message.tittel}</a></li>`; 
 
-    var marker2 = L.marker([message.latitude, message.longitude]).addTo(map).bindPopup(
+    /*var marker2 = L.marker([message.latitude, message.longitude]).addTo(map).bindPopup(
         "<div class='text-center' width='560' height='315'>" +
             "<h2>" + message.tittel + "</h2>" + 
             "<p>" + message.beskrivelse + "</p>" +
             "<p class='font-italic'>" + message.brukernavn + "</p>" + 
             "<button type='button' class='btn btn-primary btn-default btn-circle'>" +
-                "<i class='fa fa-comment'></i>" + 
+                "<i class='fa fa-comment' onclick='startChat("+ message.brukernavn + ")'></i>" + 
             "</button>" +
         "</div>", {
             maxWidth: 560
-        }).openPopup();
+    }).openPopup();*/
+
+    var marker2 = L.marker([message.latitude, message.longitude]).addTo(map).bindPopup(
+        `<div class ="text-center" width="560" height="315"` + 
+            `<h2>` + message.tittel + `</h2>` + 
+            `<p>` + message.beskrivelse + `</p>` + 
+            `<p class="font-italic">` + message.brukernavn + `</p>` + 
+            `<button type="button" class="btn btn-primary btn-default btn-circle">` + 
+                `<i class="fa fa-comment" onclick="startChat('` + message.brukernavn + `')"></i>` +
+            `</button>` + 
+        `</div>`, {
+            maxWidth: 560
+    }).openPopup();
 });
+
 
 
 

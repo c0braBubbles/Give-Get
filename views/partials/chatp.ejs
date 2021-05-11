@@ -2,14 +2,14 @@
     <div class="row">
         <div class="col-md-4 my-col-medium">
             <!-- Her starter dropown med alle andre chats en bruker har -->
+            
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle custom-dropdown-btn" type="button"
                     id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Dropdown button
                 </button>
-                <ul class="dropdown-menu chat-liste" aria-labelledby="dropdownMenuButton1">
-
-                    <!-- Bare masse test/filler data -->
+                <ul class="dropdown-menu chat-liste" aria-labelledby="dropdownMenuButton1" id="chatListeTopp">
+                    <!--
                     <li class="another-chat">  
                         <div>
                             <h5>Jacob1337</h5>
@@ -30,12 +30,14 @@
                             <p>masse fjas</p>
                         </div>
                     </li>
-
+                    -->
                 </ul>
             </div>
-            <ul class="chat-liste-stor">
+            
 
-                <!-- Bare masse test/filler data -->
+            <!-- Liste med chats når du ikke har minimert vindu -->
+            <ul class="chat-liste-stor" id="chatListeVenstre">
+                <!--
                 <li class="another-chat">
                     <h5>Jacob1337</h5>
                     <p>ting og tang</p>
@@ -69,41 +71,18 @@
                     <p>Lefser lefser jeg trengermmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmlefslllllllllllllllllllllllllllll
                     </p>
                 </li>
-
+                -->
             </ul>
         </div>
+
+
         <!-- Her kommer selve vinduet hvor en samtale foregår -->
         <div class="col-md-8 my-col-large">
             <div class="chat-window" id="chatVindu2">
-
-                <!-- Bare masse test/filler data -->
-                
-                <div class="msg-line"><p class="sender-bubble">Hei</p></div>
-                <!--
-                <div class="msg-line"><p class="receiver-bubble">Hei på deg på skolen er det tomt siden det er ingen som har undervisning for tiden
-                    alle har jo enten eksamensperioden eller nettundervisning de siste skoletimene de har før semesteret er over og nå skriver jeg 
-                    bare massevis av fjas for å teste om denne melding driten fungerer, jeg håper det altså
-                </p></div>
-                <div class="msg-line"><p class="sender-bubble">Ja med den barmen med den sangen med den barmen med den sangen med den barmen med den sangen
-                </p></div>
-                <div class="msg-line"><p class="receiver-bubble">Hei</p></div>
-                <div class="msg-line"><p class="sender-bubble">Hei1</p></div>
-                <div class="msg-line"><p class="receiver-bubble">Hei2</p></div>
-                <div class="msg-line"><p class="sender-bubble">Hei1</p></div>
-                <div class="msg-line"><p class="receiver-bubble">Hei2</p></div>
-                <div class="msg-line"><p class="sender-bubble">Hei1</p></div>
-                <div class="msg-line"><p class="receiver-bubble">Hei2</p></div>
-                <div class="msg-line"><p class="sender-bubble">Hei1</p></div>
-                <div class="msg-line"><p class="receiver-bubble">Hei2</p></div>
-                <div class="msg-line"><p class="sender-bubble">Hei1</p></div>
-                <div class="msg-line"><p class="receiver-bubble">Hei2</p></div>
-                <div class="msg-line"><p class="sender-bubble">Hei1</p></div>
-                <div class="msg-line"><p class="receiver-bubble">Hei2</p></div>
-                <div class="msg-line"><p class="sender-bubble">Hei1</p></div>
-                <div class="msg-line"><p class="receiver-bubble">Hei2</p></div>
-                -->
+                <!-- I denne div-en kommer selve meldingsboblene -->
             </div>
 
+            <!-- Dette er hvor du skriver meldingen og trykker send -->
             <form id="skjema">
                 <div class="chat-input-box">
                     <input class="msg-input" id="mld_inp" type="text" placeholder="Aa">
