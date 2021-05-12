@@ -37,8 +37,8 @@ function openChat(number) {
     currentChat = number;
     console.log("Etter: " + currentChat);
 
-    msg_window.style.display = "none"; 
-    msg_window.style.display = "block";
+    chatWindow.style.display = "none"; 
+    chatWindow.style.display = "block";
 
     chat_ref.on("child_added", function(snapshot) {
         var message = snapshot.val(); 
