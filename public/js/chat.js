@@ -1,5 +1,6 @@
-var msg_inp = document.getElementById("mld_inp"); 
-var chat_ref = firebase.database().ref().child('meldinger'); 
+var chat_ref = firebase.database().ref().child('meldinger');
+var msg_inp = document.getElementById("mld_inp");  
+var msg_window = document.getElementById("mld_vindu");
 var form = document.getElementById("skjema"); 
 var chatWindow = document.getElementById("chatVindu2"); 
 
@@ -36,11 +37,14 @@ function openChat(number) {
     currentChat = number;
     console.log("Etter: " + currentChat);
 
+    msg_window.style.display = "none"; 
+    msg_window.style.display = "block";
+
     chat_ref.on("child_added", function(snapshot) {
         var message = snapshot.val(); 
         
         if(message.chatID === currentChat) {
-            if(username === message.brukernavnet) {
+            if(username == message.brukernavnet) {
                 chatWindow.innerHTML += `<div class='msg-line'><p class='sender-bubble'>${message.meldingen}</p></div>`;
             }else {
                 chatWindow.innerHTML += `<div class="msg-line"><p class="receiver-bubble">${message.meldingen}</p></div>`;
