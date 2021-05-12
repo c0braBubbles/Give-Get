@@ -17,7 +17,36 @@ var currentChat = 0;
  */
 
 function startChat(name) {
+    currentChat++; 
 
+    active.style.display = "none";
+    toggles[2].style.display = "block";
+    
+    chat_ref.push({
+        "chatID": currentChat, 
+        "Mottaker": name, 
+        "Sender": username
+    });
+}
+
+
+
+function openChat(number) {
+    console.log("Før: " + currentChat);
+    currentChat = number;
+    console.log("Etter: " + currentChat);
+
+    chat_ref.on("child_added", function(snapshot) {
+        var message = snapshot.val(); 
+        
+        if(message.chatID === currentChat) {
+            if(username === message.brukernavnet) {
+                chatWindow.innerHTML += `<div class='msg-line'><p class='sender-bubble'>${message.meldingen}</p></div>`;
+            }else {
+                chatWindow.innerHTML += `<div class="msg-line"><p class="receiver-bubble">${message.meldingen}</p></div>`;
+            }
+        }
+    });
 }
 
 
@@ -47,12 +76,24 @@ form.onsubmit = function(evt) {
 chat_ref.on("child_added", function(snapshot) {
     var message = snapshot.val(); 
     
-    currentChat = message.chatID;
-
-    if(username === message.brukernavnet) {
+    if(message.Sender === username) {
+        chatListLeft.innerHTML +=   `<li class="another-chat" onclick="openChat(` + message.chatID + `)">` + 
+                                        `<br>` + 
+                                        `<h5>` + message.Mottaker + `</h5>` +
+                                        `<br>` +   
+                                    `</li>`;
+    } else if(message.Mottaker === username) {
+        chatListLeft.innerHTML +=   `<li class="another-chat" onclick="openChat(` + message.chatID + `)">` + 
+                                        `<br>` + 
+                                        `<h5>` + message.Sender + `</h5>` +
+                                        `<br>` +   
+                                    `</li>`;
+    }
+    
+    /*if(username === message.brukernavnet) {
         chatWindow.innerHTML += `<div class='msg-line'><p class='sender-bubble'>${message.meldingen}</p></div>`;
     }
     else {
         chatWindow.innerHTML += `<div class="msg-line"><p class="receiver-bubble">${message.meldingen}</p></div>`;
-    }
+    }*/
 });
