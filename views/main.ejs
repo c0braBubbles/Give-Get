@@ -69,7 +69,8 @@
         };
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
-        //firebase.analytics();
+        firebase.analytics();
+        const analytics = firebase.analytics();
     </script>  
 
 
@@ -100,6 +101,14 @@
                 }
             }
         });*/
+        
+        //random id funksjon - funnet på nettet
+        function randomID() {
+        var S4 = function() {
+        return (((1 + Math.random()) * 0x10000)|0).toString(16).substring(1);
+        };
+        return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+        }
 
 
         //Registrerer om CB er checket, Henter brukers posisjon og lagrer variabel som lastes opp i DB 
@@ -161,10 +170,11 @@
 
         function submitClick() {
             var cb = document.getElementById("positioncb");
-            id++;
+            id = randomID(); //Gir ID en tilfeldig String
             blå++;
             rød++;
             grønn++;
+
             //hvis posisjon er valgt, pusher vi med lon og lat
             if ($(cb).is(':checked')) {
                 firebase.database().ref("Annonse").child(id).set({
@@ -196,6 +206,8 @@
                 setTimeout(function () {
 					window.location.reload(1);
 				}, 0001);   
+                //Logging av ny annonse
+                analytics.logEvent('ny_annonse', { id: id, brukernavn: username, tittel: document.getElementById("TitlePost").value })
             }
 
             var chat = firebase.database().ref().child('Annonse');

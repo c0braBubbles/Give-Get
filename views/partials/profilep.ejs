@@ -145,18 +145,18 @@
             <form>
                 <div class="mb-3">
                     <label class="form-label text-dark">Brukernavn</label>
-                    <input type="name" class="form-control w-50" value="username">
+                    <input type="text" class="form-control w-50" id="editUsername">
                 </div>
 
                 <div class="row mb-3 w-50">
 
                     <div class="col-sm">
                         <label class="form-label text-dark">Fornavn</label>
-                        <input type="text" class="form-control" value="firstname">
+                        <input type="text" class="form-control" id="editFirstname">
                     </div>
                     <div class="col-sm" style="margin-right:-4.5%">
                         <label class="form-label text-dark">Etternavn</label>
-                        <input type="text" class="form-control" value="lastname">
+                        <input type="text" class="form-control" id="editLastname">
                     </div>
                 </div>
 
@@ -164,10 +164,10 @@
 
                 <div class="mb-3">
                     <label class="form-label text-dark">E-post</label>
-                    <input type="text" class="form-control w-50" id="exampleInputEmail1" value="example@hotmail.com">
+                    <input type="email" class="form-control w-50" placeholder="example@hotmail.com" id="editEmail">
                 </div>
 
-                <button type="submit" class="btn btn-danger">Lagre endringer</button>
+                <button class="btn btn-danger" id="submitEditsButton" onclick="lastOppDritt()">Lagre endringer</button>
                 <button type="button" class="btn btn-danger btn-close" aria-label="Close" onclick="exitEditing()"></button>
             </form>
 
@@ -254,9 +254,6 @@
 		});
 	}
 
-	//getData();
-
-
 	//Henter info fra databasen og gir variabler til elementer fra databasen
 	$(document).ready(function () {
         $("#myModal").on("hidden.bs.modal", function(){
@@ -305,12 +302,17 @@
     $(document).ready(function() {
     $('body').on('click', '#' + grønn +'', function() {
         firebase.database().ref("Fullført").child(id).set({
-        tittel: document.getElementById("Title").value = snap.child("tittel").val()
+        tittel: document.getElementById("Title").value = snap.child("tittel").val(),
+        id: id,
+        brukernavn: username
          });  
         firebase.database().ref("Annonse").child(id).remove();
         setTimeout(function() {
         window.location.reload(1);
         }, 0200); 
+        //Logging av fullført annonse
+        analytics.logEvent('annonse_fullført', { id: id, brukernavn: username, tittel: document.getElementById("Title").value = snap.child("tittel").val() })
+        
         });
     });
 			//Edit knapp, åpner popup
@@ -399,6 +401,16 @@
                             longitude: edlong,
                             latitude: edlat
 						});
+                            //Logging av rediger annonse med posisjon
+                            analytics.logEvent('annonse_redigert', { 
+                            id: id, 
+                            brukernavn: username, 
+                            tittel: document.getElementById("Title").value, 
+                            beskrivelse: document.getElementById("Description").value,
+                            kategori: edstatus,
+                            longitude: edlong,
+                            latitude: edlat
+                        })
                         //fjerner lon og lat om posisjon CB ikke er checked
                         } else {
                             firebase.database().ref("Annonse").child(id).update({
@@ -408,6 +420,14 @@
                             longitude: null,
                             latitude: null
 						});
+                           //Logging av rediger annonse uten posisjon
+                           analytics.logEvent('annonse_redigert', { 
+                            id: id, 
+                            brukernavn: username, 
+                            tittel: document.getElementById("Title").value, 
+                            beskrivelse: document.getElementById("Description").value,
+                            kategori: edstatus
+                        })
                         }
 						setTimeout(function () {
 							window.location.reload(1);
@@ -423,6 +443,12 @@
 					setTimeout(function () {
 						window.location.reload(1);
 					}, 0001);
+                    //Logging av slettet annonse
+                    analytics.logEvent('annonse_slettet', { 
+                    id: id,
+                    brukernavn: username,
+                    tittel: document.getElementById("Title").value = snap.child("tittel").val() 
+                    })  
 				});
 			});
 		});
