@@ -49,11 +49,11 @@ chat_ref.on("child_added", function (snapshot) {
     var message = snapshot.val();
 
     if (message.sender === username) {
-        chatListLeft.innerHTML += `<li class="another-chat" onclick="haltFunction(), openChat(` + message.chatID + `)">` +
-            `<br>` +
-            `<h5>` + message.mottaker + `</h5>` +
-            `<br>` +
-            `</li>`;
+        chatListLeft.innerHTML +=   `<li class="another-chat" onclick="openChat(` + message.chatID + `)">` +
+                                        `<br>` +
+                                        `<h5>` + message.mottaker + `</h5>` +
+                                        `<br>` +
+                                    `</li>`;
 
         // Til dropdown menyen når vinduet blir mindre (responsivt)
         chatListTop.innerHTML += `<li class="another-chat">  
@@ -62,11 +62,11 @@ chat_ref.on("child_added", function (snapshot) {
                                         </div>
                                     </li>`
     } else if (message.mottaker === username) {
-        chatListLeft.innerHTML += `<li class="another-chat" onclick="haltFunction(), openChat(` + message.chatID + `)">` +
-            `<br>` +
-            `<h5>` + message.sender + `</h5>` +
-            `<br>` +
-            `</li>`;
+        chatListLeft.innerHTML +=   `<li class="another-chat" onclick="openChat(` + message.chatID + `)">` +
+                                        `<br>` +
+                                        `<h5>` + message.sender + `</h5>` +
+                                        `<br>` +
+                                    `</li>`;
 
         // Til dropdown menyen når vinduet blir mindre (responsivt)
         chatListTop.innerHTML += `<li class="another-chat">  
@@ -107,7 +107,7 @@ function openChat(number) {
     chatWindow.innerHTML = ``;
     currentChat = number;
     console.log(currentChat);
-
+    
     chat_msg.on("child_added", function (snapshot) {
         var message = snapshot.val();
         if (message.chatID === currentChat) {
@@ -116,35 +116,19 @@ function openChat(number) {
             } else {
                 chatWindow.innerHTML += `<div id='bobler' class="msg-line"><p class="receiver-bubble">${message.meldingen}</p></div>`;
             }
-        }
+        } 
     });
 }
 
-
-function haltFunction() {
-    clearInterval(openChat());
-    console.log("Stoppet tidligere kjøring");
-}
-
-
-
-/*function openChat(number) {
-    // chatWindow.innerHTML = ``;
-    currentChat = number; 
-    console.log(currentChat);
-}
-
-chat_msg.on("child_added", function(snapshot) {
+/*function noe() {
+chat_msg.on("child_added", function (snapshot) {
     var message = snapshot.val();
-    if(message.chatID == getCurrentChat()) {
-        if(username == message.brukernavnet) {
+    if (message.chatID === currentChat) {
+        if (username == message.brukernavnet) {
             chatWindow.innerHTML += `<div id='bobler' class='msg-line'><p class='sender-bubble'>${message.meldingen}</p></div>`;
         } else {
             chatWindow.innerHTML += `<div id='bobler' class="msg-line"><p class="receiver-bubble">${message.meldingen}</p></div>`;
         }
     }
 });
-
-function getCurrentChat() {
-    return currentChat;
 }*/
