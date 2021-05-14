@@ -254,9 +254,6 @@
 		});
 	}
 
-	//getData();
-
-
 	//Henter info fra databasen og gir variabler til elementer fra databasen
 	$(document).ready(function () {
         $("#myModal").on("hidden.bs.modal", function(){
@@ -305,12 +302,17 @@
     $(document).ready(function() {
     $('body').on('click', '#' + grønn +'', function() {
         firebase.database().ref("Fullført").child(id).set({
-        tittel: document.getElementById("Title").value = snap.child("tittel").val()
+        tittel: document.getElementById("Title").value = snap.child("tittel").val(),
+        id: id,
+        brukernavn: username
          });  
         firebase.database().ref("Annonse").child(id).remove();
         setTimeout(function() {
         window.location.reload(1);
         }, 0200); 
+        //Logging av fullført annonse
+        analytics.logEvent('annonse_fullført', { id: id, brukernavn: username, tittel: document.getElementById("Title").value = snap.child("tittel").val() })
+        
         });
     });
 			//Edit knapp, åpner popup
@@ -399,6 +401,16 @@
                             longitude: edlong,
                             latitude: edlat
 						});
+                            //Logging av rediger annonse med posisjon
+                            analytics.logEvent('annonse_redigert', { 
+                            id: id, 
+                            brukernavn: username, 
+                            tittel: document.getElementById("Title").value, 
+                            beskrivelse: document.getElementById("Description").value,
+                            kategori: edstatus,
+                            longitude: edlong,
+                            latitude: edlat
+                        })
                         //fjerner lon og lat om posisjon CB ikke er checked
                         } else {
                             firebase.database().ref("Annonse").child(id).update({
@@ -408,6 +420,14 @@
                             longitude: null,
                             latitude: null
 						});
+                           //Logging av rediger annonse uten posisjon
+                           analytics.logEvent('annonse_redigert', { 
+                            id: id, 
+                            brukernavn: username, 
+                            tittel: document.getElementById("Title").value, 
+                            beskrivelse: document.getElementById("Description").value,
+                            kategori: edstatus
+                        })
                         }
 						setTimeout(function () {
 							window.location.reload(1);
@@ -423,6 +443,12 @@
 					setTimeout(function () {
 						window.location.reload(1);
 					}, 0001);
+                    //Logging av slettet annonse
+                    analytics.logEvent('annonse_slettet', { 
+                    id: id,
+                    brukernavn: username,
+                    tittel: document.getElementById("Title").value = snap.child("tittel").val() 
+                    })  
 				});
 			});
 		});

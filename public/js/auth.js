@@ -68,6 +68,8 @@ function login() {
         window.alert("Error : " + errorMessage);
     });
     console.log(username);
+    //Logging av innlogging
+    analytics.logEvent('bruker_login', { epost: emailInp })
 }
 
 
