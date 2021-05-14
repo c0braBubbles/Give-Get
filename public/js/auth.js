@@ -149,7 +149,7 @@ function signUp() {
         });
     }
 }
-
+/*
 function lastOppDritt() {
     var usernameG = document.getElementById('editUsername').value;
     var firstnameG = document.getElementById('editFirstname').value;
@@ -158,14 +158,62 @@ function lastOppDritt() {
     firebase.database().ref('bruker/'+brukerID).update({
         brukernavn : usernameG,
         fornavn : firstnameG,
-        etternavn : lastnameG 
+        etternavn : lastnameG
+        //email : emailG
         //email : emailG  !NB denne venter vi litt med, fordi det krever litt mere å oppdatere email
     }).then(() => {
         username = usernameG;
         firstname = firstnameG;
         lastname = lastnameG;
+        //email_id = emailG;
         document.getElementById('bnavn').innerHTML = username;
-        exitEditing(); //Lukker vinduet for å redigere profilen
+        var userG = firebase.auth().currentUser;
+        userG.updateEmail(emailG).then(function() {
+            firebase.database().ref('bruker/'+brukerID).update({
+                email : emailG
+            });
+            //Update successful
+            email_id = emailG;
+            exitEditing(); //Lukker vinduet for å redigere profilen
+        }).catch(function(error) {
+            //Error
+        });
+        
+    });
+}*/
+
+/*
+ * Metoden har flere steg
+ * 1. henter verdiene fra input-feltene
+ * 2. oppdaterer email-adressen
+ * 3. oppdaterer bruker-tabellen
+ * 4. setter variablene i js-filen til de nye bruker-verdiene, og krysser ut edit-vinduet 
+ */
+function lastOppDritt() {
+    var f_username = document.getElementById('editUsername').value;
+    var f_firstname = document.getElementById('editFirstname').value;
+    var f_lastname = document.getElementById('editLastname').value;
+    var testmail = document.getElementById("editEmail").value;
+    //var testmail = "detteerentest@hotmail.com";
+    var fuser = firebase.auth().currentUser;
+    fuser.updateEmail(testmail).then(function() { 
+
+        firebase.database().ref("bruker/"+brukerID).update({
+            brukernavn : f_username,
+            fornavn : f_firstname,
+            etternavn : f_lastname,
+            email : testmail 
+        }).then(() => {
+            username = f_username;
+            firstname = f_firstname;
+            lastname = f_lastname;
+            email_id = testmail;
+            document.getElementById('bnavn').innerHTML = username; //Denne er bare for å oppdatere navnet som står på profil-siden
+            exitEditing();
+        });
+
+    }).catch(function(error) {
+        //Error
     });
 }
 
