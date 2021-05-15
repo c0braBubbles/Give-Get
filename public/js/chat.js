@@ -111,24 +111,28 @@ function openChat(number) {
     chat_msg.on("child_added", function (snapshot) {
         var message = snapshot.val();
         if (message.chatID === currentChat) {
+            console.log("De stemmer");
             if (username == message.brukernavnet) {
                 chatWindow.innerHTML += `<div id='bobler' class='msg-line'><p class='sender-bubble'>${message.meldingen}</p></div>`;
             } else {
                 chatWindow.innerHTML += `<div id='bobler' class="msg-line"><p class="receiver-bubble">${message.meldingen}</p></div>`;
             }
-        } 
+        }
     });
 }
 
 /*function noe() {
-chat_msg.on("child_added", function (snapshot) {
-    var message = snapshot.val();
-    if (message.chatID === currentChat) {
-        if (username == message.brukernavnet) {
-            chatWindow.innerHTML += `<div id='bobler' class='msg-line'><p class='sender-bubble'>${message.meldingen}</p></div>`;
+    chatWindow.innerHTML = ``;
+    chat_msg.on("child_added", function (snapshot) {
+        var message = snapshot.val();
+        if (message.chatID === currentChat) {
+            if (username == message.brukernavnet) {
+                chatWindow.innerHTML += `<div id='bobler' class='msg-line'><p class='sender-bubble'>${message.meldingen}</p></div>`;
+            } else {
+                chatWindow.innerHTML += `<div id='bobler' class="msg-line"><p class="receiver-bubble">${message.meldingen}</p></div>`;
+            }
         } else {
-            chatWindow.innerHTML += `<div id='bobler' class="msg-line"><p class="receiver-bubble">${message.meldingen}</p></div>`;
+            noe();
         }
-    }
-});
+    });
 }*/
