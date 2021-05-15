@@ -56,7 +56,7 @@ chat_ref.on("child_added", function (snapshot) {
                                     `</li>`;
 
         // Til dropdown menyen når vinduet blir mindre (responsivt)
-        chatListTop.innerHTML += `<li class="another-chat">  
+        chatListTop.innerHTML +=    `<li class="another-chat" onclick="openChat(`+ message.chatID + `)">  
                                         <div>
                                             <h5>` + message.mottaker + `</h5>
                                         </div>
@@ -69,7 +69,7 @@ chat_ref.on("child_added", function (snapshot) {
                                     `</li>`;
 
         // Til dropdown menyen når vinduet blir mindre (responsivt)
-        chatListTop.innerHTML += `<li class="another-chat">  
+        chatListTop.innerHTML +=    `<li class="another-chat" onclick="openChat(`+ message.chatID + `)">  
                                         <div>
                                             <h5>` + message.sender + `</h5>
                                         </div>
