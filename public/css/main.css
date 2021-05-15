@@ -331,3 +331,21 @@ slide p {
     font-size: 12px;
     line-height: 1.42857;
 }
+
+
+.translated-ltr {
+    margin-top:-40px;
+}
+/*.translated-ltr {
+    margin-top:-40px;
+}*/
+.goog-te-banner-frame {
+    display: none;
+    margin-top:-20px;
+}
+.goog-logo-link {
+   display:none !important;
+} 
+.goog-te-gadget {
+   color: transparent !important;
+}
