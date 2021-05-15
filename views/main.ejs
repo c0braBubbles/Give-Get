@@ -101,7 +101,8 @@
                 }
             }
         });*/
-        
+
+
         //random id funksjon - funnet på nettet
         function randomID() {
         var S4 = function() {
@@ -134,11 +135,24 @@
                 function latitude(position) {
                     lat = position.coords.latitude;
                 }
+                
             } else {
                 //alert("unchecked")
                 //long = 0;
                 //lat = 0;
             } 
+             // disabler publiser knapp i 5 sekunder om posisjon er valgt
+             //legger til loading i 5 sekunder, og går tilbake til normalt etter dette
+            $('#publish').prop("disabled", true);
+            // spinner på knappen
+            $('#publish').html(
+            `<span id="laster" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Henter posisjon...`
+            );
+            setTimeout(function () {
+                $('#publish').prop("disabled", false);
+                $('#laster').remove();
+                $('#publish').html(`publiser`);
+            }, 4000); 
         });
 
         //Tilbud
@@ -159,21 +173,21 @@
                 status = "Etterspørsel";
             } 
         });
-
-
+ 
 
         //Laster opp tittel, beskrivelse, posisjon og kategori til firebase
-        var id = 0;
-        var blå = 0;
-        var rød = 999;
-        var grønn = 9999;
+
+        //var id = 0;
+        //var blå = 0;
+        //var rød = 999;
+        //var grønn = 9999;
 
         function submitClick() {
             var cb = document.getElementById("positioncb");
             id = randomID(); //Gir ID en tilfeldig String
-            blå++;
-            rød++;
-            grønn++;
+            blå = randomID();
+            rød = randomID();
+            grønn = randomID();
 
             //hvis posisjon er valgt, pusher vi med lon og lat
             if ($(cb).is(':checked')) {
@@ -189,6 +203,7 @@
                     latitude: lat,
                     kategori: status
                 });   
+
             }
             //hvis posisjon ikke er valgt pusher vi uten lon og lat
             else {

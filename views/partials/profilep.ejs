@@ -311,8 +311,11 @@
         window.location.reload(1);
         }, 0200); 
         //Logging av fullført annonse
-        analytics.logEvent('annonse_fullført', { id: id, brukernavn: username, tittel: document.getElementById("Title").value = snap.child("tittel").val() })
-        
+        analytics.logEvent('annonse_fullført', {
+            id: id, 
+            brukernavn: username, 
+            tittel: document.getElementById("Title").value = snap.child("tittel").val() 
+            })
         });
     });
 			//Edit knapp, åpner popup
@@ -362,7 +365,19 @@
                             }
                             function latitude(position) {
                                 edlat = position.coords.latitude;
-                            }
+                            } 
+            // disabler publiser knapp i 5 sekunder om posisjon er valgt
+            //legger til loading i 5 sekunder, og går tilbake til normalt etter dette
+            $('#update').prop("disabled", true);
+            // spinner på knappen
+            $('#update').html(
+            `<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Henter posisjon...`
+            );
+            setTimeout(function () {
+                $('#update').prop("disabled", false);
+                $('#loading').remove();
+                $('#update').html(`oppdater`);
+            }, 4000);  
                         } 
                     });
 
