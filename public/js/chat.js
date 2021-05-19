@@ -20,7 +20,7 @@ var currentChat = 0;
  * @param {*} name 
  */
 
-function startChat(name) {
+function startChat(name, addTittle) {
     chat_ref.on("child_added", function (snapshot) {
         var message = snapshot.val();
         maxChat = message.chatID;
@@ -33,7 +33,8 @@ function startChat(name) {
     chat_ref.push({
         "chatID": maxChat,
         "sender": username,
-        "mottaker": name
+        "mottaker": name,
+        "tittel": addTittle
     });
 }
 
@@ -52,27 +53,31 @@ chat_ref.on("child_added", function (snapshot) {
         chatListLeft.innerHTML +=   `<li class="another-chat" onclick="openChat(` + message.chatID + `)">` +
                                         `<br>` +
                                         `<h5>` + message.mottaker + `</h5>` +
+                                        `<p>` + message.tittel + `</p>` + 
                                         `<br>` +
                                     `</li>`;
 
         // Til dropdown menyen når vinduet blir mindre (responsivt)
         chatListTop.innerHTML +=    `<li class="another-chat" onclick="openChat(`+ message.chatID + `)">  
                                         <div>
-                                            <h5>` + message.mottaker + `</h5>
-                                        </div>
+                                            <h5>` + message.mottaker + `</h5>` + 
+                                            `<p>` + message.tittel + `</p>` + 
+                                        `</div>
                                     </li>`
     } else if (message.mottaker === username) {
         chatListLeft.innerHTML +=   `<li class="another-chat" onclick="openChat(` + message.chatID + `)">` +
                                         `<br>` +
                                         `<h5>` + message.sender + `</h5>` +
+                                        `<p>` + message.tittel + `</p>` + 
                                         `<br>` +
                                     `</li>`;
 
         // Til dropdown menyen når vinduet blir mindre (responsivt)
         chatListTop.innerHTML +=    `<li class="another-chat" onclick="openChat(`+ message.chatID + `)">  
                                         <div>
-                                            <h5>` + message.sender + `</h5>
-                                        </div>
+                                            <h5>` + message.sender + `</h5>` +
+                                            `<p>` + message.tittel + `</p>` + 
+                                        `</div>
                                     </li>`
     }
 });
@@ -92,6 +97,7 @@ form.onsubmit = function (evt) {
         "brukernavnet": username
     });
     msg_inp.value = "";
+    openChat(currentChat);
 }
 
 
@@ -106,12 +112,10 @@ form.onsubmit = function (evt) {
 function openChat(number) {
     chatWindow.innerHTML = ``;
     currentChat = number;
-    console.log(currentChat);
     
     chat_msg.on("child_added", function (snapshot) {
         var message = snapshot.val();
         if (message.chatID === currentChat) {
-            console.log("De stemmer");
             if (username == message.brukernavnet) {
                 chatWindow.innerHTML += `<div id='bobler' class='msg-line'><p class='sender-bubble'>${message.meldingen}</p></div>`;
             } else {
@@ -120,19 +124,3 @@ function openChat(number) {
         }
     });
 }
-
-/*function noe() {
-    chatWindow.innerHTML = ``;
-    chat_msg.on("child_added", function (snapshot) {
-        var message = snapshot.val();
-        if (message.chatID === currentChat) {
-            if (username == message.brukernavnet) {
-                chatWindow.innerHTML += `<div id='bobler' class='msg-line'><p class='sender-bubble'>${message.meldingen}</p></div>`;
-            } else {
-                chatWindow.innerHTML += `<div id='bobler' class="msg-line"><p class="receiver-bubble">${message.meldingen}</p></div>`;
-            }
-        } else {
-            noe();
-        }
-    });
-}*/

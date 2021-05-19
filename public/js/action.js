@@ -112,7 +112,7 @@ ref_ads.on("child_added", function(snapshot) {
             `<p>` + message.beskrivelse + `</p>` + 
             `<p class="font-italic">` + message.brukernavn + `</p>` + 
             `<button type="button" class="btn btn-primary btn-default btn-circle">` + 
-                `<i class="fa fa-comment" onclick="startChat('` + message.brukernavn + `')"></i>` +
+                `<i class="fa fa-comment" onclick="startChat('` + message.brukernavn + `', '` + message.tittel + `')"></i>` +
             `</button>` + 
         `</div>`, {
             maxWidth: 560
