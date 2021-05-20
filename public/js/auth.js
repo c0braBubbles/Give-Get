@@ -49,6 +49,7 @@ function setUsername(email_id) {
             document.getElementById("editUsername").value = username;
             document.getElementById("editFirstname").value = firstname;
             document.getElementById("editLastname").value = lastname;
+            document.getElementById("editEmail").value = message.email;
             //document.getElementById("editEmail").value = message.email;
         }
     });
