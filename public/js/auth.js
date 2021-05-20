@@ -63,6 +63,10 @@ function setUsername(email_id) {
             document.getElementById("editFirstname").value = firstname;
             document.getElementById("editLastname").value = lastname;
             document.getElementById("editEmail").value = message.email;
+            firebase.storage().ref("users/"+brukerID+"/profile.jpg").getDownloadURL().then(imgURL => {
+                document.getElementById("redigerProfilBilde").src = imgURL;
+                document.getElementById("minProfilBilde").src = imgURL;
+            });
         }
     });
 }
@@ -228,5 +232,25 @@ function lastOppDritt() {
 
     }).catch(function(error) {
         //Error
+    });
+}
+
+//Når en bruker velger en fil, og trykker på knappen for å endre profilbilde, skjer det her
+var fil = {};
+
+function velgFil(e) {
+    fil = e.target.files[0];
+}
+
+function changeProfilePicture() {
+    firebase.storage().ref("users/"+brukerID+"/profile.jpg").put(fil).then(function () {
+        console.log("Fil lastet opp i Storage");
+    }).catch(error => {
+        console.log(error.message);
+    }).then(() => {
+        firebase.storage().ref("users/"+brukerID+"/profile.jpg").getDownloadURL().then(imgURL => {
+            document.getElementById("redigerProfilBilde").src = imgURL;
+            document.getElementById("minProfilBilde").src = imgURL;
+        });
     });
 }

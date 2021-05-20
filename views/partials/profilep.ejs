@@ -3,7 +3,7 @@
 <div id="profilen">
     <div class="text-center">
         <img src="https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg"
-            class="rounded-circle w-25 m-3" alt="...">
+            class="rounded-circle w-25 m-3" alt="..." id ="minProfilBilde">
     </div>
 
     <p class="text-center fs-1" id="bnavn">
@@ -124,12 +124,12 @@
     <div class="container w-75 h-75 p-3 bg-Gainsboro mt-5">
         <div class="text-left">
             <img src="https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg "
-                class="rounded-circle w-25 m-5" alt="...">
+                class="rounded-circle w-25 m-5" alt="..." id="redigerProfilBilde">
 
             <div class="input-group input group-lg mb-3">
-                <input type="file" class="form-control" id="inputGroupFile02" aria-describedby="button-addon2">
+                <input type="file" class="form-control" id="inputGroupFile02" aria-describedby="button-addon2" onchange="velgFil(event)">
 
-                <button class="btn btn-primary text-center" type="Button" id="button-addon2"> Endre profilbilde
+                <button class="btn btn-primary text-center" id="button-addon2" onclick="changeProfilePicture()"> Endre profilbilde
                     <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="1rem" fill="currentColor"
                         class="bi bi-camera-fill center" viewBox="0 0 16 16" style="margin-bottom:3px">
                         <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
