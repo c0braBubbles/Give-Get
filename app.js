@@ -1,3 +1,10 @@
+/*
+    Server-fila. Bygger på rammeverket ExpressJS
+    Skrevet av Mats Jørgen Engesund
+*/
+
+
+
 // Imports 
 const { text } = require('express');
 const express = require('express'); 
@@ -29,6 +36,7 @@ app.get('/main', (req, res) => {
     res.render('main');
 });
 
+// Registrering siden
 app.get('/registerer', (req, res) => {
     res.render('registerer');
 });

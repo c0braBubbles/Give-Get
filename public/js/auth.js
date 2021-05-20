@@ -4,13 +4,23 @@ var firstname;
 var lastname;
 var brukerID;
 
-// DETTE ER FUNKSJONEN SOM SJEKKER HVEM SOM HAR LOGGET INN!!!!!!!!
-// function checkUser() {
+
+
+/**
+ * Dette er en funksjon som settes i verk når du laster inn nettsiden. 
+ * Den sjekker hvem som er logget inn. Skjelettet til denne funksjonen 
+ * er hentet fra firebase sine hjemmesider og blitt modfisisert til 
+ * mer relevans for vårt bruk. Som hva som skjer når en bruker er logget inn,
+ * og når ikke, som er å hente partials (div-er som er låst før man er logget inn), 
+ * og sette lokal variabel 'email_id' lik den man logget inn med
+ * 
+ * Skrevet av Mats Jørgen Engesund
+ */
+
 firebase.auth().onAuthStateChanged(function(user) {
     if(user) {
         // User is signed in
         document.getElementById("main-side").style.display = "block";
-        // document.getElementById("hjem_div").style.display = "none";
         document.getElementById("login-side").style.display = "none";
 
         var user = firebase.auth().currentUser; 
@@ -27,12 +37,15 @@ firebase.auth().onAuthStateChanged(function(user) {
         document.getElementById("login-side").style.display = "block";
     }
 });
-// } 
+
+
 
 /**
  * Brukernavn og email_id er lagret på to forskjellige steder i db-en
  * for autensiseringens skyld. Derfor i denne metoden går vi gjennom den delen 
  * som har lagret bruker-info, og ser hvem som matcher med emailen
+ * 
+ * Skrevet av Mats Jørgen Engesund og Jacob Kristensen
  * 
  * @param {*} email_id 
  */
@@ -50,21 +63,9 @@ function setUsername(email_id) {
             document.getElementById("editFirstname").value = firstname;
             document.getElementById("editLastname").value = lastname;
             document.getElementById("editEmail").value = message.email;
-            //document.getElementById("editEmail").value = message.email;
         }
     });
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -85,9 +86,14 @@ function login() {
 
 
 
-/* For at funksjonen skulle funke måtte jeg omringe 
-funksjonen "firebase.auth().signOut()" med try-catch */
-
+/**
+ * Logut funksjon. Blir aktivert når du trykker på knappen øverst i 
+ * venstre på nav-baren. 
+ * For at funksjonen skulle funke måtte jeg omringe 
+ * funksjonen "firebase.auth().signOut()" med try-catch
+ * 
+ * Skrevet av Mats Jørgen Engesund
+ */
 function logout() {
     firebase.auth().signOut().then(() => {
         // trenger ingenting her
@@ -224,8 +230,3 @@ function lastOppDritt() {
         //Error
     });
 }
-
-
-/**
- * Submit funksjon for å lagre brukernavna til brukere for enklere aksess for søk
- */

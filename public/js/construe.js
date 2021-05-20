@@ -1,12 +1,29 @@
+/*
+ * JavaScript fil for å oversette siden. 
+ * Ikke noe her er selvskrevet. Det er brukt et google API, men 
+ * er hentet fra W3Schools: 
+ * https://www.w3schools.com/howto/howto_google_translate.asp
+ * ... ved hjelp av: 
+ * https://www.youtube.com/watch?v=b8BqSjYmkxw
+ * 
+ * Script laget av Mats Jørgen Engesund
+ */
+
+
+
 function googleTranslateElementInit() {
-    new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element_id');
+    new google.translate.TranslateElement({ pageLanguage: 'en' }, 'google_translate_element_id');   // Peker til dropdown knapp på instillinger på profil-siden
 }
 
 
 
 (function () {
     var gtConstEvalStartTime = new Date();
-
+    
+    /*
+    Copyright The Closure Library Authors.
+    SPDX-License-Identifier: Apache-2.0
+    */
     
     var d = "Translate", k = this || self; function l(a, c) { a = a.split("."); var b = k; a[0] in b || "undefined" == typeof b.execScript || b.execScript("var " + a[0]); for (var f; a.length && (f = a.shift());)a.length || void 0 === c ? b[f] && b[f] !== Object.prototype[f] ? b = b[f] : b = b[f] = {} : b[f] = c }
     function m(a, c) { function b() { } b.prototype = c.prototype; a.ka = c.prototype; a.prototype = new b; a.prototype.constructor = a; a.ja = function (f, h, n) { for (var g = Array(arguments.length - 2), e = 2; e < arguments.length; e++)g[e - 2] = arguments[e]; return c.prototype[h].apply(f, g) } } function p(a) { return a }; function q() { return "[msg_undefined]" } var r = {};
