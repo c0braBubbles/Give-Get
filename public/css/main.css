@@ -1,3 +1,10 @@
+/*
+    En selvskrevet CSS-fil. Altså ikke bootstrap.
+    Skrevet av Mats Jørgen Engesund, utenom der det eventuelt er markert i koden
+*/
+
+
+
 * {
     box-sizing: border-box
 }
@@ -41,7 +48,7 @@ body {
     justify-content: flex-start;
 }
 
-/* SLIDESHOW */
+/* SLIDESHOW (inspirert fra W3Schools) */
 slider {
     display: block;
     width: 100%;

@@ -1,26 +1,39 @@
+/*
+ * JavaScript fil for all funksjonalitet som har med chat-delen 
+ * av applikasjonen å gjøre
+ * 
+ * Script skrevet av Mats Jørgen Engesund, utenom der det eventuelt er markert i koden
+ */
+
+
+
+// Mange variabler som blir brukt flere steder gjennom hele fila. 
 var chat_ref = firebase.database().ref().child('samtaler');     // Denne sparer på samtaler mellom 2
 var chat_msg = firebase.database().ref().child('meldinger');    // Denne sparer på alle meldinger
-var msg_inp = document.getElementById("mld_inp");
+var msg_inp = document.getElementById("mld_inp");               // Melding-input-felt
 var msg_window = document.getElementById("mld_vindu");          // trokkke denne blir brukt
-var form = document.getElementById("skjema");
-var chatWindow = document.getElementById("chatVindu2");
+var form = document.getElementById("skjema");                   // Form som er rundt hele meldingsvinduet
+var chatWindow = document.getElementById("chatVindu2");         // Hvor meldingsboblene dukker opp
 
-var chatListLeft = document.getElementById("chatListeVenstre");
-var chatListTop = document.getElementById("chatListeTopp");
+var chatListLeft = document.getElementById("chatListeVenstre"); // Listen med alle samtaler
+var chatListTop = document.getElementById("chatListeTopp");     // Når vinduet blir minimert skal samtaler dukke opp i denne div-en
 
-var maxChat = 0;
-var currentChat = 0;
+var maxChat = 0;        // Max antall samtaler totalt
+var currentChat = 0;    // Samtalen du for øyeblikket er på.
 
 
 
 /**
- *  Tar inn brukernavnet fra annonsen som parameter
+ * Tar inn brukernavnet fra annonsen som parameter
  * og re-directer brukeren til en privat chat hvor 
  * han/hun kan snakke sammen
- * @param {*} name 
+ * 
+ * @param {navnet til den man vil prate med} name 
+ * @param {annonsetittel} addTittle 
  */
 
 function startChat(name, addTittle) {
+    // henter siste chat lagt til og øker med 1
     chat_ref.on("child_added", function (snapshot) {
         var message = snapshot.val();
         maxChat = message.chatID;
@@ -30,6 +43,7 @@ function startChat(name, addTittle) {
     active.style.display = "none";
     toggles[2].style.display = "block";
 
+    // Sender informasjon om samtale til DB
     chat_ref.push({
         "chatID": maxChat,
         "sender": username,
@@ -90,10 +104,10 @@ chat_ref.on("child_added", function (snapshot) {
  */
 
 form.onsubmit = function (evt) {
-//Logging av chat - Christoffer
-analytics.logEvent('melding_sendt', {
-    melding: msg_inp.value,
-    sender: username,
+    //Logging av chat - Christoffer
+    analytics.logEvent('melding_sendt', {
+        melding: msg_inp.value,
+        sender: username,
     })
     evt.preventDefault();
     chat_msg.push({

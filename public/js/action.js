@@ -1,19 +1,18 @@
-/* 
-    JavaScript fil med diverse funksjoner for den dynamiske opplevelsen
-    Inneholder funksjoner for å manøvrere seg inni brukergrensesnittet
-*/
+/*
+ * JavaScript fil med diverse funksjoner for den dynamiske opplevelsen.
+ * Inneholder funksjoner for å manøvrere seg inni brukergrensesnittet, 
+ * få opp kart, få annonser på kart og søk. Nøyere beskrivelser over
+ * hver metode. 
+ * 
+ * Script skrevet av Mats Jørgen Engesund, utenom der det eventuelt er markert i koden
+ */
 
 
 
-var ref_users = firebase.database().ref().child('bruker'); // Referanse og funksjon for når brukere blir lagt tils
-ref_users.on("child_added", function(snapshot) {
-    var message = snapshot.val(); 
-    ul.innerHTML += `<li><a href='#'>${message.brukernavn}</a></li>`;
-});
 
 
 
-/* Slideshowet på index.html */
+/** Slideshowet på index.ejs */
 const navSlide = () => {
     const burger = document.querySelector('.burger'); 
     const nav = document.querySelector('.nav-links'); 
@@ -36,7 +35,7 @@ const navSlide = () => {
 
 
 
-/* Navigasjon */
+/** DOM-objekter som refererer til partials */
 var toggles = [
     document.getElementById("hjem_div"),
     document.getElementById("sok_div"), 
@@ -44,6 +43,10 @@ var toggles = [
     document.getElementById("profil_div")
 ];
 
+/** 
+ * ID-er til hvilken side du er på. 
+ * Matcher ID-en til knappene på nav-baren
+ */
 var ids = [
     "hjem",
     "sok",
@@ -51,7 +54,19 @@ var ids = [
     "bruker"
 ];
 
+
+/** Aktiv-side (den du er på) satt til 'hjem' av default etter man logger inn */
 var active = toggles[0]; 
+
+
+/**
+ * Funksjon navigate er til å navigere rundt på 
+ * nettsiden. Tar inn ID-en til knappen du trykket på 
+ * og sjekker opp med listen 'ids'. Setter så den som 
+ * matcher tilhørende side ved bruk av DOM-lista 'toggles'
+ * 
+ * @param {*} clicked_id 
+ */
 
 function navigate(clicked_id) {
     for(let i = 0; i < toggles.length; i++) {
@@ -66,12 +81,12 @@ function navigate(clicked_id) {
 
 
 
-/**
+/*
  * Javascript kode for kartet på hjem-skjermen 
  * Variabel 'map' er selve kartet som blir lagt til i 'kart-diven' (home.ejs)
  * Linker fra maptiler.com blir så lagt til som et lag (layer) på kartet
  * Variabel 'marker' er bare en test-markør for å demonstrere hvordan ting kan bli 
- * ... lagt til på kartet med lengdegrad og breddegrad 
+ * lagt til på kartet med lengdegrad og breddegrad 
  */
 
 var map = L.map('map').setView([0, 0], 1); 
@@ -82,30 +97,18 @@ L.tileLayer('https://api.maptiler.com/maps/basic/{z}/{x}/{y}.png?key=GM1I0Cr9B2E
 
 
 
-
-/**
- * Henter info innhold fra databasen, som kan bli brukt til å søkes etter
- * Innholdet blir lagt til i en HTML liste (ul)
+/*
+ * Funksjoner som konstant skjer (realtime) hver gang annonse blir lagt ut. 
+ * Hva som skjer her er at hver gang en annonse blir lagt ut så vil det legges
+ * til i søke-lista og markør på kartet
  */
-
-var ul = document.getElementById("liste"); 
-var ref_ads = firebase.database().ref().child('Annonse'); // Referanse og funksjon til når annonser blir lagt til
-ref_ads.on("child_added", function(snapshot) {
+var ul = document.getElementById("liste");                  // DOM-ref. til listen på søk-side
+var ref_ads = firebase.database().ref().child('Annonse');   // Referanse til 'tabell' i DB
+ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver gang noe blir lagt til i DB starter her
     var message = snapshot.val();
-    ul.innerHTML += `<li><a href='#'>${message.tittel}</a></li>`; 
+    ul.innerHTML += `<li><a href='#'>${message.tittel}</a></li>`; //Legger til i liste for søk, så man kan søke etter anonser og
 
-    /*var marker2 = L.marker([message.latitude, message.longitude]).addTo(map).bindPopup(
-        "<div class='text-center' width='560' height='315'>" +
-            "<h2>" + message.tittel + "</h2>" + 
-            "<p>" + message.beskrivelse + "</p>" +
-            "<p class='font-italic'>" + message.brukernavn + "</p>" + 
-            "<button type='button' class='btn btn-primary btn-default btn-circle'>" +
-                "<i class='fa fa-comment' onclick='startChat("+ message.brukernavn + ")'></i>" + 
-            "</button>" +
-        "</div>", {
-            maxWidth: 560
-    }).openPopup();*/
-
+    // Legger til annonse på markør, som så blir lagt til på kartet.
     var marker2 = L.marker([message.latitude, message.longitude]).addTo(map).bindPopup(
         `<div class ="text-center" width="560" height="315"` + 
             `<h2>` + message.tittel + `</h2>` + 
@@ -119,6 +122,17 @@ ref_ads.on("child_added", function(snapshot) {
     }).openPopup();
 });
 
+
+
+/*
+ * Referanse og funksjon for når brukere blir lagt til
+ * og legger til i liste for søk
+ */
+ var ref_users = firebase.database().ref().child('bruker'); 
+ ref_users.on("child_added", function(snapshot) {
+    var message = snapshot.val(); 
+    ul.innerHTML += `<li><a href='#'>${message.brukernavn}</a></li>`;
+ });
 
 
 
