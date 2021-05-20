@@ -1,3 +1,4 @@
+<!--  HTML er skrevet av Christoffer, utenom der et annet navn eventuelt er markert i koden -->
 <!-- Profilen -->
 <div id="profilen">
     <div class="text-center">
@@ -37,7 +38,7 @@
 </div>
 
 
-<!-- Brukerens innlegg -->
+<!-- Brukerens innlegg/Annonser -->
 <div id="annonse_div" style="display: none;" class="container w-75 h-75 p-3 bg-Gainsboro mt-5">
 
     <h2 class="font-weight-bold text-dark m-auto"> Mine annonser </h2>
@@ -63,7 +64,7 @@
         <p id="data"> </p>
 
 
-        <!-- Modal -->
+        <!-- Modal/Popup for rediger Annonse -->
         <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl bg-Jet">
                 <div class="modal-content">
@@ -214,300 +215,36 @@
     </div>
 </div>
 
-
 <script>
-    // Åpne og lukke "mine innlegg"
-    function openMyPosts() {
-        document.getElementById("profilen").style.display = "none";
-        document.getElementById("annonse_div").style.display = "block";
-    }
-    function closeMyPosts() {
-        document.getElementById("profilen").style.display = "block"; 
-        document.getElementById("annonse_div").style.display = "none";
-    }
+      // Åpne og lukke "mine innlegg" - Mats
+  function openMyPosts() {
+    document.getElementById("profilen").style.display = "none";
+    document.getElementById("annonse_div").style.display = "block";
+}
+function closeMyPosts() {
+    document.getElementById("profilen").style.display = "block"; 
+    document.getElementById("annonse_div").style.display = "none";
+}
 
-    // Åpne og lukke "rediger profil"
-    function openEditProfile() {
-        document.getElementById("profilen").style.display = "none";
-        document.getElementById("redigerProfil_div").style.display = "block";
-    }
-    function exitEditing() {
-        document.getElementById("profilen").style.display = "block"; 
-        document.getElementById("redigerProfil_div").style.display = "none";
-    }
+// Åpne og lukke "rediger profil" - Mats
+function openEditProfile() {
+    document.getElementById("profilen").style.display = "none";
+    document.getElementById("redigerProfil_div").style.display = "block";
+}
+function exitEditing() {
+    document.getElementById("profilen").style.display = "block"; 
+    document.getElementById("redigerProfil_div").style.display = "none";
+}
 
-    // Åpne og lukke "innstillinger"
-    function openSettings() {
-        document.getElementById("profilen").style.display = "none"; 
-        document.getElementById("innstillinger_div").style.display = "block";
-    }
-    function closeSettings() {
-        document.getElementById("profilen").style.display = "block"; 
-        document.getElementById("innstillinger_div").style.display = "none";
-    }
-
-
-    //første metode, henter bare siste element
-	function getData() {
-		firebase.database().ref('Annonse').on('value', function (snapshot) {
-			snapshot.forEach(function (childSnapshot) {
-				var childKey = childSnapshot.key;
-				var childData = childSnapshot.val();
-				document.getElementById("data").value = childData['tittel'];
-			});
-		});
-	}
-
-    
-	//Henter info fra databasen og gir variabler til elementer fra databasen
-	$(document).ready(function () {
-        $("#myModal").on("hidden.bs.modal", function(){
-            //clearer alt innhold i modal etter den lukkes
-            var tilbbtn = document.getElementById("edtilbycb");
-                   tilbbtn.checked = false;
-            var etterbtn = document.getElementById("edetterspørcb");
-                   etterbtn.checked = false;
-                });
-
-        //Gjør så man ikke kan klikke seg ut av edit popup etter den er åpnet
-        $('#myModal').modal({backdrop: 'static', keyboard: false})
-
-		var rootRef = firebase.database().ref().child("Annonse");
-		rootRef.on("child_added", snap => {
-			var title = snap.child("tittel").val();
-			var desc = snap.child("beskrivelse").val();
-			var blå = snap.child("blå").val();
-			var rød = snap.child("rød").val();
-			var grønn = snap.child("grønn").val();
-			var id = snap.child("id").val();
-            var longitude = snap.child("longitude").val();
-            var latitude = snap.child("latitude").val();
-            var bruker = snap.child("brukernavn").val();
-            var annbrukerid = snap.child("userid").val();
-
-            //Sjekker hvem bruker som er innlogget, henter kun denne brukerens annonser
-            if(firebase.auth().currentUser.uid == annbrukerid) {
-			//Fyller ut en html table med titler og handlingsknapper
-			$("#table").append('<tr> <td class = "pt-4" style = "width:65%" id = "tekst">' + title + '</td>' + '<td>' + '<th scope="row">' +
-				'<button type="button" class="btn btn-primary text-center m-2" id="' + blå + '" >' +
-				'<svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">' +
-				'<path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>' +
-				'</svg>' + '</button>' +
-
-				'<button type="button" class="btn btn-danger text-center m-2" id="' + rød + '">' +
-				'<svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">' +
-				' <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>' +
-				'</svg>' + '</button' + '</th>' +
-
-				'<button type="button" class="btn btn-success text-center m-2" id="' + grønn + '">' +
-				'<svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">' +
-				'<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>' +
-				'</svg>' + '</button>' + '</tr></td>');
-                }
-                
-    //Fullført knapp, pusher annonsen til fullført tabellen i Firebase
-    var titleee;
-    $(document).ready(function() {
-    $('body').on('click', '#' + grønn +'', function() {
-        firebase.database().ref("Fullført").child(id).set({
-        tittel: document.getElementById("Title").value = snap.child("tittel").val(),
-        id: id,
-        brukernavn: username,
-        userid: firebase.auth().currentUser.uid
-        });  
-        firebase.database().ref("Annonse").child(id).remove();
-        setTimeout(function() {
-        window.location.reload(1);
-        }, 0200); 
-        //Logging av fullført annonse
-        analytics.logEvent('annonse_fullført', {
-            id: id, 
-            brukernavn: username, 
-            tittel: document.getElementById("Title").value = snap.child("tittel").val() 
-            })
-        });
-    });
-			//Edit knapp, åpner popup
-			$(document).ready(function () {
-                var edstatus = "ikke valgt";
-				$('body').on('click', '#' + blå + '', function () {
-					$('#myModal').modal('show');
-					document.getElementById("Title").value = snap.child("tittel").val();
-					document.getElementById("Description").value = snap.child("beskrivelse").val();
-
-                    //Tilbud checkbox
-                    $('#edtilbycb').on('change', function() { 
-                    var tcb = document.getElementById("edtilbycb");
-                        if ($(tcb).is(':checked')) {
-                        //alert("Tilbud");
-                        edstatus = "Tilbud";
-                        }    
-                    });
-                    //Etterspørsel checkbox
-                    $('#edetterspørcb').on('change', function() { 
-                        var ecb = document.getElementById("edetterspørcb");
-                        if ($(ecb).is(':checked')) {
-                        //alert("Etterspørsel");
-                        edstatus = "Etterspørsel";
-                        } 
-                    });
-
-                    //Rediger posisjon i edit vinduet
-                    var edlong = null;
-                    var edlat = null;
-                    $('#edpositioncb').on('change', function() { 
-                        var edcb = document.getElementById("edpositioncb");
-                        if ($(edcb).is(':checked')) {
-                            //alert("checked");
-                            if (navigator.geolocation) {
-                                edlong = navigator.geolocation.getCurrentPosition(longitude);
-                            } else { 
-                                console.log(innerHTML = "Geolocation is not supported by this browser.");
-                            }
-                            if (navigator.geolocation) {
-                                edlat = navigator.geolocation.getCurrentPosition(latitude);
-                            } else { 
-                                console.log(innerHTML = "Geolocation is not supported by this browser.");
-                            }
-                            function longitude(position) {
-                                edlong = position.coords.longitude;
-                            }
-                            function latitude(position) {
-                                edlat = position.coords.latitude;
-                            } 
-                            // disabler publiser knapp i 5 sekunder om posisjon er valgt
-                            //legger til loading i 5 sekunder, og går tilbake til normalt etter dette
-                            $('#update').prop("disabled", true);
-                            // spinner på knappen
-                            $('#update').html(
-                            `<span id="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Henter posisjon...`
-                            );
-                            setTimeout(function () {
-                                $('#update').prop("disabled", false);
-                                $('#loading').remove();
-                                $('#update').html(`oppdater`);
-                            }, 4000);  
-                        } 
-                    });
-
-                    //gir Tilbud CB checked automatisk hvis annonsen er et tilbud
-                    tilb = document.getElementById("edtilbycb").value = snap.child("kategori").val();
-                    if (tilb == "Tilbud") {
-                    edstatus = "Tilbud"; //gir Tilbud CB Verdi på nytt når CBen er checket fra før av
-                    var tilbbtn = document.getElementById("edtilbycb");
-                    tilbbtn.checked = true;
-                    }
-                    //gir Etterspørsel CB checked automatisk hvis annonsen er en Etterspørsel
-                    etters = document.getElementById("edetterspørcb").value = snap.child("kategori").val();
-                    if (etters == "Etterspørsel") {
-                    edstatus = "Etterspørsel"; //gir Etterspørsel CB Verdi på nytt når CBen er checket fra før av
-                    var ettersbtn = document.getElementById("edetterspørcb");
-                    ettersbtn.checked = true;
-                    }
-                    //gir posisjon CB checked automatisk hvis annonsen bruker posisjon
-                    lonpos = snap.child("longitude").val();
-                    latpos = snap.child("latitude").val();
-                    if (lonpos !=null && latpos !=null) {
-                    edlong = lonpos; //gir lon Verdi på nytt når CBen er checket fra før av
-                    edlat = latpos; //gir lat Verdi på nytt når CBen er checket fra før av
-                    var posbtn = document.getElementById("edpositioncb");
-                    posbtn.checked = true;
-                    }
-
-					//Oppdater Annonser knapp i popuppen
-					$('body').on('click', '#update', function () {
-                        var edcb = document.getElementById("edpositioncb");
-                        if ($(edcb).is(':checked')) {
-						firebase.database().ref("Annonse").child(id).update({
-							tittel: document.getElementById("Title").value,
-							beskrivelse: document.getElementById("Description").value,
-                            kategori: edstatus,
-                            longitude: edlong,
-                            latitude: edlat
-						});
-                            //Logging av rediger annonse med posisjon
-                            analytics.logEvent('annonse_redigert', { 
-                            id: id, 
-                            brukernavn: username, 
-                            tittel: document.getElementById("Title").value, 
-                            beskrivelse: document.getElementById("Description").value,
-                            kategori: edstatus,
-                            longitude: edlong,
-                            latitude: edlat
-                        })
-                        //fjerner lon og lat om posisjon CB ikke er checked
-                        } else {
-                            firebase.database().ref("Annonse").child(id).update({
-							tittel: document.getElementById("Title").value,
-							beskrivelse: document.getElementById("Description").value,
-                            kategori: edstatus,
-                            longitude: null,
-                            latitude: null
-						});
-                           //Logging av rediger annonse uten posisjon
-                           analytics.logEvent('annonse_redigert', { 
-                            id: id, 
-                            brukernavn: username, 
-                            tittel: document.getElementById("Title").value, 
-                            beskrivelse: document.getElementById("Description").value,
-                            kategori: edstatus
-                        })
-                        }
-						setTimeout(function () {
-							window.location.reload(1);
-						}, 0000);
-					});
-				});
-			});
-
-			//Remove knapp, fjerner raden fra databasen ved bruk av Keyen
-			$(document).ready(function () {
-				$('body').on('click', '#' + rød + '', function () {
-					firebase.database().ref("Annonse").child(id).remove();
-					setTimeout(function () {
-						window.location.reload(1);
-					}, 0001);
-                    //Logging av slettet annonse
-                    analytics.logEvent('annonse_slettet', { 
-                    id: id,
-                    brukernavn: username,
-                    tittel: document.getElementById("Title").value = snap.child("tittel").val() 
-                    })  
-				});
-			});
-		});
-
-    //Henter data fra fullført tabell i Firebase og fyller ut fullført tabell på nettsiden
-    var root = firebase.database().ref().child("Fullført");
-        root.on("child_added", snap => { 
-        titleee = snap.child("tittel").val();
-        var fullfbrukerid = snap.child("userid").val(); //bruker id i fullført tabell
-        if(firebase.auth().currentUser.uid == fullfbrukerid) {
-        $("#done").append( '<tr> <td class = "pt-4" style = "width:65%" id = "tekst">' + titleee + '</td>'+ '</tr>');
-        }
-        }); 
-    });
-    
-
-    // JavaScript kode fra Innstillinger.ejs:
-    /* var abs = "Ting og tang"; firebaseConfig */
-	document.getElementById("flexCheckDefault").onclick = function () {
-        if (navigator.geolocation)
-			navigator.geolocation.getCurrentPosition(function (position) {
-				console.log(position);
-			});
-
-		else
-			console.log("geolocation is not supported");
-	};
-
-
-    var slider = document.getElementById("Avstand");
-	var output = document.getElementById("Verdi");
-	output.innerHTML = slider.value;
-
-	slider.oninput = function () {
-		output.innerHTML = this.value;
-	}
-    //Slutt på JavaScript kode fra Instillinger.ejs
+// Åpne og lukke "innstillinger" - Mats
+function openSettings() {
+    document.getElementById("profilen").style.display = "none"; 
+    document.getElementById("innstillinger_div").style.display = "block";
+}
+function closeSettings() {
+    document.getElementById("profilen").style.display = "block"; 
+    document.getElementById("innstillinger_div").style.display = "none";
+}
 </script>
+
+<script src="js/getposts.js"></script>
