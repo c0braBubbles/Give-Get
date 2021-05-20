@@ -7,7 +7,7 @@
     </div>
 
     <p class="text-center fs-1" id="bnavn">
-        username 
+        username
         <!-- <p class="text-center fs-5">0 Score></p> -->
     </p>
 
@@ -54,8 +54,8 @@
                     <th colspan="1" scope="col"></th>
                     <th colspan="1" scope="col">Handlinger</th>
                 </table>
-                <table class = "table" id ="done">
-                    <th colspan = "1" scope ="col"> Fullførte Annonser </th>
+                <table class="table" id="done">
+                    <th colspan="1" scope="col"> Fullførte Annonser </th>
                 </table>
             </div>
         </div>
@@ -77,15 +77,16 @@
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="flexRadioDefault" id="edtilbycb">
                                     <label class="form-check-label text-dark" for="edtilbycb">
-                                      Tilbud
+                                        Tilbud
                                     </label>
-                                  </div>
-                                  <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="edetterspørcb">
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="edetterspørcb">
                                     <label class="form-check-label text-dark" for="edetterspørcb">
-                                      Etterspørsel
+                                        Etterspørsel
                                     </label>
-                                  </div>
+                                </div>
 
                                 <div class="mt-3">
                                     <label for="Title" class="form-label text-dark">Tittel</label>
@@ -169,7 +170,8 @@
                 </div>
 
                 <button class="btn btn-danger" id="submitEditsButton" onclick="lastOppDritt()">Lagre endringer</button>
-                <button type="button" class="btn btn-danger btn-close" aria-label="Close" onclick="exitEditing()"></button>
+                <button type="button" class="btn btn-danger btn-close" aria-label="Close"
+                    onclick="exitEditing()"></button>
             </div>
 
         </div>
@@ -216,35 +218,35 @@
 </div>
 
 <script>
-      // Åpne og lukke "mine innlegg" - Mats
-  function openMyPosts() {
-    document.getElementById("profilen").style.display = "none";
-    document.getElementById("annonse_div").style.display = "block";
-}
-function closeMyPosts() {
-    document.getElementById("profilen").style.display = "block"; 
-    document.getElementById("annonse_div").style.display = "none";
-}
+    // Åpne og lukke "mine innlegg" - Mats
+    function openMyPosts() {
+        document.getElementById("profilen").style.display = "none";
+        document.getElementById("annonse_div").style.display = "block";
+    }
+    function closeMyPosts() {
+        document.getElementById("profilen").style.display = "block";
+        document.getElementById("annonse_div").style.display = "none";
+    }
 
-// Åpne og lukke "rediger profil" - Mats
-function openEditProfile() {
-    document.getElementById("profilen").style.display = "none";
-    document.getElementById("redigerProfil_div").style.display = "block";
-}
-function exitEditing() {
-    document.getElementById("profilen").style.display = "block"; 
-    document.getElementById("redigerProfil_div").style.display = "none";
-}
+    // Åpne og lukke "rediger profil" - Mats
+    function openEditProfile() {
+        document.getElementById("profilen").style.display = "none";
+        document.getElementById("redigerProfil_div").style.display = "block";
+    }
+    function exitEditing() {
+        document.getElementById("profilen").style.display = "block";
+        document.getElementById("redigerProfil_div").style.display = "none";
+    }
 
-// Åpne og lukke "innstillinger" - Mats
-function openSettings() {
-    document.getElementById("profilen").style.display = "none"; 
-    document.getElementById("innstillinger_div").style.display = "block";
-}
-function closeSettings() {
-    document.getElementById("profilen").style.display = "block"; 
-    document.getElementById("innstillinger_div").style.display = "none";
-}
+    // Åpne og lukke "innstillinger" - Mats
+    function openSettings() {
+        document.getElementById("profilen").style.display = "none";
+        document.getElementById("innstillinger_div").style.display = "block";
+    }
+    function closeSettings() {
+        document.getElementById("profilen").style.display = "block";
+        document.getElementById("innstillinger_div").style.display = "none";
+    }
 </script>
 
 <script src="js/getposts.js"></script>
