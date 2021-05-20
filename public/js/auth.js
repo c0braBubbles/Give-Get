@@ -107,31 +107,19 @@ function logout() {
 }
 
 
-/*
-function signUp() {
 
-    var email      = document.getElementById('inputEmail').value;
-    var password   = document.getElementById('inputPassword').value;
-
-
-    var brukerInfo = {
-        fornavn: document.getElementById('inputFirstname').value,
-        etternavn: document.getElementById('inputLastname').value,
-        email: document.getElementById('inputEmail').value,
-        brukernavn: document.getElementById('inputUsername').value
-    }
-
-    
-    // opprett brukeren, metoden bruker litt tid på å gjennomføre
-    auth.createUserWithEmailAndPassword(email, password).then(cred => {
-        console.log(cred);
-        firebase.database().ref('Bruker').push(brukerInfo); // Lagrer resterende brukerdata i databasen
-        window.location = "main";
-    });
-}*/
-
-
-
+/* 
+ * Registrering av ny bruker funksjon. Funksjonen blir aktivert
+ * Når en trykker på knappen "registrer" bruker på registrering-siden
+ * 1. Funksjonen henter info som er i de forskjellige input-feltene
+ * 2. Sjekker om infoen fylt ut (riktig)
+ * 3.1. Info er feil -> send en passende alert til brukeren
+ * 3.2. Info er riktig -> Opprett en bruker, login info lagres i Auth
+ *        Resterende info lagres i realtime databasen, deretter sendes brukeren til main-siden
+ * 
+ *  Skrevet av Jacob Kristensen
+ * 
+ */
 function signUp() {
     
     var email      = document.getElementById('inputEmail').value;
@@ -139,7 +127,6 @@ function signUp() {
     var brukernavn = document.getElementById('inputUsername').value;
     var userID = Date.now();
     
-    // opprett brukeren, metoden bruker litt tid på å gjennomføre
     if ( document.getElementById('inputPassword2').value !== password ) {
         window.alert("Gjenta passord stemmer ikke med passordet du har skrevet inn!")
     } else if ( password.length < 6 ) {
@@ -160,45 +147,19 @@ function signUp() {
         });
     }                            
 }
-/*
-function lastOppDritt() {
-    var usernameG = document.getElementById('editUsername').value;
-    var firstnameG = document.getElementById('editFirstname').value;
-    var lastnameG = document.getElementById('editLastname').value;
-    var emailG = document.getElementById('editEmail').value;
-    firebase.database().ref('bruker/'+brukerID).update({
-        brukernavn : usernameG,
-        fornavn : firstnameG,
-        etternavn : lastnameG
-        //email : emailG
-        //email : emailG  !NB denne venter vi litt med, fordi det krever litt mere å oppdatere email
-    }).then(() => {
-        username = usernameG;
-        firstname = firstnameG;
-        lastname = lastnameG;
-        //email_id = emailG;
-        document.getElementById('bnavn').innerHTML = username;
-        var userG = firebase.auth().currentUser;
-        userG.updateEmail(emailG).then(function() {
-            firebase.database().ref('bruker/'+brukerID).update({
-                email : emailG
-            });
-            //Update successful
-            email_id = emailG;
-            exitEditing(); //Lukker vinduet for å redigere profilen
-        }).catch(function(error) {
-            //Error
-        });
-        
-    });
-}*/
+
 
 /*
- * Metoden har flere steg
+ * Metoden er for å endre på brukerinformasjon og har flere steg
+ * Metoden blir aktivert når bruker trykker på knappen for å lagre endringer i profil-siden
  * 1. henter verdiene fra input-feltene
  * 2. oppdaterer email-adressen
- * 3. oppdaterer bruker-tabellen
- * 4. setter variablene i js-filen til de nye bruker-verdiene, og krysser ut edit-vinduet 
+ * 3. oppdaterer bruker-tabellen i realtime databasen (den resterende infoen)
+ * 4. setter variablene i js-filen til de nye bruker-verdiene, i tillegg til verdien til et element på profil-siden
+ * 5. Krysser ut edit-vinduet, ved hjelp av en funksjon 
+ * 
+ * Skrevet av Jacob Kristensen, utenom der annet navn er kommentert
+ * 
  */
 function lastOppDritt() {
     var f_username = document.getElementById('editUsername').value;
@@ -219,7 +180,7 @@ function lastOppDritt() {
             firstname = f_firstname;
             lastname = f_lastname;
             email_id = testmail;
-            document.getElementById('bnavn').innerHTML = username; //Denne er bare for å oppdatere navnet som står på profil-siden
+            document.getElementById('bnavn').innerHTML = username;
             exitEditing();
         });
            //Logging av Redigerte profiler - Christoffer
@@ -235,13 +196,27 @@ function lastOppDritt() {
     });
 }
 
-//Når en bruker velger en fil, og trykker på knappen for å endre profilbilde, skjer det her
+
 var fil = {};
 
+/*
+ * Denne funksjonen henter filstien til en bilde, slik at brukeren kan laste opp bildet
+ * Metoden er funnet på nettet, mer info om kilden kan sees i kildehenvisningen
+ */
 function velgFil(e) {
     fil = e.target.files[0];
 }
 
+/*
+ * Funksjon for å endre/laste opp profilbilde
+ * Funksjonen starter med at filen hentes og lastes opp i storage
+ * Videre henter vi igjen url'en til bildet fra firebase Storage, og endrer på image-elementer sin src,
+ * slik at det nye profilbildet vises for brukeren
+ * Hjelp til metoden funnet på nettet, mer info om kilden kan sees i kildehenvisningen
+ * 
+ * Skrevet av Jacob Kristensen
+ * 
+ */
 function changeProfilePicture() {
     firebase.storage().ref("users/"+brukerID+"/profile.jpg").put(fil).then(function () {
         console.log("Fil lastet opp i Storage");
