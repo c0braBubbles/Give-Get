@@ -90,6 +90,11 @@ chat_ref.on("child_added", function (snapshot) {
  */
 
 form.onsubmit = function (evt) {
+//Logging av chat - Christoffer
+analytics.logEvent('melding_sendt', {
+    melding: msg_inp.value,
+    sender: username,
+    })
     evt.preventDefault();
     chat_msg.push({
         "chatID": currentChat,
@@ -99,6 +104,7 @@ form.onsubmit = function (evt) {
     msg_inp.value = "";
     openChat(currentChat);
 }
+
 
 
 

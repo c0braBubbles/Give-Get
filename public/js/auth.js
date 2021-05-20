@@ -78,7 +78,7 @@ function login() {
         window.alert("Error : " + errorMessage);
     });
     console.log(username);
-    //Logging av innlogging
+    //Logging av innlogging - Christoffer
     analytics.logEvent('bruker_login', { epost: emailInp })
 }
 
@@ -143,11 +143,11 @@ function signUp() {
                 etternavn:  document.getElementById('inputLastname').value,
                 email:      email,
                 brukernavn: brukernavn
-            }).then(() => {                                                 //Går til slutt til main-siden når det over er ferdig
-                window.location = "main";            
+            }).then(() => {                                          //Går til slutt til main-siden når det over er ferdig 
+                window.location = "main";
             });
         });
-    }
+    }                            
 }
 /*
 function lastOppDritt() {
@@ -211,6 +211,13 @@ function lastOppDritt() {
             document.getElementById('bnavn').innerHTML = username; //Denne er bare for å oppdatere navnet som står på profil-siden
             exitEditing();
         });
+           //Logging av Redigerte profiler - Christoffer
+           analytics.logEvent('brukerinfo_redigert', {
+            epost: testmail,
+            brukernavn: f_username,
+            fornavn: f_firstname,
+            etternavn: f_lastname
+          }) 
 
     }).catch(function(error) {
         //Error
