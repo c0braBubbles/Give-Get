@@ -1,4 +1,4 @@
-/* Script er skrevet av Christoffer, utenom der et annet navn eventuelt er markert i koden */
+/* Script er skrevet av Christoffer Arnesen, utenom der et annet navn eventuelt er markert i koden */
 
         alert("Hvert gruppemedlem må huske å rydde opp i sin kode og skrive inn kommentarer (javadoc typ). Få med også navn ved det du har gjort");
 
