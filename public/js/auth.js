@@ -135,13 +135,13 @@ function signUp() {
                email.length == 0 || brukernavn.length == 0) {
         window.alert("Vennligst fyll inn alle feltene")
     } else {
-        auth.createUserWithEmailAndPassword(email, password).then(cred => { //Oppretter brukeren i auth her
-            firebase.database().ref('bruker').child(userID).set({       //Legger inn resterende bruker info child(brukernavn)
+        auth.createUserWithEmailAndPassword(email, password).then(cred => { 
+            firebase.database().ref('bruker').child(userID).set({
                 fornavn:    document.getElementById('inputFirstname').value,
                 etternavn:  document.getElementById('inputLastname').value,
-                email:      email,
+                email:      email.toLowerCase(), 
                 brukernavn: brukernavn
-            }).then(() => {                                          //Går til slutt til main-siden når det over er ferdig 
+            }).then(() => {                                          
                 window.location = "main";
             });
         });
@@ -161,39 +161,71 @@ function signUp() {
  * Skrevet av Jacob Kristensen, utenom der annet navn er kommentert
  * 
  */
-function lastOppDritt() {
+function saveUserChanges() {
     var f_username = document.getElementById('editUsername').value;
     var f_firstname = document.getElementById('editFirstname').value;
     var f_lastname = document.getElementById('editLastname').value;
-    var testmail = document.getElementById("editEmail").value;
-    //var testmail = "detteerentest@hotmail.com";
+    var f_mail = document.getElementById("editEmail").value;
     var fuser = firebase.auth().currentUser;
-    fuser.updateEmail(testmail).then(function() { 
+
+    fuser.updateEmail(f_mail).then(function() { 
 
         firebase.database().ref("bruker/"+brukerID).update({
             brukernavn : f_username,
             fornavn : f_firstname,
             etternavn : f_lastname,
-            email : testmail 
+            email : f_mail.toLowerCase()
         }).then(() => {
             username = f_username;
             firstname = f_firstname;
             lastname = f_lastname;
-            email_id = testmail;
+            email_id = f_mail.toLowerCase();
             document.getElementById('bnavn').innerHTML = username;
             exitEditing();
         });
            //Logging av Redigerte profiler - Christoffer
            analytics.logEvent('brukerinfo_redigert', {
-            epost: testmail,
+            epost: f_mail,
             brukernavn: f_username,
             fornavn: f_firstname,
             etternavn: f_lastname
-          }) 
+          });
 
     }).catch(function(error) {
         //Error
     });
+}
+
+/*
+ * Funksjonen brukes for å slette bruker
+ * og aktiveres når noen først trykker på knappen "Slett bruker" på profil-siden
+ * Videre får bruker en popup, hvor en kan bekrefte at en vil slette bruker, eller kansellere
+ * Dersom bruker bekrefter, slettes først bruker-info i realtime databasen, derretter mulig tilhørende bilde
+ * og til slutt auth-info(login info til bruker)
+ * 
+ * Skrevet av Jacob Kristensen
+ * 
+ */ 
+function deleteUser() {
+    var fuser = firebase.auth().currentUser;
+    var svar = confirm("Du er i ferd med å slette brukeren din! \r\n Trykk [OK] for å fortsette");
+
+    if (svar) {
+        
+        firebase.database().ref("bruker/"+brukerID).remove().then(() => {
+            firebase.storage().ref("users/"+brukerID+"/profile.jpg").delete().then(() => {
+                //Fil slettet
+            }).catch((error) => {
+                console.log("Ingen fil tilhørende brukeren");
+            });
+            
+            fuser.delete().then(function() {
+                //bruker slettet
+            }).catch(function(error) {
+                //error med å slette bruker
+            });
+        });
+    }
 }
 
 
