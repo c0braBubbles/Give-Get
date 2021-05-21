@@ -1,6 +1,5 @@
 /* Script er skrevet av Christoffer Arnesen, utenom der et annet navn eventuelt er markert i koden */
 
-        alert("Hvert gruppemedlem må huske å rydde opp i sin kode og skrive inn kommentarer (javadoc typ). Få med også navn ved det du har gjort");
 
         //random id funksjon - funnet på nettet
         function randomID() {
