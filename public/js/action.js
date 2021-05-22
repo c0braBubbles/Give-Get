@@ -109,7 +109,62 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
     ul.innerHTML += `<li><a href='#'>${message.tittel}</a></li>`; //Legger til i liste for søk, så man kan søke etter anonser og
 
     // Legger til annonse på markør, som så blir lagt til på kartet.
-    var marker2 = L.marker([message.latitude, message.longitude]).addTo(map).bindPopup(
+
+    // farge på markøren (leaflet)
+    var blueMarker = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+    var redMarker = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+
+
+    if(message.kategori === "Etterspørsel") {
+        var marker2 = L.marker([message.latitude, message.longitude], {icon: blueMarker}).addTo(map).bindPopup(
+            `<div class ="text-center" width="560" height="315"` + 
+                `<h2>` + message.tittel + `</h2>` + 
+                `<p>` + message.beskrivelse + `</p>` + 
+                `<p class="font-italic">` + message.brukernavn + `</p>` + 
+                `<button type="button" class="btn btn-primary btn-default btn-circle">` + 
+                    `<i class="fa fa-comment" onclick="startChat('` + message.brukernavn + `', '` + message.tittel + `')"></i>` +
+                `</button>` + 
+            `</div>`, {
+                maxWidth: 560
+        }).openPopup();
+    } 
+    else if(message.kategori === "Tilbud") {
+        var marker2 = L.marker([message.latitude, message.longitude], {icon: redMarker}).addTo(map).bindPopup(
+            `<div class ="text-center" width="560" height="315"` + 
+                `<h2>` + message.tittel + `</h2>` + 
+                `<p>` + message.beskrivelse + `</p>` + 
+                `<p class="font-italic">` + message.brukernavn + `</p>` + 
+                `<button type="button" class="btn btn-primary btn-danger btn-circle">` + 
+                    `<i class="fa fa-comment" onclick="startChat('` + message.brukernavn + `', '` + message.tittel + `')"></i>` +
+                `</button>` + 
+            `</div>`, {
+                maxWidth: 560
+        }).openPopup();
+    }
+
+    /*var greenIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+    });
+    var marker2 = L.marker([message.latitude, message.longitude], {icon: greenIcon}).addTo(map).bindPopup(
         `<div class ="text-center" width="560" height="315"` + 
             `<h2>` + message.tittel + `</h2>` + 
             `<p>` + message.beskrivelse + `</p>` + 
@@ -119,7 +174,7 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
             `</button>` + 
         `</div>`, {
             maxWidth: 560
-    }).openPopup();
+    }).openPopup();*/
 });
 
 
