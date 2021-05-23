@@ -31,7 +31,7 @@ var currentChat = 0;    // Samtalen du for øyeblikket er på.
  * @param {navnet til den man vil prate med} name 
  * @param {annonsetittel} addTittle 
  */
-
+/*
 function startChat(name, addTittle) {
     // henter siste chat lagt til og øker med 1
     chat_ref.on("child_added", function (snapshot) {
@@ -39,7 +39,7 @@ function startChat(name, addTittle) {
         maxChat = message.chatID;
         maxChat++;
     });
-
+    // Sender bruker chat-siden
     active.style.display = "none";
     toggles[2].style.display = "block";
 
@@ -51,7 +51,98 @@ function startChat(name, addTittle) {
         "tittel": addTittle
     });
 }
+*/
+//lagSamtale - Aktiveres når en trykker på chat-symbolet på en annonse
+function lagSamtale(name, addTitle) {
+    var samtaleID = Date.now();
+    firebase.database().ref('samtaleTest').child(samtaleID).set({
+        annonseEier : name,
+        annonseInteressert : username,
+        annonseTittel : addTitle
+    }).then(() => {
+        active.style.display = "none";
+        toggles[2].style.display = "block";
+    });
+}
+//loadSamtale - Lager det visuelle, altså boksene på venstre, når det blir opprettet en ny samtale i firebase
+  //Når et nytt child blir lagt til i samtaleTest, gjør det under. Message inneholder alle verdiene i det nye child'et
+firebase.database().ref('samtaleTest').on("child_added", function (snapshot) {
+    var message = snapshot.val();
 
+    if (message.annonseInteressert === username) {  //Dersom du er den som tar kontakt
+        chatListLeft.innerHTML +=  `<li class="another-chat" onclick="testOpenChat(` + snapshot.key + `)">` + //NB! Husk å lage egen metode, istedet for openChat
+                                        `<br>` +
+                                        `<h5>` + message.annonseEier + `</h5>` +
+                                        `<p>` + message.annonseTittel + `</p>` + 
+                                        `<br>` +
+                                   `</li>`;
+        chatListTop.innerHTML +=    `<li class="another-chat" onclick="testOpenChat(`+ snapshot.key + `)">  
+                                        <div>
+                                            <h5>` + message.annonseEier + `</h5>` + 
+                                            `<p>` + message.annonseTittel + `</p>` + 
+                                        `</div>
+                                    </li>`
+    } else if (message.annonseEier === username) {
+        chatListLeft.innerHTML +=  `<li class="another-chat" onclick="testOpenChat(` + snapshot.key + `)">` + //NB! Husk å lage egen metode, istedet for openChat
+                                        `<br>` +
+                                        `<h5>` + message.annonseInteressert + `</h5>` +
+                                        `<p>` + message.annonseTittel + `</p>` + 
+                                        `<br>` +
+                                   `</li>`;
+        chatListTop.innerHTML +=    `<li class="another-chat" onclick="testOpenChat(`+ snapshot.key + `)">  
+                                        <div>
+                                            <h5>` + message.annonseInteressert + `</h5>` + 
+                                            `<p>` + message.annonseTittel + `</p>` + 
+                                        `</div>
+                                    </li>`
+    }
+});
+//hentGamleMeldinger - aktiveres når en trykker på en samtale
+var testsamtaleID;
+function testOpenChat(samtaleNr) {
+    chatWindow.innerHTML = ``; // Fjerner alle meldinger, og så skal meldingene hentes på ny
+    testsamtaleID = samtaleNr;
+
+    firebase.database().ref("testMeldinger/").once('value', (snapshot) => { //Usikker på denne metoden, må finne ut mer om det her
+        var data = snapshot.val();
+        for (let i in data) { //Går gjennom hele tabellen
+            if (data[i].samtaleNr === samtaleNr) { //Dersom en melding sitt samtalenr er lik 
+                if (username === data[i].sender) { //Sjekker om meldingen er sendt av deg eller ikke, gir riktig styling på boblen ut ifra det
+                    chatWindow.innerHTML += `<div id='bobler' class='msg-line'><p class='sender-bubble'>${data[i].beskjeden}</p></div>`;
+                } else {
+                    chatWindow.innerHTML += `<div id='bobler' class="msg-line"><p class="receiver-bubble">${data[i].beskjeden}</p></div>`;
+                }
+            }
+        }
+    })
+}
+
+//sendMelding
+form.onsubmit = function (evt) {
+    evt.preventDefault();
+    var testmeldingID = Date.now();
+    firebase.database().ref("testMeldinger").child(testmeldingID).set({
+        samtaleNr : testsamtaleID,
+        beskjeden : msg_inp.value,
+        sender : username
+    });
+    msg_inp.value = ""; // Når du sender noe, fjern teksten fra input
+}
+
+//hentNyeMeldinger
+firebase.database().ref("testMeldinger").on("child_added", function (snapshot) {
+    var data = snapshot.val();
+    //Sjekker om meldingen ble sendt til nåværende samtale(testsamtaleID og data.samtaleNr)
+    if (data.samtaleNr == testsamtaleID) {
+        // sant - er sender deg, eller er sender en annen, er det deg, sett riktig boble osv
+        if (data.sender == username) {
+            chatWindow.innerHTML += `<div id='bobler' class='msg-line'><p class='sender-bubble'>${data.beskjeden}</p></div>`;
+        } else {
+            chatWindow.innerHTML += `<div id='bobler' class="msg-line"><p class="receiver-bubble">${data.beskjeden}</p></div>`;
+        }
+    }
+    
+});
 
 
 /**
@@ -59,7 +150,7 @@ function startChat(name, addTittle) {
  * legger dem til i venstremenyen 
  * og toppmenyen
  */
-
+/*
 chat_ref.on("child_added", function (snapshot) {
     var message = snapshot.val();
 
@@ -95,14 +186,14 @@ chat_ref.on("child_added", function (snapshot) {
                                     </li>`
     }
 });
-
+*/
 
 
 /**
  * Sende melding fra tekstfelt til DB
  * @param {*} evt 
  */
-
+/*
 form.onsubmit = function (evt) {
     //Logging av chat - Christoffer
     analytics.logEvent('melding_sendt', {
@@ -118,7 +209,7 @@ form.onsubmit = function (evt) {
     msg_inp.value = "";
     openChat(currentChat);
 }
-
+*/
 
 
 
@@ -128,7 +219,7 @@ form.onsubmit = function (evt) {
  * åpne i venstre/top-menyen
  * @param {*} number 
  */
-
+/*
 function openChat(number) {
     chatWindow.innerHTML = ``;
     currentChat = number;
@@ -144,3 +235,4 @@ function openChat(number) {
         }
     });
 }
+*/
