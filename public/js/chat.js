@@ -103,6 +103,7 @@ chat_ref.on("child_added", function (snapshot) {
  * @param {*} evt 
  */
 
+function sendMld() {
 form.onsubmit = function (evt) {
     //Logging av chat - Christoffer
     analytics.logEvent('melding_sendt', {
@@ -118,7 +119,8 @@ form.onsubmit = function (evt) {
     msg_inp.value = "";
     openChat(currentChat);
 }
-
+console.log("kjører");
+}
 
 
 
@@ -130,9 +132,24 @@ form.onsubmit = function (evt) {
  */
 
 function openChat(number) {
-    chatWindow.innerHTML = ``;
+    // chatWindow.innerHTML = ``;
     currentChat = number;
-    
+
+    chat_msg.on("child_added", function (snapshot) {
+        var message = snapshot.val();
+        if (message.chatID === currentChat) {
+            if (username == message.brukernavnet) {
+                chatWindow.innerHTML += `<div id='bobler' class='msg-line'><p class='sender-bubble'>${message.meldingen}</p></div>`;
+            } else {
+                chatWindow.innerHTML += `<div id='bobler' class="msg-line"><p class="receiver-bubble">${message.meldingen}</p></div>`;
+            }
+        }
+    });
+}
+
+
+
+function getData() {
     chat_msg.on("child_added", function (snapshot) {
         var message = snapshot.val();
         if (message.chatID === currentChat) {
