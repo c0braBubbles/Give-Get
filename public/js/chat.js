@@ -135,6 +135,11 @@ function openChat(samtaleNr) {
  */
 //sendMelding
 form.onsubmit = function (evt) {
+    //Logging av chat - Christoffer
+    analytics.logEvent('melding_sendt', {
+        melding: msg_inp.value,
+        sender: username,
+    });
     evt.preventDefault();
     var testmeldingID = Date.now();
     firebase.database().ref("melding").child(testmeldingID).set({
