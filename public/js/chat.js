@@ -8,17 +8,11 @@
 
 
 // Mange variabler som blir brukt flere steder gjennom hele fila. 
-var chat_ref = firebase.database().ref().child('samtaler');     // Denne sparer på samtaler mellom 2
-var chat_msg = firebase.database().ref().child('meldinger');    // Denne sparer på alle meldinger
 var msg_inp = document.getElementById("mld_inp");               // Melding-input-felt
-var msg_window = document.getElementById("mld_vindu");          // trokkke denne blir brukt
 var form = document.getElementById("skjema");                   // Form som er rundt hele meldingsvinduet
 var chatWindow = document.getElementById("chatVindu2");         // Hvor meldingsboblene dukker opp
-
 var chatListLeft = document.getElementById("chatListeVenstre"); // Listen med alle samtaler
 var chatListTop = document.getElementById("chatListeTopp");     // Når vinduet blir minimert skal samtaler dukke opp i denne div-en
-
-
 
 
 
@@ -65,6 +59,9 @@ function lagSamtale(name, addTitle, enID) {
     });
     
 }
+
+
+
 /* 
  * Koden under har som ansvar å legge til innhold i html-elementer på chat-siden
  * når en samtale blir opprettet i realtime-databasen. Innhold skal bli gitt til
@@ -103,6 +100,8 @@ firebase.database().ref('samtale').on("child_added", function (snapshot) {
     }
 });
 
+
+
 /*
  * Metoden aktiveres når en bruker trykker på en samtale (boks på venstre side av chat-siden/dropdown meny)
  * Den har ansvar for å hente tidligere meldinger fra den allerede-eksisterende samtalen slik at bruker kan se
@@ -127,6 +126,8 @@ function openChat(samtaleNr) {
     })
 }
 
+
+
 /*
  * Koden under aktiveres når en "submitter" noe i formen, altså når bruker trykker på send-knappen, eller
  * trykker enter etter en har skrevet en melding i input-feltet på chat-siden.
@@ -143,6 +144,8 @@ form.onsubmit = function (evt) {
     });
     msg_inp.value = "";
 }
+
+
 
 /*
  * Koden under aktiveres når en ny melding blir lagt til i realtime-databasen, og henter meldingen som ble sendt

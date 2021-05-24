@@ -155,26 +155,6 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
                 maxWidth: 560
         }).openPopup();
     }
-
-    /*var greenIcon = new L.Icon({
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41]
-    });
-    var marker2 = L.marker([message.latitude, message.longitude], {icon: greenIcon}).addTo(map).bindPopup(
-        `<div class ="text-center" width="560" height="315"` + 
-            `<h2>` + message.tittel + `</h2>` + 
-            `<p>` + message.beskrivelse + `</p>` + 
-            `<p class="font-italic">` + message.brukernavn + `</p>` + 
-            `<button type="button" class="btn btn-primary btn-default btn-circle">` + 
-                `<i class="fa fa-comment" onclick="startChat('` + message.brukernavn + `', '` + message.tittel + `')"></i>` +
-            `</button>` + 
-        `</div>`, {
-            maxWidth: 560
-    }).openPopup();*/
 });
 
 
