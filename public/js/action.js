@@ -65,7 +65,7 @@ var active = toggles[0];
  * og sjekker opp med listen 'ids'. Setter så den som 
  * matcher tilhørende side ved bruk av DOM-lista 'toggles'
  * 
- * @param {*} clicked_id 
+ * @param {ID til knapp trykket} clicked_id 
  */
 
 function navigate(clicked_id) {
