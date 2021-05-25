@@ -52,8 +52,7 @@ function lagSamtale(name, addTitle, enID) {
                 annonseTittel : addTitle,
                 annonseID : enID
             }).then(() => {
-                active.style.display = "none";
-                toggles[2].style.display = "block";
+                navigate("melding");
             });
         }
     });
