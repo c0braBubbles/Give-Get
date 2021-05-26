@@ -105,7 +105,7 @@ var ul = document.getElementById("liste");                  // DOM-ref. til list
 var ref_ads = firebase.database().ref().child('Annonse');   // Referanse til 'tabell' i DB
 ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver gang noe blir lagt til i DB starter her
     var message = snapshot.val();
-    ul.innerHTML += `<li><a href='#' onclick='moveOnMap(${message.latitude}, ${message.longitude})'>${message.tittel}</a></li>`; //Legger til i liste for søk, så man kan søke etter anonser og
+    // ul.innerHTML += `<li><a href='#' onclick='moveOnMap(${message.latitude}, ${message.longitude})'>${message.tittel}</a></li>`; //Legger til i liste for søk, så man kan søke etter anonser og
 
     // Legger til annonse på markør, som så blir lagt til på kartet.
 
@@ -169,10 +169,10 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
  * @param {lengdegrad} lGrad 
  * @param {breddegrad} bGrad 
  */
-function moveOnMap(lGrad, bGrad) {
+/*function moveOnMap(lGrad, bGrad) {
     navigate(ids[0]);
     map.setView([lGrad, bGrad], 20);
-}
+}*/
 
 
 
