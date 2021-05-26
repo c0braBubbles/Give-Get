@@ -252,7 +252,15 @@ var root = firebase.database().ref().child("Fullført");
 
 
 // JavaScript kode fra Innstillinger.ejs:
+document.getElementById("flexCheckDefault").onclick = function () {
+    if (navigator.geolocation)
+        navigator.geolocation.getCurrentPosition(function (position) {
+            console.log(position);
+        });
 
+    else
+        console.log("geolocation is not supported");
+};
 
 
 var slider = document.getElementById("Avstand");
