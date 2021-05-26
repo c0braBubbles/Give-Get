@@ -80,7 +80,6 @@ function navigate(clicked_id) {
 
 
 
-
 /*
  * Javascript kode for kartet på hjem-skjermen 
  * Variabel 'map' er selve kartet som blir lagt til i 'kart-diven' (home.ejs)
@@ -106,7 +105,7 @@ var ul = document.getElementById("liste");                  // DOM-ref. til list
 var ref_ads = firebase.database().ref().child('Annonse');   // Referanse til 'tabell' i DB
 ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver gang noe blir lagt til i DB starter her
     var message = snapshot.val();
-    ul.innerHTML += `<li><a href='#'>${message.tittel}</a></li>`; //Legger til i liste for søk, så man kan søke etter anonser og
+    ul.innerHTML += `<li><a href='#' onclick='moveOnMap(${message.latitude}, ${message.longitude})'>${message.tittel}</a></li>`; //Legger til i liste for søk, så man kan søke etter anonser og
 
     // Legger til annonse på markør, som så blir lagt til på kartet.
 
@@ -159,15 +158,21 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
 
 
 
-/*
- * Referanse og funksjon for når brukere blir lagt til
- * og legger til i liste for søk
+/**
+ * Funksjon til når man trykker på et søkeresultat.
+ * Når en annonse er sendt til DB, så vil en av tingene som skjer
+ * være at en annonse blir lagt til en liste for søk. Dette 
+ * elementet på listen vil få en 'onClick' som tar er denne 
+ * funksjonen og sender med lengdegraden og breddegraden til
+ * tilhørende annonse
+ * 
+ * @param {lengdegrad} lGrad 
+ * @param {breddegrad} bGrad 
  */
- var ref_users = firebase.database().ref().child('bruker'); 
- ref_users.on("child_added", function(snapshot) {
-    var message = snapshot.val(); 
-    ul.innerHTML += `<li><a href='#'>${message.brukernavn}</a></li>`;
- });
+function moveOnMap(lGrad, bGrad) {
+    navigate(ids[0]);
+    map.setView([lGrad, bGrad], 20);
+}
 
 
 
