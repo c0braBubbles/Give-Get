@@ -32,21 +32,22 @@ var chatListTop = document.getElementById("chatListeTopp");     // Når vinduet 
 function lagSamtale(name, addTitle, enID, eierUID) {
     var samtaleID = Date.now();
     var finnesSamtale = false;
-    
+
     firebase.database().ref("samtale").once("value", (snapshot) => {
         var data = snapshot.val();
         if (snapshot.exists()) {
             for (let i in data) {
-                if (data[i].annonseID == enID && data[i].interessertID == brukerID && finnesSamtale == false) {
+                if (data[i].annonseID === enID && data[i].interessertID === brukerID && finnesSamtale == false) {
                     alert("Du har allerede en samtale knyttet til denne annonsen");
                     finnesSamtale = true;
-                } else if (eierUID === brukerID) {
+                } else if (eierUID == firebase.auth().currentUser.uid) { //brukerID
                     alert("Du er eier av annonsen");
                     finnesSamtale = true;
                 }
-            }
+            }          
         }
-        if (finnesSamtale == false) {
+    }).then(() => {
+        if (!finnesSamtale) {
             firebase.database().ref('samtale').child(samtaleID).set({
                 annonseEier : name,
                 annonseInteressert : username,
