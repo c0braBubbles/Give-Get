@@ -1,25 +1,21 @@
 <!-- HTML skrevet av Jacob Kristensen -->
 <div class="container w-50" style="padding-top:10%;">
     <div class="card" style="background-color:#284B63;"> <!-- rammefarge, farge på header/footer -->
-        <div class="card-header" style="color:#FFFFFF;">Login</div> <!--Login-top farge-->
-        <div class="card-body" style="background-color:#FFFFFF"> <!-- farge bak input felt -->
+        <div class="card-header" style="color:#FFFFFF;">Login</div> <!--Login-top farge #FFFFFF-->
+        <div class="card-body" style="background-color:#FFFFFF;"> <!-- farge bak input felt -->
             <div class="form-inline" id="formContainer">
                 <div class="form-floating mb-3">
                     <input id="email" type="email" class="form-control" placeholder="Email">
-                    <label for="floatingInput">Email address</label>
+                    <label for="floatingInput" style="color:gray;">Email address</label>
                 </div>
 
                 <div class="form-floating"> 
                     <input id="passord" type="password" class="form-control" placeholder="Password">
-                    <label for="floatingPassword">Password</label>
+                    <label for="floatingPassword" style="color:gray;">Password</label>
                 </div>
 
-                <div class="checkbox" style="padding-top:5px;">
-                    <label>
-                        <input type="checkbox"> Remember me
-                    </label>
-                    <button onclick="login()" class="btn btn-bprimary">Login</button>
-                </div>
+                <button onclick="login()" class="btn btn-primary" style="margin-top:10px;">Login</button>
+                
             </div>
         </div>
         <div class="card-footer text-center" style="height:60px;">
