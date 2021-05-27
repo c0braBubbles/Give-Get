@@ -27,8 +27,9 @@ var chatListTop = document.getElementById("chatListeTopp");     // Når vinduet 
  * @param {navnet til den man vil prate med} name 
  * @param {annonsetittel} addTittle 
  * @param {annonseID} enID
+ * @param {UID til eier av annonsen} eierUID
  */
-function lagSamtale(name, addTitle, enID) {
+function lagSamtale(name, addTitle, enID, eierUID) {
     var samtaleID = Date.now();
     var finnesSamtale = false;
     
@@ -36,10 +37,10 @@ function lagSamtale(name, addTitle, enID) {
         var data = snapshot.val();
         if (snapshot.exists()) {
             for (let i in data) {
-                if (data[i].annonseID == enID && data[i].annonseInteressert == username && finnesSamtale == false) {
+                if (data[i].annonseID == enID && data[i].interessertID == brukerID && finnesSamtale == false) {
                     alert("Du har allerede en samtale knyttet til denne annonsen");
                     finnesSamtale = true;
-                } else if (name === username) {
+                } else if (eierUID === brukerID) {
                     alert("Du er eier av annonsen");
                     finnesSamtale = true;
                 }
@@ -50,7 +51,9 @@ function lagSamtale(name, addTitle, enID) {
                 annonseEier : name,
                 annonseInteressert : username,
                 annonseTittel : addTitle,
-                annonseID : enID
+                annonseID : enID,
+                interessertID : brukerID,
+                eierID : eierUID
             }).then(() => {
                 navigate("melding");
             });
@@ -70,8 +73,8 @@ function lagSamtale(name, addTitle, enID) {
 firebase.database().ref('samtale').on("child_added", function (snapshot) {
     var message = snapshot.val();
 
-    if (message.annonseInteressert === username) {  //Dersom du er den som tar kontakt
-        chatListLeft.innerHTML +=  `<li class="another-chat" onclick="openChat(` + snapshot.key + `)">` + //NB! Husk å lage egen metode, istedet for openChat
+    if (message.interessertID === brukerID) {  //Dersom du er den som tar kontakt annonseInteressert === username
+        chatListLeft.innerHTML +=  `<li class="another-chat" onclick="openChat(` + snapshot.key + `)">` + 
                                         `<br>` +
                                         `<h5>` + message.annonseEier + `</h5>` +
                                         `<p>` + message.annonseTittel + `</p>` + 
@@ -83,8 +86,8 @@ firebase.database().ref('samtale').on("child_added", function (snapshot) {
                                             `<p>` + message.annonseTittel + `</p>` + 
                                         `</div>
                                     </li>`
-    } else if (message.annonseEier === username) {
-        chatListLeft.innerHTML +=  `<li class="another-chat" onclick="openChat(` + snapshot.key + `)">` + //NB! Husk å lage egen metode, istedet for openChat
+    } else if (message.eierID === brukerID) {
+        chatListLeft.innerHTML +=  `<li class="another-chat" onclick="openChat(` + snapshot.key + `)">` + 
                                         `<br>` +
                                         `<h5>` + message.annonseInteressert + `</h5>` +
                                         `<p>` + message.annonseTittel + `</p>` + 
@@ -115,7 +118,7 @@ function openChat(samtaleNr) {
         var data = snapshot.val();
         for (let i in data) {
             if (data[i].samtaleNr === samtaleNr) { 
-                if (username === data[i].sender) {
+                if (username === data[i].sender) { //username === data[i].sender
                     chatWindow.innerHTML += `<div id='bobler' class='msg-line'><p class='sender-bubble'>${data[i].beskjeden}</p></div>`;
                 } else {
                     chatWindow.innerHTML += `<div id='bobler' class="msg-line"><p class="receiver-bubble">${data[i].beskjeden}</p></div>`;

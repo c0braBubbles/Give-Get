@@ -136,7 +136,7 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
                 `<p>` + message.beskrivelse + `</p>` + 
                 `<p class="font-italic">` + message.brukernavn + `</p>` + 
                 `<button type="button" class="btn btn-primary btn-default btn-circle">` + 
-                    `<i class="fa fa-comment" onclick="lagSamtale('` + message.brukernavn + `', '` + message.tittel +`', '` + snapshot.key + `')"></i>` + //'` + message.brukernavn + `', '` + message.tittel +`', '` + message.id + `'
+                    `<i class="fa fa-comment" onclick="lagSamtale('` + message.brukernavn + `', '` + message.tittel +`', '` + snapshot.key + `', '` + message.userid + `')"></i>` + //'` + message.brukernavn + `', '` + message.tittel +`', '` + message.id + `'
                 `</button>` + 
             `</div>`, {
                 maxWidth: 560
@@ -149,7 +149,7 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
                 `<p>` + message.beskrivelse + `</p>` + 
                 `<p class="font-italic">` + message.brukernavn + `</p>` + 
                 `<button type="button" class="btn btn-primary btn-danger btn-circle">` + 
-                    `<i class="fa fa-comment" onclick="lagSamtale('` + message.brukernavn + `', '` + message.tittel +`', '` + snapshot.key + `')"></i>` + //'` + message.brukernavn + `', '` + message.tittel + `'
+                    `<i class="fa fa-comment" onclick="lagSamtale('` + message.brukernavn + `', '` + message.tittel +`', '` + snapshot.key +  `', '` + message.userid + `')"></i>` + //'` + message.brukernavn + `', '` + message.tittel + `'
                 `</button>` + 
             `</div>`, {
                 maxWidth: 560
