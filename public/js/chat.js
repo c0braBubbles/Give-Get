@@ -53,6 +53,7 @@ function lagSamtale(name, addTitle, enID, eierUID) {
                 annonseInteressert : username,
                 annonseTittel : addTitle,
                 annonseID : enID,
+                samtaleID : samtaleID,
                 interessertID : brukerID,
                 eierID : eierUID
             }).then(() => {
@@ -119,7 +120,7 @@ function openChat(samtaleNr) {
         var data = snapshot.val();
         for (let i in data) {
             if (data[i].samtaleNr === samtaleNr) { 
-                if (username === data[i].sender) { //username === data[i].sender
+                if (brukerID == data[i].sender) { //username === data[i].sender
                     chatWindow.innerHTML += `<div id='bobler' class='msg-line'><p class='sender-bubble'>${data[i].beskjeden}</p></div>`;
                 } else {
                     chatWindow.innerHTML += `<div id='bobler' class="msg-line"><p class="receiver-bubble">${data[i].beskjeden}</p></div>`;
@@ -148,7 +149,7 @@ form.onsubmit = function (evt) {
     firebase.database().ref("melding").child(testmeldingID).set({
         samtaleNr : aktivSamtaleID,
         beskjeden : msg_inp.value,
-        sender : username
+        sender : brukerID
     });
     msg_inp.value = "";
 }
@@ -165,7 +166,7 @@ firebase.database().ref("melding").on("child_added", function (snapshot) {
     //Sjekker om meldingen ble sendt til nåværende samtale
     if (data.samtaleNr == aktivSamtaleID) {
         // sant - er sender deg, eller er sender en annen. Er det deg? -> sett riktig boble osv
-        if (data.sender == username) {
+        if (data.sender == brukerID) {
             chatWindow.innerHTML += `<div id='bobler' class='msg-line'><p class='sender-bubble'>${data.beskjeden}</p></div>`;
         } else {
             chatWindow.innerHTML += `<div id='bobler' class="msg-line"><p class="receiver-bubble">${data.beskjeden}</p></div>`;

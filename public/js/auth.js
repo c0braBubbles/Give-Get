@@ -194,6 +194,23 @@ function saveUserChanges() {
 
     }).catch(function(error) {
         //Error
+    }).then(() => {
+        firebase.database().ref('samtale').once('value', (snapshot) => {
+            if (snapshot.exists()) {
+                var data = snapshot.val();
+                for (let i in data) {
+                    if (data[i].interessertID === brukerID) {
+                        firebase.database().ref('samtale/'+data[i].samtaleID).update({
+                            annonseInteressert : f_username
+                        });
+                    } else if (data[i].eierID === brukerID) {
+                        firebase.database().ref('samtale/'+data[i].samtaleID).update({
+                            annonseEier : f_username
+                        });
+                    }
+                }
+            }
+        });
     });
 }
 
