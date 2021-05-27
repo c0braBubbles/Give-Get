@@ -1,4 +1,8 @@
-/* Script er skrevet av Christoffer Arnesen, utenom der et annet navn eventuelt er markert i koden */
+/* 
+Script er skrevet av Christoffer Arnesen, utenom der et annet navn eventuelt er markert i koden 
+* Dette scriptet tilhører hovedsiden med å Opprette Annonser, her henter vi informasjon
+* brukeren taster inn: Posisjon, Tittel, Beksrivelse og Tilbud/Etterspørsel og sender dette opp til databasen.
+*/
 
 
         //random id funksjon - funnet på nettet
