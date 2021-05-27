@@ -1,4 +1,9 @@
-  /* Script er skrevet av Christoffer Arnesen, utenom der et annet navn eventuelt er markert i koden */
+/* 
+* Script er skrevet av Christoffer Arnesen, utenom der et annet navn eventuelt er markert i koden 
+* Dette scriptet tilhører Mine Annonser/Innlegg siden, her henter vi ned annonser fra databasen
+* og brukeren har mulighet til å redigere, slette og fullføre annonsene sine
+* helt nederst er det også litt kode til innstillinger siden, men dette er kun statisk og har ingen funksjon
+*/
 
 
 
