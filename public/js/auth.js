@@ -125,7 +125,7 @@ function signUp() {
     var email      = document.getElementById('inputEmail').value;
     var password   = document.getElementById('inputPassword').value;
     var brukernavn = document.getElementById('inputUsername').value;
-    var userID = Date.now();
+    var userID;
     
     if ( document.getElementById('inputPassword2').value !== password ) {
         window.alert("Gjenta passord stemmer ikke med passordet du har skrevet inn!")
@@ -135,7 +135,8 @@ function signUp() {
                email.length == 0 || brukernavn.length == 0) {
         window.alert("Vennligst fyll inn alle feltene")
     } else {
-        auth.createUserWithEmailAndPassword(email, password).then(cred => { 
+        auth.createUserWithEmailAndPassword(email, password).then(cred => {
+            userID = firebase.auth().currentUser.uid; 
             firebase.database().ref('bruker').child(userID).set({
                 fornavn:    document.getElementById('inputFirstname').value,
                 etternavn:  document.getElementById('inputLastname').value,
@@ -193,6 +194,23 @@ function saveUserChanges() {
 
     }).catch(function(error) {
         //Error
+    }).then(() => {
+        firebase.database().ref('samtale').once('value', (snapshot) => {
+            if (snapshot.exists()) {
+                var data = snapshot.val();
+                for (let i in data) {
+                    if (data[i].interessertID === brukerID) {
+                        firebase.database().ref('samtale/'+data[i].samtaleID).update({
+                            annonseInteressert : f_username
+                        });
+                    } else if (data[i].eierID === brukerID) {
+                        firebase.database().ref('samtale/'+data[i].samtaleID).update({
+                            annonseEier : f_username
+                        });
+                    }
+                }
+            }
+        });
     });
 }
 

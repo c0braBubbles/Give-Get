@@ -105,9 +105,7 @@ var ul = document.getElementById("liste");                  // DOM-ref. til list
 var ref_ads = firebase.database().ref().child('Annonse');   // Referanse til 'tabell' i DB
 ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver gang noe blir lagt til i DB starter her
     var message = snapshot.val();
-    // ul.innerHTML += `<li><a href='#' onclick='moveOnMap(${message.latitude}, ${message.longitude})'>${message.tittel}</a></li>`; //Legger til i liste for søk, så man kan søke etter anonser og
-
-    // Legger til annonse på markør, som så blir lagt til på kartet.
+    ul.innerHTML += `<li><a href="#" onclick="moveOnMap(${message.latitude}, ${message.longitude}, '${message.tittel}', '${message.brukernavn}', '${snapshot.key}')">${message.tittel}</a></li>`; //Legger til i liste for søk, så man kan søke etter anonser og
 
     // farge på markøren (leaflet)
     var blueMarker = new L.Icon({
@@ -127,7 +125,7 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
         shadowSize: [41, 41]
     });
 
-
+    // Legger til annonse på markør, som så blir lagt til på kartet.
     if(message.kategori === "Etterspørsel") {
         var marker2 = L.marker([message.latitude, message.longitude], {icon: blueMarker}).addTo(map).bindPopup(
             `<div class ="text-center" width="560" height="315"` + 
@@ -135,7 +133,7 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
                 `<p>` + message.beskrivelse + `</p>` + 
                 `<p class="font-italic">` + message.brukernavn + `</p>` + 
                 `<button type="button" class="btn btn-primary btn-default btn-circle">` + 
-                    `<i class="fa fa-comment" onclick="lagSamtale('` + message.brukernavn + `', '` + message.tittel +`', '` + snapshot.key + `')"></i>` + //'` + message.brukernavn + `', '` + message.tittel +`', '` + message.id + `'
+                    `<i class="fa fa-comment" onclick="lagSamtale('` + message.brukernavn + `', '` + message.tittel +`', '` + snapshot.key + `', '` + message.userid + `')"></i>` + //'` + message.brukernavn + `', '` + message.tittel +`', '` + message.id + `'
                 `</button>` + 
             `</div>`, {
                 maxWidth: 560
@@ -148,7 +146,7 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
                 `<p>` + message.beskrivelse + `</p>` + 
                 `<p class="font-italic">` + message.brukernavn + `</p>` + 
                 `<button type="button" class="btn btn-primary btn-danger btn-circle">` + 
-                    `<i class="fa fa-comment" onclick="lagSamtale('` + message.brukernavn + `', '` + message.tittel +`', '` + snapshot.key + `')"></i>` + //'` + message.brukernavn + `', '` + message.tittel + `'
+                    `<i class="fa fa-comment" onclick="lagSamtale('` + message.brukernavn + `', '` + message.tittel +`', '` + snapshot.key +  `', '` + message.userid + `')"></i>` + //'` + message.brukernavn + `', '` + message.tittel + `'
                 `</button>` + 
             `</div>`, {
                 maxWidth: 560
@@ -169,10 +167,23 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
  * @param {lengdegrad} lGrad 
  * @param {breddegrad} bGrad 
  */
-/*function moveOnMap(lGrad, bGrad) {
-    navigate(ids[0]);
-    map.setView([lGrad, bGrad], 20);
-}*/
+ var ref_users = firebase.database().ref().child('bruker'); 
+ ref_users.on("child_added", function(snapshot) {
+    var message = snapshot.val(); 
+    ul.innerHTML += `<li><a href='#'>${message.brukernavn}</a></li>`;
+});
+
+
+
+function moveOnMap(lGrad, bGrad, title, bNavn, nokkel) {
+    navigate(ids[0]); 
+    // map.setView([lGrad, bGrad], 20);
+    if(lGrad == null && bGrad == null) {
+        lagSamtale(bNavn, title, nokkel);
+    } else {
+        map.setView([lGrad, bGrad], 20);
+    }
+}
 
 
 
