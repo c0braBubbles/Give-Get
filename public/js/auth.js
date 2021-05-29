@@ -7,11 +7,11 @@ var brukerID;
 
 
 /**
- * Dette er en funksjon som settes i verk når du laster inn nettsiden. 
+ * Dette er en funksjon som settes i verk når du laster inn main.ejs. 
  * Den sjekker hvem som er logget inn. Skjelettet til denne funksjonen 
  * er hentet fra firebase sine hjemmesider og blitt modfisisert til 
  * mer relevans for vårt bruk. Som hva som skjer når en bruker er logget inn,
- * og når ikke, som er å hente partials (div-er som er låst før man er logget inn), 
+ * og når ikke, som i vårt tilfelle er å hente partials (div-er som er låst før man er logget inn), 
  * og sette lokal variabel 'email_id' lik den man logget inn med
  * 
  * Skrevet av Mats Jørgen Engesund
