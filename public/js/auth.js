@@ -235,12 +235,12 @@ function deleteUser() {
                 //Fil slettet
             }).catch((error) => {
                 console.log("Ingen fil tilhørende brukeren");
-            });
-            
-            fuser.delete().then(function() {
-                //bruker slettet
-            }).catch(function(error) {
-                //error med å slette bruker
+            }).then(() => {
+                fuser.delete().then(function() {
+                    //bruker slettet
+                }).catch(function(error) {
+                    //error med å slette bruker
+                });
             });
         });
     }
