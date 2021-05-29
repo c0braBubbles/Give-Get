@@ -80,7 +80,6 @@ function navigate(clicked_id) {
 
 
 
-
 /*
  * Javascript kode for kartet på hjem-skjermen 
  * Variabel 'map' er selve kartet som blir lagt til i 'kart-diven' (home.ejs)
@@ -108,8 +107,6 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
     var message = snapshot.val();
     ul.innerHTML += `<li><a href="#" onclick="moveOnMap(${message.latitude}, ${message.longitude}, '${message.tittel}', '${message.brukernavn}', '${snapshot.key}')">${message.tittel}</a></li>`; //Legger til i liste for søk, så man kan søke etter anonser og
 
-    // Legger til annonse på markør, som så blir lagt til på kartet.
-
     // farge på markøren (leaflet)
     var blueMarker = new L.Icon({
         iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
@@ -128,7 +125,7 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
         shadowSize: [41, 41]
     });
 
-
+    // Legger til annonse på markør, som så blir lagt til på kartet.
     if(message.kategori === "Etterspørsel") {
         var marker2 = L.marker([message.latitude, message.longitude], {icon: blueMarker}).addTo(map).bindPopup(
             `<div class ="text-center" width="560" height="315"` + 
@@ -159,9 +156,16 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
 
 
 
-/*
- * Referanse og funksjon for når brukere blir lagt til
- * og legger til i liste for søk
+/**
+ * Funksjon til når man trykker på et søkeresultat.
+ * Når en annonse er sendt til DB, så vil en av tingene som skjer
+ * være at en annonse blir lagt til en liste for søk. Dette 
+ * elementet på listen vil få en 'onClick' som tar er denne 
+ * funksjonen og sender med lengdegraden og breddegraden til
+ * tilhørende annonse
+ * 
+ * @param {lengdegrad} lGrad 
+ * @param {breddegrad} bGrad 
  */
  var ref_users = firebase.database().ref().child('bruker'); 
  ref_users.on("child_added", function(snapshot) {
