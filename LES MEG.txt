@@ -14,7 +14,7 @@ azure-ressurs-pakkene som fulgte den første serveren.
 
 Vi håper du har det like gøy med å teste nettapplikasjonen vår, like mye som vi hadde det med å lage den. 
 Vi er veldig stolte av produktet og har jobbet hardt. 
-God sommer! 
+God sommer!  
 
 Mvh
 Gruppe 2
