@@ -259,6 +259,9 @@ slide p {
         font-size: 15px;
         padding: 10px;
     }
+    #map {
+        height: 50vw;
+    }
 }
 
 @media only screen and (max-width: 1024px) {
