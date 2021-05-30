@@ -16,7 +16,6 @@ body {
     background-color: #d9d9d9;
 }
 
-
 .bars {
     font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
     z-index: 3;
@@ -259,9 +258,6 @@ slide p {
         font-size: 15px;
         padding: 10px;
     }
-    #map {
-        height: 50vw;
-    }
 }
 
 @media only screen and (max-width: 1024px) {
@@ -314,10 +310,8 @@ slide p {
 
 /* Div til kartet */
 #map {
-    margin: auto;
-    /* width: 60vw; */
     width: 100%;
-    height: 35vw;
+    height: 400px;
     padding: 10px;
 }
 

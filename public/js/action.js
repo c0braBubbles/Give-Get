@@ -128,7 +128,7 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
     // Legger til annonse på markør, som så blir lagt til på kartet.
     if(message.kategori === "Etterspørsel") {
         var marker2 = L.marker([message.latitude, message.longitude], {icon: blueMarker}).addTo(map).bindPopup(
-            `<div class ="text-center" width="560" height="315"` + 
+            `<div class ="text-center" width="300" height="315"` + 
                 `<h2>` + message.tittel + `</h2>` + 
                 `<p>` + message.beskrivelse + `</p>` + 
                 `<p class="font-italic">` + message.brukernavn + `</p>` + 
@@ -136,12 +136,12 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
                     `<i class="fa fa-comment" onclick="lagSamtale('` + message.brukernavn + `', '` + message.tittel +`', '` + snapshot.key + `', '` + message.userid + `')"></i>` + //'` + message.brukernavn + `', '` + message.tittel +`', '` + message.id + `'
                 `</button>` + 
             `</div>`, {
-                maxWidth: 560
+                maxWidth: 300
         }).openPopup();
     } 
     else if(message.kategori === "Tilbud") {
         var marker2 = L.marker([message.latitude, message.longitude], {icon: redMarker}).addTo(map).bindPopup(
-            `<div class ="text-center" width="560" height="315"` + 
+            `<div class ="text-center" width="300" height="315"` + 
                 `<h2>` + message.tittel + `</h2>` + 
                 `<p>` + message.beskrivelse + `</p>` + 
                 `<p class="font-italic">` + message.brukernavn + `</p>` + 
@@ -149,7 +149,7 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
                     `<i class="fa fa-comment" onclick="lagSamtale('` + message.brukernavn + `', '` + message.tittel +`', '` + snapshot.key +  `', '` + message.userid + `')"></i>` + //'` + message.brukernavn + `', '` + message.tittel + `'
                 `</button>` + 
             `</div>`, {
-                maxWidth: 560
+                maxWidth: 300
         }).openPopup();
     }
 });
