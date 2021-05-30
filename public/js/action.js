@@ -105,7 +105,7 @@ var ul = document.getElementById("liste");                  // DOM-ref. til list
 var ref_ads = firebase.database().ref().child('Annonse');   // Referanse til 'tabell' i DB
 ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver gang noe blir lagt til i DB starter her
     var message = snapshot.val();
-    ul.innerHTML += `<li><a href="#" onclick="moveOnMap(${message.latitude}, ${message.longitude}, '${message.tittel}', '${message.brukernavn}', '${snapshot.key}')">${message.tittel}</a></li>`; //Legger til i liste for søk, så man kan søke etter anonser og
+    ul.innerHTML += `<li><a href="#" onclick="moveOnMap(${message.latitude}, ${message.longitude}, '${message.brukernavn}', '${message.tittel}', '${snapshot.key}', '${message.userid}')">${message.tittel}</a></li>`; //Legger til i liste for søk, så man kan søke etter anonser og
 
     // farge på markøren (leaflet)
     var blueMarker = new L.Icon({
@@ -175,11 +175,11 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
 
 
 
-function moveOnMap(lGrad, bGrad, title, bNavn, nokkel) {
+function moveOnMap(lGrad, bGrad, bNavn, tittel, enID, eierUID) {
     navigate(ids[0]); 
     // map.setView([lGrad, bGrad], 20);
     if(lGrad == null && bGrad == null) {
-        lagSamtale(bNavn, title, nokkel);
+        lagSamtale(bNavn, tittel, enID, eierUID);
     } else {
         map.setView([lGrad, bGrad], 20);
     }
