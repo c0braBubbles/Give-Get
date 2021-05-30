@@ -1,22 +1,20 @@
-Last ned nodeJS og npm
-Åpne mappen i filutforsker, og sørg for å være i det øverste nivået (altså den hvor det er en gjennomsiktig ".git")
-Hold Left-skift og høyreklikk et tomt sted, så trykk på "åpne powershell" elns 
-På mac vet jeg ikke hva man skal gjøre her 
-Men når du er i den terminalen skriver du NPM start. Så går du i nettleseren din og skriver i url-en "localhost:3000"
+Til sensor:
 
-Her er grener i git veldig essensielt. Du kødder ikke rundt i master-grenen. Utrolig viktig. Er du i master-grenen 
-skal det være for å gjøre små-ting som ikke krever at du sitter å jobber i mer enn 15 min. 
-Du avslutter å kjøre programmet ved å trykke CTRL+C. Alle endringer du gjør "lastes" automatisk opp, så du trenger
-ikke avslutte for hver gang du gjør en endring. 
+Litt nyttig info: 
+Dette er linken til nettstedet vårt: https://give-get2.azurewebsites.net/
+Linken til Github repoet vårt: https://github.com/c0braBubbles/Give-Get
+Alt dette står i rapporten også forøvrig.
 
-Alle sider (ejs/html) skal ligge i mappen "views". CSS, JS-filer og diverse skal i public-mappa. Er du litt rusten 
-eller utstå på serverkode kan du lagre sidene som html for å få dem opp og se hva du har laget. Vi kan alltids 
-konvertere til ejs når som helst. Hvis du vil lære deg litt serverkode og se ejs filer kan jeg vise deg hvordan her: 
-- app.js er en fil som ligger i øverste mappenivå. Det er server-fila 
-- for å kunne se filene dine må du skrive inn at programmet skal kunne "requeste" og "få" fila. Det vil stå noe her: 
-	app.get('', (req, res) => {
-    		res.render('eksempelfilnavn'); 
-	});
-- Det du gjør er å skrive det samme. Bare bytter ut navnet på fila
-- Så går du i powershell, npm start, går i nettleser på "localhost:3000/fila_du_vil_se"
-Håper dere forstår. Ikke så lett å skrive, lettere å vise 
+"c0braBubbles" er Mats Engesund. Det navnet står også i package.json som "author", men 
+det er bare fordi det var Mats som initierte NodeJS prosjektet og git-mappen. 
+
+I url-en til nettstedet vårt står det "give-get2". Dette er fordi "give-get"-serveren ble ødelagt,
+og vi kunne ikke slette den før prosjektet var ferdig fordi vi trengte kildekoden fra serveren og 
+azure-ressurs-pakkene som fulgte den første serveren. 
+
+Vi håper du har det like gøy med å teste nettapplikasjonen vår, like mye som vi hadde det med å lage den. 
+Vi er veldig stolte av produktet og har jobbet hardt. 
+God sommer! 
+
+Mvh
+Gruppe 2

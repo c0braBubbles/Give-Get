@@ -10,8 +10,6 @@
 
 
 
-
-
 /** Slideshowet på index.ejs */
 const navSlide = () => {
     const burger = document.querySelector('.burger'); 
@@ -47,13 +45,13 @@ var toggles = [
  * ID-er til hvilken side du er på. 
  * Matcher ID-en til knappene på nav-baren
  */
+
 var ids = [
     "hjem",
     "sok",
     "melding", 
     "bruker"
 ];
-
 
 /** Aktiv-side (den du er på) satt til 'hjem' av default etter man logger inn */
 var active = toggles[0]; 
@@ -175,9 +173,27 @@ ref_ads.on("child_added", function(snapshot) {              // Funksjon for hver
 
 
 
+/**
+ * Funksjon til når man trykker på et søkeresultat.
+ * Når en annonse er sendt til DB, så vil en av tingene som skjer
+ * være at en annonse blir lagt til en liste for søk. Dette 
+ * elementet på listen vil få en 'onClick' som tar er denne 
+ * funksjonen og sender med lengdegraden og breddegraden til
+ * tilhørende annonse, så vi kan finne aktuelle annonse og frakte
+ * brukeren til kartet. Hvis brukeren ikke har lagt til posisjon, 
+ * vil en chat opprettes med aktuelle bruker. 
+ * 
+ * @param {lengdegrad} lGrad 
+ * @param {breddegrad} bGrad 
+ * @param {brukernavn} bNavn 
+ * @param {annonsetittel} tittel 
+ * @param {en ID} enID 
+ * @param {eierens ID} eierUID 
+ */
+
 function moveOnMap(lGrad, bGrad, bNavn, tittel, enID, eierUID) {
     navigate(ids[0]); 
-    // map.setView([lGrad, bGrad], 20);
+    
     if(lGrad == null && bGrad == null) {
         lagSamtale(bNavn, tittel, enID, eierUID);
     } else {

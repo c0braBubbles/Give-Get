@@ -19,7 +19,7 @@ var brukerID;
 
 firebase.auth().onAuthStateChanged(function(user) {
     if(user) {
-        // User is signed in
+        // Bruker logget inn
         document.getElementById("main-side").style.display = "block";
         document.getElementById("login-side").style.display = "none";
 
@@ -33,6 +33,7 @@ firebase.auth().onAuthStateChanged(function(user) {
     }
 
     else {
+        // Ingen bruker logget inn
         document.getElementById("main-side").style.display = "none"; 
         document.getElementById("login-side").style.display = "block";
     }
