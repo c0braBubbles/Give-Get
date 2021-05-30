@@ -56,6 +56,7 @@
     height:calc(100vh - 95px);
     background-color: #353535;
     margin-top: -45px;
+    font-family: Arial, Helvetica, sans-serif !important;/*Arial, Helvetica, sans-serif*/
 }
 
 .my-col-medium {
@@ -81,12 +82,14 @@
     background-color: rgb(10, 155, 210);
     float: right;
     clear:both;
+    margin-right:10px;
 }
 
 .receiver-bubble {
     background-color: rgb(190, 190, 190);
     display: table;
     clear: right;
+    margin-left:10px;
 }
 
 .msg-list {
@@ -114,7 +117,7 @@
     border-radius: 15px;
     max-width:60%;
     color:black;
-    
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 .chat-input-box {
@@ -154,7 +157,9 @@
     .myInputContainer {
         width:100% !important;
         padding:0px;
-        height:100vh;
+    }
+    .myInputField {
+        width:100% !important;
     }
 }
 
