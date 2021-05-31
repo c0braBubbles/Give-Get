@@ -5,8 +5,9 @@ Dette er linken til nettstedet vårt: https://give-get2.azurewebsites.net/
 Linken til Github repoet vårt: https://github.com/c0braBubbles/Give-Get
 Alt dette står i rapporten også forøvrig.
 
-"c0braBubbles" er Mats Engesund. Det navnet står også i package.json som "author", men 
-det er bare fordi det var Mats som initierte NodeJS prosjektet og git-mappen. 
+"c0braBubbles" er Mats Engesund. Det navnet står i package.json som "author", og 
+flere steder gjennom prosjektet, men det er bare fordi det var Mats som initierte 
+NodeJS prosjektet og git-mappen. 
 
 I url-en til nettstedet vårt står det "give-get2". Dette er fordi "give-get"-serveren ble ødelagt,
 og vi kunne ikke slette den før prosjektet var ferdig fordi vi trengte kildekoden fra serveren og 
