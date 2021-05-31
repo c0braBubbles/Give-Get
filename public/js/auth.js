@@ -143,8 +143,13 @@ function signUp() {
                 etternavn:  document.getElementById('inputLastname').value,
                 email:      email.toLowerCase(), 
                 brukernavn: brukernavn
-            }).then(() => {                                          
-                window.location = "main";
+            }).then(() => {
+                firebase.analytics().logEvent('bruker_registrert', {
+                    epost: email,
+                    brukernavn: brukernavn,
+                    brukerID: userID
+                });
+                window.location = "main";                                 
             });
         });
     }                            
